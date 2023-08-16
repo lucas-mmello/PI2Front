@@ -1,0 +1,20 @@
+// styles.module.scss
+
+$color-start: #007bff; // Azul mais claro
+$color-end: #003366; // Azul mais escuro
+
+.nav {
+  background: linear-gradient(to right, $color-start, $color-end);
+  height: 5rem;
+  /* Resto do seu estilo para a navbar */
+}
+
+.li {
+  font-size: 1.1rem;
+  margin: 0 0.5rem;
+}
+
+.li:hover {
+  transform: scale(1.2);
+  font-weight: 500;
+}

@@ -1,4 +1,5 @@
 import Header from "../../components/Header";
+import HeaderLogged from "../../components/HeaderLogged";
 
 export default function Home() {
   return (

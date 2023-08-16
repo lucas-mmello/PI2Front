@@ -1,6 +1,8 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-export default function Header() {
+
+export default function HeaderLogged() {
   return (
     <nav className={`navbar navbar-expand-lg navbar-dark ${styles.nav}`}>
       <div className="container-fluid">
@@ -20,7 +22,7 @@ export default function Header() {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <div className="d-flex justify-content-between align-items-start w-100">
-            <ul className="navbar-nav">
+            <ul className="navbar-nav my-2">
               <li className={`nav-item ${styles.li}`}>
                 <Link to="/" className="text-light nav-link">
                   Home
@@ -37,24 +39,37 @@ export default function Header() {
                 </Link>
               </li>
             </ul>
-          </div>
-          <div className={`my-2 my-lg-0 ${styles.buttons}`}>
-            <button
-              className="btn btn-outline-secondary  my-2 my-sm-0"
-              type="submit"
-            >
-              <Link to="/Login" className="text-light nav-link">
-                Login
-              </Link>
-            </button>
-            <button
-              className="btn btn-outline-secondary  my-2 my-sm-0 mx-2"
-              type="submit"
-            >
-              <Link to="/Register" className="text-light nav-link">
-                Register
-              </Link>
-            </button>
+
+            <div className={`my-2 my-lg-2 mx-3 dropstart`}>
+              <ul className="navbar-nav">
+                <li className="nav-item dropdown">
+                  <button
+                    className="btn btn-dark dropdown-toggle text-light"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    UserName
+                  </button>
+                  <ul className="dropdown-menu dropdown-menu-lg-start dropdown-menu-dark">
+                    <li>
+                      <Link to="" className="text-light nav-link dropdown-item">
+                        Account
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="" className="text-light nav-link dropdown-item">
+                        Something
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="" className="text-light nav-link dropdown-item">
+                        Log Out
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
