@@ -17,4 +17,5 @@ $color-end: #003366; // Azul mais escuro
 .li:hover {
   transform: scale(1.2);
   font-weight: 500;
+  text-shadow: 0 0 1rem #f4eeee;
 }
