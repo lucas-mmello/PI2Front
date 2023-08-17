@@ -17,7 +17,12 @@ export default function User() {
             <span className="input-group-text">
               <i className="bi bi-envelope"></i>
             </span>
-            <input type="text" id="Login" className="form-control" />
+            <input
+              type="text"
+              id="Login"
+              className="form-control"
+              placeholder="usuario@example.com"
+            />
           </div>
         </div>
         <div className={`${styles.divinp}`}>
@@ -28,11 +33,19 @@ export default function User() {
             <span className="input-group-text">
               <i className="bi bi-key"></i>
             </span>
-            <input type="password" id="Senha" className="form-control" />
+            <input
+              type="password"
+              id="Senha"
+              className="form-control"
+              placeholder="••••••••"
+            />
           </div>
         </div>
         <div className={`${styles.submit}`}>
-          <button type="submit" className="btn btn-outline-success px-5 ">
+          <button
+            type="submit"
+            className={`btn btn-outline-success px-5 ${styles.btnSubmit}`}
+          >
             Entrar
           </button>
         </div>

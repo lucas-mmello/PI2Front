@@ -11,6 +11,7 @@ $login-gradient: linear-gradient(
   width: 500px;
   margin: 1rem auto;
   background: $login-gradient;
+  animation: shadow-pulse 3s infinite;
 }
 
 .divinp {
@@ -47,6 +48,23 @@ $login-gradient: linear-gradient(
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.btnSubmit:hover {
+  margin-left: 0.8rem;
+  transition: margin-left 0.5s ease-in-out;
+}
+
+@keyframes shadow-pulse {
+  0% {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
 }
 
 @media (max-width: 575px) {

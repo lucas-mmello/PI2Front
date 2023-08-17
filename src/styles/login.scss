@@ -9,3 +9,8 @@ $background-gradient: linear-gradient(
   min-height: 100vh;
   padding-top: 2rem;
 }
+
+.btnEscolha:hover {
+  margin-left: 0.8rem;
+  transition: margin-left 0.5s ease-in-out;
+}

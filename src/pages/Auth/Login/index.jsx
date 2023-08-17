@@ -15,7 +15,7 @@ export default function Login() {
       {escolhaLogin ? <User /> : <Estudio />}
       <div className="d-flex justify-content-center align-items-center my-4">
         <button
-          className="btn btn-outline-primary"
+          className="btn btn-outline-primary btnEscolha"
           onClick={(e) =>
             escolhaLogin ? setEscolhaLogin(false) : setEscolhaLogin(true)
           }
