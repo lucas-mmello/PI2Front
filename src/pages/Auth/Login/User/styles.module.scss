@@ -1,0 +1,62 @@
+$login-gradient: linear-gradient(
+  to right,
+  rgba(173, 226, 225, 0.8),
+  rgba(135, 206, 235, 0.8)
+);
+
+.form {
+  border: 0.1rem solid rgb(32, 31, 31);
+  border-radius: 0.5rem;
+  padding: 2rem;
+  width: 500px;
+  margin: 1rem auto;
+  background: $login-gradient;
+}
+
+.divinp {
+  width: 75%;
+  margin: 0.5rem auto;
+}
+
+.input-group-text {
+  background-color: transparent;
+  border: none;
+}
+
+.form-control {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.divlogo {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  font-size: 4rem;
+  color: #4444e7;
+}
+
+.submit {
+  margin: 1.5rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 575px) {
+  .form {
+    width: 360px;
+  }
+}
+
+@media (max-width: 400px) {
+  .form {
+    width: 280px;
+  }
+}

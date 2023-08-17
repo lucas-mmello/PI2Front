@@ -6,15 +6,14 @@ export default function Register() {
   const [escolhaRegister, setEscolhaRegister] = useState(true);
   return (
     <>
-      <h1 className="danger">Register</h1>
       {escolhaRegister ? <User /> : <Estudio />}
       <button
-        className=""
+        className="btn btn-outline-primary"
         onClick={(e) =>
           escolhaRegister ? setEscolhaRegister(false) : setEscolhaRegister(true)
         }
       >
-        Teste
+        {escolhaRegister ? "Register Estudio" : "Register User"}
       </button>
     </>
   );
