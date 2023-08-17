@@ -1,4 +1,25 @@
+@import "./variables.scss";
+
 * {
   margin: 0;
   padding: 0;
+}
+
+::-webkit-scrollbar-track {
+  background-color: $blue2;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+  background: $blue1;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $blue1;
+  border-radius: 0.35rem;
+}
+
+html {
+  scrollbar-width: 0.5rem;
+  scrollbar-color: $blue1 $blue2;
 }
