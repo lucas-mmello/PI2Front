@@ -1,8 +1,30 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { useState } from "react";
 
 export default function HeaderLogged() {
+  const [RedirectToHome, setRedirectToHome] = useState(false);
+
+  const user = sessionStorage.getItem("user");
+  let name = "";
+
+  if (user) {
+    const parsedUser = JSON.parse(user);
+    name = parsedUser.email;
+  }
+
+  const LogOut = () => {
+    sessionStorage.removeItem("user");
+    setRedirectToHome(true);
+  };
+
+  if (RedirectToHome && location.pathname !== "/") {
+    return <Navigate replace to={{ pathname: "/" }} />;
+  } else if (RedirectToHome && location.pathname === "/") {
+    window.location.reload();
+  }
+
   return (
     <nav className={`navbar navbar-expand-lg navbar-dark ${styles.nav}`}>
       <div className="container-fluid">
@@ -48,7 +70,7 @@ export default function HeaderLogged() {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    UserName
+                    {name}
                   </button>
                   <ul className="dropdown-menu dropdown-menu-lg-start dropdown-menu-dark">
                     <li>
@@ -62,7 +84,11 @@ export default function HeaderLogged() {
                       </Link>
                     </li>
                     <li>
-                      <Link to="" className="text-light nav-link dropdown-item">
+                      <Link
+                        to=""
+                        className="text-light nav-link dropdown-item"
+                        onClick={LogOut}
+                      >
                         Log Out
                       </Link>
                     </li>

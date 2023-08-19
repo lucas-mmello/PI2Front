@@ -7,14 +7,40 @@ export default function Register() {
   return (
     <>
       {escolhaRegister ? <User /> : <Estudio />}
-      <button
-        className="btn btn-outline-primary"
-        onClick={(e) =>
-          escolhaRegister ? setEscolhaRegister(false) : setEscolhaRegister(true)
-        }
-      >
-        {escolhaRegister ? "Register Estudio" : "Register User"}
-      </button>
+
+      <div className="d-flex justify-content-center align-items-center my-4">
+        <div
+          className="btn-group "
+          role="group"
+          aria-label="Basic radio toggle button group"
+        >
+          <input
+            type="radio"
+            className="btn-check"
+            name="btnradio"
+            id="btnradio1"
+            autocomplete="off"
+            checked={escolhaRegister === true}
+            onClick={(e) => setEscolhaRegister(true)}
+          />
+          <label className="btn btn-outline-primary" htmlFor="btnradio1">
+            Usuario
+          </label>
+
+          <input
+            type="radio"
+            className="btn-check"
+            name="btnradio"
+            id="btnradio2"
+            autocomplete="off"
+            checked={escolhaRegister === false}
+            onClick={(e) => setEscolhaRegister(false)}
+          />
+          <label className="btn btn-outline-primary" htmlFor="btnradio2">
+            Estudio
+          </label>
+        </div>
+      </div>
     </>
   );
 }

@@ -3,11 +3,11 @@ import HeaderLogged from "../../components/HeaderLogged";
 import "../../styles/home.scss";
 
 export default function Home() {
-  const user = 1; // Aqui ele irá armazenar se o user está logado
+  const user = sessionStorage.getItem("user"); // Aqui ele irá armazenar se o user está logado
   return (
     <>
       {
-        user === 1 ? (
+        user === null ? (
           <Header />
         ) : (
           <HeaderLogged />
