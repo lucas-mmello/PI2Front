@@ -29,7 +29,7 @@ export default function HeaderLogged() {
     <nav className={`navbar navbar-expand-lg navbar-dark ${styles.nav}`}>
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
-          Navbar
+          InkSearch
         </a>
         <button
           className="navbar-toggler"

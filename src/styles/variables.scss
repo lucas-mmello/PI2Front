@@ -6,3 +6,9 @@ $background-gradient: linear-gradient(
 
 $blue1: #498cff;
 $blue2: #a0c3ff;
+
+$footer-gradient: linear-gradient(
+  to bottom,
+  darken(rgba(220, 255, 254, 0.8), 40%),
+  darken(rgba(200, 245, 244, 0.8), 40%)
+);
