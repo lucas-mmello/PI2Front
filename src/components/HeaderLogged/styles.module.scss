@@ -5,7 +5,7 @@ $color-end: #003366; // Azul mais escuro
 
 .nav {
   background: linear-gradient(to right, $color-start, $color-end);
-  height: 5rem;
+  min-height: 5rem;
   /* Resto do seu estilo para a navbar */
 }
 

@@ -18,7 +18,7 @@ export default function Header() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div className="collapse navbar-collapse " id="navbarNav">
           <div className="d-flex justify-content-between align-items-start w-100">
             <ul className="navbar-nav">
               <li className={`nav-item ${styles.li}`}>
