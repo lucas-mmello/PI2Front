@@ -18,17 +18,17 @@ export default function Footer() {
         <ul className="nav col-md-4 justify-content-end px-4 list-unstyled d-flex">
           <li className="ms-3">
             <a className="text-ligth" href="#">
-              <i className="bi bi-twitter"></i>
+              <i className={`bi bi-twitter ${styles.social}`}></i>
             </a>
           </li>
           <li className="ms-3">
             <a className="text-danger" href="#">
-              <i className="bi bi-instagram"></i>
+              <i className={`bi bi-instagram ${styles.social}`}></i>
             </a>
           </li>
           <li className="ms-3">
             <a className="text-light" href="#">
-              <i className="bi bi-facebook"></i>
+              <i className={`bi bi-facebook ${styles.social}`}></i>
             </a>
           </li>
         </ul>

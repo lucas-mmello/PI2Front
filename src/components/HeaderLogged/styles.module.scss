@@ -17,5 +17,37 @@ $color-end: #003366; // Azul mais escuro
 .li:hover {
   transform: scale(1.2);
   font-weight: 500;
-  text-shadow: 0 0 1rem #f4eeee;
+  text-shadow: 0 0 1rem black;
+}
+
+@keyframes textColorChange {
+  0%,
+  100% {
+    color: #ffffff; // Cor branca para um bom contraste
+    text-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.5); // Sombra texturizada para legibilidade
+  }
+  20% {
+    color: #ff5733;
+  }
+  40% {
+    color: #ffcc00;
+  }
+  60% {
+    color: #32cd32;
+  }
+  80% {
+    color: #00ff99;
+  }
+}
+
+.projectName {
+  margin-right: 1rem;
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: bold;
+  background-size: 500% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: textColorChange 20s linear infinite;
 }

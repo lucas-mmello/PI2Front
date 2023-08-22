@@ -28,7 +28,7 @@ export default function HeaderLogged() {
   return (
     <nav className={`navbar navbar-expand-lg navbar-dark ${styles.nav}`}>
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <a className={`${styles.projectName}`} href="#">
           InkSearch
         </a>
         <button
