@@ -15,7 +15,7 @@ export default function Login() {
       </h3>
       {escolhaLogin ? <User /> : <Estudio />}
 
-      <div className="d-flex justify-content-center align-items-center my-4">
+      <div className="d-flex justify-content-center align-items-center my-4 pb-4">
         <div
           className="btn-group "
           role="group"

@@ -2,7 +2,7 @@ import styles from "./styles.module.scss";
 
 export default function Estudio() {
   return (
-    <div className="container my-3">
+    <div className="container py-3">
       <h2>Estudio Register</h2>
       <form className="row g-3">
         <div className="col-md-6">
