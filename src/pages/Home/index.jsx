@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import HeaderLogged from "../../components/HeaderLogged";
 import "../../styles/home.scss";
 import image1 from "../../assets/images/teste.png";
+import icon from "../../assets/icon/logo.png";
 
 export default function Home() {
   const user = sessionStorage.getItem("user"); // Aqui ele irá armazenar se o user está logado
@@ -21,7 +22,7 @@ export default function Home() {
         <div className="div-carousel">
           <Carousel
             image1={image1}
-            image2="https://cdn-icons-png.flaticon.com/512/896/896866.png"
+            image2={icon}
             image3="https://static.vecteezy.com/ti/fotos-gratis/p3/2268491-fundo-de-praia-vazio-gratis-foto.jpg"
             alt="teste"
           />
