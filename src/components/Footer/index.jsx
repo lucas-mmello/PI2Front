@@ -1,4 +1,5 @@
 import styles from "./styles.module.scss";
+import logo from "../../assets/icon/logo.png";
 export default function Footer() {
   return (
     <>
@@ -8,7 +9,7 @@ export default function Footer() {
             href="/"
             className="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1"
           >
-            <i className="bi bi-brush-fill "></i>
+            <img src={logo} height={64} width={66} />
           </a>
           <span className="mb-3 mb-md-0 text-body">
             &copy; 2023 Company, Inc
