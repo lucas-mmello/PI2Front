@@ -7,8 +7,8 @@ export default function Login() {
   const [escolhaLogin, setEscolhaLogin] = useState(true);
 
   return (
-    <div className="login-div">
-      <h3 className="danger d-flex justify-content-center align-items-center">
+    <>
+      <h3 className="danger py-4 d-flex justify-content-center align-items-center">
         {escolhaLogin
           ? "Faça seu Login como Usuário"
           : "Faça seu Login como Estudio"}
@@ -48,6 +48,6 @@ export default function Login() {
           </label>
         </div>
       </div>
-    </div>
+    </>
   );
 }

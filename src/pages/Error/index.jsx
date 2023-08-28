@@ -20,7 +20,7 @@ const Error = () => {
   }
 
   return (
-    <div className={styles.errorContainer}>
+    <>
       <div className={styles.errorContent}>
         <h1 className={styles.errorTitle}>Error {errorCode}</h1>
         <p className={styles.errorDescription}>{message}</p>
@@ -39,7 +39,7 @@ const Error = () => {
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
