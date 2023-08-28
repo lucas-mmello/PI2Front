@@ -1,16 +1,17 @@
 import Carousel from "../../components/Carousel";
 import "../../styles/home.scss";
 import image1 from "../../assets/images/teste.png";
-import icon from "../../assets/icon/logo.png";
-import { useNavigate } from "react-router-dom"; // Importe o useNavigate
+import icon from "../../assets/icon/logo.png"; // Importe o useNavigate
 import { errorHandlers } from "../../configs/Error"; // Importe o módulo de manipuladores de erro
+import { useState } from "react";
 
 export default function Home() {
-  const navigate = useNavigate(); // Obtenha o objeto navigate
-
   // Funções para lidar com os erros
-  const handleUnauthorized = errorHandlers.handleUnauthorized(navigate);
-  const handlePermissionDenied = errorHandlers.handlePermissionDenied(navigate);
+  const [handleUnauthorized, setHandleUnauthorized] = useState(false);
+
+  if (handleUnauthorized) {
+    return errorHandlers.handleUnauthorized();
+  }
 
   return (
     <>
@@ -24,11 +25,8 @@ export default function Home() {
           />
         </div>
         <div className="buttons">
-          <button onClick={handleUnauthorized}>
+          <button onClick={(e) => setHandleUnauthorized(true)}>
             Erro de Acesso Não Autorizado
-          </button>
-          <button onClick={handlePermissionDenied}>
-            Erro de Permissão Negada
           </button>
         </div>
       </div>

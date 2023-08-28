@@ -1,24 +1,43 @@
-/* ErrorPage.module.scss */
-
 .errorContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background-color: #f8f8f8;
-}
 
-.errorContent {
-  text-align: center;
-}
+  .errorContent {
+    text-align: center;
 
-.errorTitle {
-  font-size: 3rem;
-  color: #ff5733;
-  margin-bottom: 1rem;
-}
+    .errorTitle {
+      font-size: 3rem;
+      color: #ff5733;
+      margin-bottom: 1rem;
+    }
 
-.errorDescription {
-  font-size: 1.2rem;
-  color: #333;
+    .errorDescription {
+      font-size: 1.2rem;
+      color: #333;
+    }
+
+    .buttonContainer {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .button {
+      background-color: #ff5733;
+      color: white;
+      border: none;
+      border-radius: 0.3rem;
+      padding: 0.5rem 1rem;
+      margin: 0 0.5rem;
+      cursor: pointer;
+      transition: transform 0.3s ease-out;
+
+      &:hover {
+        transform: translateX(10px);
+      }
+    }
+  }
 }
