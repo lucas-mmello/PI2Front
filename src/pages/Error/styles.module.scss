@@ -1,0 +1,24 @@
+/* ErrorPage.module.scss */
+
+.errorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8f8f8;
+}
+
+.errorContent {
+  text-align: center;
+}
+
+.errorTitle {
+  font-size: 3rem;
+  color: #ff5733;
+  margin-bottom: 1rem;
+}
+
+.errorDescription {
+  font-size: 1.2rem;
+  color: #333;
+}

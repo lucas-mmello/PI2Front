@@ -1,5 +1,6 @@
 .imgWrapper {
-  max-height: 76vh;
+  height: 76vh;
+  max-height: 596px;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -7,6 +8,24 @@
 
 .img {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
+}
+
+@media (max-width: 1024px) {
+  .imgWrapper {
+    height: 65vh;
+  }
+}
+
+@media (max-width: 700px) {
+  .imgWrapper {
+    height: 45vh;
+  }
+}
+
+@media (max-width: 500px) {
+  .imgWrapper {
+    height: 35vh;
+  }
 }

@@ -1,0 +1,16 @@
+@import "./variables.scss";
+
+#root {
+  background: $background-gradient;
+  position: relative;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.div-footer {
+  background: $footer-gradient;
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
