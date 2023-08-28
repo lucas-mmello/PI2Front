@@ -16,6 +16,7 @@ export default function HeaderLogged() {
 
   const LogOut = () => {
     sessionStorage.removeItem("user");
+    sessionStorage.removeItem("permission");
     setRedirectToHome(true);
   };
 

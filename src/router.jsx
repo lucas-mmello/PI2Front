@@ -1,10 +1,11 @@
-import { Navigate, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
 import App from "./App";
 import Error from "./pages/Error";
 import Private from "./components/Auth/Private";
+import EstudioPrivate from "./components/Auth/Private/EstudioPrivate";
 
 const router = createBrowserRouter([
   {
@@ -12,43 +13,55 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/",
+        path: "/", // Página inicial
         element: <Home />,
       },
+      {
+        path: "private", // Rota privada
+        element: (
+          <>
+            <Private />
+          </>
+        ),
+        children: [
+          {
+            path: "search", // Rota de pesquisa
+            element: <h1>Protected Route Content</h1>,
+          },
+          {
+            path: "estudioPrivate",
+            element: (
+              <>
+                <EstudioPrivate />
+              </>
+            ),
+            children: [
+              {
+                path: "post",
+                element: (
+                  <h1 className="py-4">Protected Estudio Route Content</h1>
+                ),
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
   {
-    path: "/private",
-    element: (
-      <>
-        <Private />
-      </>
-    ), // Use o componente ProtectedRoute para proteger a rota
-    children: [
-      {
-        path: "/private/search", // /protected
-        element: <h1>Protected Route Content</h1>,
-      },
-      {
-        path: "/private/post", // /protected
-        element: <h1>Protected Route Content</h1>,
-      },
-    ],
-  },
-  {
-    path: "/Register",
+    path: "/Register", // Rota de registro
     element: <Register />,
   },
   {
-    path: "/Login",
+    path: "/Login", // Rota de login
     element: <Login />,
   },
   {
-    path: "/error/:errorCode/:errorMessage", // Define um parâmetro de rota ":message"
+    path: "/error/:errorCode/:errorMessage", // Rota de erro
     element: <Error />,
   },
   {
-    path: "*",
+    path: "*", // Qualquer outra rota de erro
     element: <Error />,
   },
 ]);
