@@ -1,33 +1,26 @@
+/* Header.module.scss */
+
 .header {
+  width: 80%;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #f0f2f5;
+  border: 1px solid #ccc;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  background-color: #f2f2f2;
-  border-bottom: 1px solid #ddd;
+
+  @media (max-width: 970px) {
+    width: 100%;
+  }
 }
 
 .studioInfo {
-  flex: 1;
-}
-
-.studioInfo h2 {
-  margin: 0;
-  font-size: 1.5rem;
-}
-
-.studioInfo p {
-  margin: 0.25rem 0;
-  font-size: 1rem;
-  color: #777;
+  flex: 2;
 }
 
 .contactInfo {
-  text-align: right;
-}
-
-.contactInfo p {
-  margin: 0.25rem 0;
-  font-size: 1rem;
-  color: #777;
+  flex: 1;
 }
