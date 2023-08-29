@@ -9,8 +9,5 @@
 
 .div-footer {
   background: $footer-gradient;
-  position: absolute;
-  right: 0;
-  left: 0;
-  bottom: 0;
+  margin-top: auto; /* Adicionado para alinhar no final */
 }

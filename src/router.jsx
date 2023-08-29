@@ -6,6 +6,7 @@ import App from "./App";
 import Error from "./pages/Error";
 import Private from "./components/Auth/Private";
 import EstudioPrivate from "./components/Auth/Private/EstudioPrivate";
+import ProfilePage from "./pages/Estudio/Profile";
 
 const router = createBrowserRouter([
   {
@@ -37,10 +38,8 @@ const router = createBrowserRouter([
             ),
             children: [
               {
-                path: "post",
-                element: (
-                  <h1 className="py-4">Protected Estudio Route Content</h1>
-                ),
+                path: "profile",
+                element: <ProfilePage />,
               },
             ],
           },

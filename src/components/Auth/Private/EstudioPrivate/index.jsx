@@ -12,7 +12,7 @@ export default function EstudioPrivate() {
 
   // Verifica se a URL é exatamente "/estudioPrivate"
   if (location.pathname === "/private/estudioPrivate" && isPermited === "1") {
-    return <Navigate to="/private/estudioPrivate/post" />;
+    return <Navigate to="/private/estudioPrivate/profile" />;
   }
 
   return <Outlet />;
