@@ -10,6 +10,7 @@ import ProfilePage from "./pages/Estudio/Profile";
 import CreatePost from "./pages/Estudio/Profile/CreatePost";
 import EditPost from "./pages/Estudio/Profile/EditPost";
 import DeletePost from "./pages/Estudio/Profile/DeletePost";
+import Search from "./pages/Search";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "search", // Rota de pesquisa
-            element: <h1>Protected Route Content</h1>,
+            element: <Search />,
           },
           {
             path: "estudioPrivate",

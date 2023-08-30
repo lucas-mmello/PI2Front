@@ -1,0 +1,41 @@
+/* StudioSearchPage.module.scss */
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #f0f2f5;
+  border-bottom: 1px solid #ccc;
+
+  .search-group {
+    padding: 1rem;
+
+    @media (max-width: 470px) {
+      padding: 1rem 0 1rem 0;
+    }
+
+    .inp-search {
+      padding: 0.2rem;
+      flex: 1;
+      font-size: 14px;
+
+      @media (max-width: 470px) {
+        padding: 0.2rem 0 0.2rem 0;
+      }
+    }
+    .icon {
+      padding: 0.2rem;
+
+      @media (max-width: 470px) {
+        padding: 0.2rem 0 0.2rem 0;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+/* search.scss */
