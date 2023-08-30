@@ -27,13 +27,8 @@ export default function Header() {
                 </Link>
               </li>
               <li className={`nav-item ${styles.li}`}>
-                <Link to="" className="text-light nav-link">
-                  Outra
-                </Link>
-              </li>
-              <li className={`nav-item ${styles.li}`}>
-                <Link to="/" className="text-light nav-link">
-                  Outra
+                <Link to="/private/search" className="text-light nav-link">
+                  Search
                 </Link>
               </li>
             </ul>

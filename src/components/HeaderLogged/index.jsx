@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export default function HeaderLogged() {
   const [RedirectToHome, setRedirectToHome] = useState(false);
+  const permission = sessionStorage.getItem("permission");
 
   const user = sessionStorage.getItem("user");
   let name = "";
@@ -52,15 +53,20 @@ export default function HeaderLogged() {
                 </Link>
               </li>
               <li className={`nav-item ${styles.li}`}>
-                <Link to="" className="text-light nav-link">
-                  Outra
+                <Link to="/private/search" className="text-light nav-link">
+                  Search
                 </Link>
               </li>
-              <li className={`nav-item ${styles.li}`}>
-                <Link to="/" className="text-light nav-link">
-                  Outra
-                </Link>
-              </li>
+              {permission === "1" ? (
+                <li className={`nav-item ${styles.li}`}>
+                  <Link
+                    to="/private/estudioPrivate/profile"
+                    className="text-light nav-link"
+                  >
+                    Perfil
+                  </Link>
+                </li>
+              ) : null}
             </ul>
 
             <div className={`my-2 my-lg-2 mx-3 dropstart`}>

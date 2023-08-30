@@ -7,6 +7,9 @@ import Error from "./pages/Error";
 import Private from "./components/Auth/Private";
 import EstudioPrivate from "./components/Auth/Private/EstudioPrivate";
 import ProfilePage from "./pages/Estudio/Profile";
+import CreatePost from "./pages/Estudio/Profile/CreatePost";
+import EditPost from "./pages/Estudio/Profile/EditPost";
+import DeletePost from "./pages/Estudio/Profile/DeletePost";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +43,18 @@ const router = createBrowserRouter([
               {
                 path: "profile",
                 element: <ProfilePage />,
+              },
+              {
+                path: "profile/createPost",
+                element: <CreatePost />,
+              },
+              {
+                path: "profile/editPost/:id",
+                element: <EditPost />,
+              },
+              {
+                path: "profile/deletePost/:id",
+                element: <DeletePost />,
               },
             ],
           },

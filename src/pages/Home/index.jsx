@@ -1,7 +1,7 @@
 import Carousel from "../../components/Carousel";
 import "../../styles/home.scss";
 import image1 from "../../assets/images/teste.png";
-import icon from "../../assets/icon/logo.png"; // Importe o useNavigate
+import icon from "../../assets/images/carrosel2.jpg"; // Importe o useNavigate
 import { errorHandlers } from "../../configs/Error"; // Importe o módulo de manipuladores de erro
 import { useState } from "react";
 
