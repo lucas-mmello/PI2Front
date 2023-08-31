@@ -1,14 +1,19 @@
 import Estudio from "./Estudio";
 import User from "./User";
 import { useState } from "react";
+import "../../../styles/register.scss";
 
 export default function Register() {
   const [escolhaRegister, setEscolhaRegister] = useState(true);
   return (
     <>
-      {escolhaRegister ? <User /> : <Estudio />}
+      <h3 className="danger pt-4 d-flex justify-content-center align-items-center">
+        {escolhaRegister
+          ? "Faça seu Registro como Usuário"
+          : "Faça seu Registro como Estudio"}
+      </h3>
 
-      <div className="d-flex justify-content-center align-items-center my-4">
+      <div className="d-flex justify-content-center align-items-center py-4">
         <div
           className="btn-group "
           role="group"
@@ -41,6 +46,7 @@ export default function Register() {
           </label>
         </div>
       </div>
+      {escolhaRegister ? <User /> : <Estudio />}
     </>
   );
 }

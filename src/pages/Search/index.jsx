@@ -35,7 +35,7 @@ export default function Search() {
             aria-describedby="button-addon1"
           />
           <span className="input-group-text" onClick={null}>
-            <i class="bi bi-search icon"></i>
+            <i className="bi bi-search icon"></i>
           </span>
           <button
             type="button"
@@ -70,6 +70,33 @@ export default function Search() {
             </div>
             <div className="modal-body">
               {/* Conteúdo do modal de filtros */}
+              <select
+                className="form-select my-2"
+                aria-label="Default select example"
+              >
+                <option selected>Estado</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+              <select
+                className="form-select my-2"
+                aria-label="Default select example"
+              >
+                <option selected>Cidade</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+              <select
+                className="form-select"
+                aria-label="Default select example"
+              >
+                <option selected>Estilos de Tatuagem</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
             </div>
             <div className="modal-footer">
               <button
