@@ -46,7 +46,7 @@ export default function Register() {
           </label>
         </div>
       </div>
-      {escolhaRegister ? <User /> : <Estudio />}
+      <div className="pb-4">{escolhaRegister ? <User /> : <Estudio />}</div>
     </>
   );
 }
