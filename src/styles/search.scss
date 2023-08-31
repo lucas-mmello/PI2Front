@@ -1,12 +1,15 @@
 /* StudioSearchPage.module.scss */
 
+h2,
+h3 {
+  padding-top: 1rem;
+  text-align: center;
+}
 .search-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
-  background-color: #f0f2f5;
-  border-bottom: 1px solid #ccc;
+  padding: 0 1rem 1rem 1rem;
 
   .search-group {
     padding: 1rem;
@@ -36,6 +39,11 @@
       }
     }
   }
+}
+
+.estudios {
+  background-color: #e4fffe;
+  min-height: 90vh;
 }
 
 /* search.scss */

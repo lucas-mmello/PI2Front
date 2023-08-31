@@ -1,8 +1,30 @@
+import Estudio from "../../components/Card/Estudio";
 import "../../styles/search.scss";
 
 export default function Search() {
+  const estudiosData = [
+    {
+      id: 1,
+      name: "Estúdio 1",
+      cep: "12345-678",
+      state: "Estado 1",
+      city: "Cidade 1",
+      street: "Rua 1",
+    },
+    {
+      id: 2,
+      name: "Estúdio 2",
+      cep: "98765-432",
+      state: "Estado 2",
+      city: "Cidade 2",
+      street: "Rua 2",
+    },
+    // ... outros objetos de estúdio
+  ];
+
   return (
     <div>
+      <h2>Buscar Estúdios</h2>
       <div className="search-bar">
         <div className="input-group mb-3 search-group">
           <input
@@ -65,7 +87,19 @@ export default function Search() {
         </div>
       </div>
 
-      {/* Resto da página */}
+      <div className="estudios">
+        <h3>Resultados da Busca</h3>
+        {estudiosData.map((estudio) => (
+          <Estudio
+            id={estudio.id}
+            name={estudio.name}
+            cep={estudio.cep}
+            state={estudio.state}
+            city={estudio.city}
+            street={estudio.street}
+          />
+        ))}
+      </div>
     </div>
   );
 }

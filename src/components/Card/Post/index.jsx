@@ -9,16 +9,20 @@ export default function Post(props) {
         <p className="card-text">{props.description}</p>
       </div>
       <div className="card-body">
-        <Link to={props.editar} className="card-link">
-          <span>
-            <i className={`bi bi-pencil ${styles.icon}`}></i>
-          </span>
-        </Link>
-        <Link to={props.excluir} className="card-link">
-          <span>
-            <i className={`bi bi-trash3 ${styles.icon}`}></i>
-          </span>
-        </Link>
+        {props.editar && (
+          <Link to={props.editar} className="card-link">
+            <span>
+              <i className={`bi bi-pencil ${styles.icon}`}></i>
+            </span>
+          </Link>
+        )}
+        {props.excluir && (
+          <Link to={props.excluir} className="card-link">
+            <span>
+              <i className={`bi bi-trash3 ${styles.icon}`}></i>
+            </span>
+          </Link>
+        )}
       </div>
     </div>
   );

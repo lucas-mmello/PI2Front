@@ -11,6 +11,7 @@ import CreatePost from "./pages/Estudio/Profile/CreatePost";
 import EditPost from "./pages/Estudio/Profile/EditPost";
 import DeletePost from "./pages/Estudio/Profile/DeletePost";
 import Search from "./pages/Search";
+import EstudioSearch from "./pages/Search/EstudioSearch";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
           {
             path: "search", // Rota de pesquisa
             element: <Search />,
+          },
+          {
+            path: "estudio/:id", // Rota de pesquisa
+            element: <EstudioSearch />,
           },
           {
             path: "estudioPrivate",

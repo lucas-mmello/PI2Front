@@ -1,0 +1,42 @@
+@import "./variables.scss";
+
+.profilePage {
+  /* Adicione estilos para o container principal */
+  width: 85vw;
+  margin: 0 auto;
+  padding: 2rem 4rem;
+  border-radius: 0.5rem;
+
+  @media (max-width: 767px) {
+    width: 75vw;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 90vw;
+  }
+}
+
+.postContainer {
+  display: grid;
+  gap: 1rem; /* Espaço entre os cards */
+
+  @media (max-width: 767px) {
+    /* Mostrar 1 post por linha em dispositivos menores que 768px */
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    /* Mostrar 2 posts por linha em dispositivos entre 768px e 1023px */
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    /* Mostrar 3 posts por linha em dispositivos maiores ou iguais a 1024px */
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.postCol {
+  padding: 0;
+  /* Ajuste os estilos da coluna do post */
+}
