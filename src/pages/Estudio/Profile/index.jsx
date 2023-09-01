@@ -3,9 +3,12 @@ import Post from "../../../components/Card/Post";
 import "../../../styles/profile.scss";
 import logo from "../../../assets/icon/logo.png";
 import icon from "../../../assets/icon/favicon-32x32.png";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import ModalPost from "../../../components/ModalPost";
 
 export default function ProfilePage() {
+  const [selectedPost, setSelectedPost] = useState("");
+
   const postsData = [
     {
       id: 1,
@@ -49,18 +52,32 @@ export default function ProfilePage() {
     cellphone: "987-654-3210",
   };
 
+  const handleCreatePost = (postData) => {
+    // Lógica para criar um novo post com os dados fornecidos
+    console.log("Creating post with data:", postData);
+  };
+
+  const handleEditPost = (postData) => {
+    // Lógica para editar um post existente com os dados fornecidos
+    console.log("Editing post with data:", postData);
+  };
+
+  const handleDeletePost = (postId) => {
+    // Lógica para excluir um post com o ID fornecido
+    console.log("Deleting post with ID:", postId);
+  };
+
   return (
     <>
       <Profile studioInfo={studioInfo} />
       <div className="profilePage">
         <div className="div-button">
-          <button className="btn btn-info">
-            <Link
-              to="/private/estudioPrivate/createPost"
-              className="criar-text"
-            >
-              Criar Post
-            </Link>
+          <button
+            className="btn btn-info"
+            data-bs-toggle="modal"
+            data-bs-target="#postModal"
+          >
+            Criar Post
           </button>
         </div>
         <div className="row postContainer">
@@ -69,12 +86,41 @@ export default function ProfilePage() {
               <Post
                 image={post.image}
                 description={post.description}
-                editar={post.editar}
-                excluir={post.excluir}
+                onEdit={() => {
+                  setSelectedPost(post.id);
+                }}
+                onDelete={() => {
+                  setSelectedPost(post.id);
+                }}
+                idModalEd="#editModal"
+                idModalDel="#deleteModal"
               />
             </div>
           ))}
         </div>
+
+        <ModalPost
+          idModal="postModal"
+          mode="create"
+          heading="Create Post"
+          onSave={handleCreatePost}
+        />
+
+        <ModalPost
+          idModal="editModal"
+          mode="edit"
+          heading="Edit Post"
+          postId={selectedPost}
+          onSave={handleEditPost}
+        />
+
+        <ModalPost
+          idModal="deleteModal"
+          mode="delete"
+          heading="Delete Post"
+          postId={selectedPost}
+          onDelete={handleDeletePost}
+        />
       </div>
     </>
   );

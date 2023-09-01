@@ -1,29 +1,48 @@
-import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import styles from "./styles.module.scss";
 
 export default function Post(props) {
+  const { image, description, onEdit, onDelete, idModalEd, idModalDel } = props;
+
   return (
     <div className={`card ${styles.cardPost} h-100`}>
-      <img src={props.image} className="card-img-top" alt="Imagem do Post" />
+      <img src={image} className="card-img-top" alt="Imagem do Post" />
       <div className="card-body">
-        <p className="card-text">{props.description}</p>
+        <p className="card-text">{description}</p>
       </div>
       <div className="card-body">
-        {props.editar && (
-          <Link to={props.editar} className="card-link">
+        {onEdit && (
+          <button
+            data-bs-toggle="modal"
+            data-bs-target={idModalEd}
+            onClick={onEdit}
+            className={`card-link ${styles.button}`}
+          >
             <span>
               <i className={`bi bi-pencil ${styles.icon}`}></i>
             </span>
-          </Link>
+          </button>
         )}
-        {props.excluir && (
-          <Link to={props.excluir} className="card-link">
+        {onDelete && (
+          <button
+            data-bs-toggle="modal"
+            data-bs-target={idModalDel}
+            onClick={onDelete}
+            className={`card-link ${styles.button}`}
+          >
             <span>
               <i className={`bi bi-trash3 ${styles.icon}`}></i>
             </span>
-          </Link>
+          </button>
         )}
       </div>
     </div>
   );
 }
+
+Post.propTypes = {
+  image: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  onEdit: PropTypes.func, // Função para editar um post
+  onDelete: PropTypes.func, // Função para excluir um post
+};

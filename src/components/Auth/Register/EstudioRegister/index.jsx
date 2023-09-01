@@ -165,7 +165,6 @@ export default function EstudioRegister(props) {
             </span>
             <input
               type="text"
-              disabled
               id="Rua"
               className="form-control"
               name="rua" // adiciona o atributo name para identificar o campo

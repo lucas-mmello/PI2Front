@@ -116,7 +116,7 @@ export default function UserRegister(props) {
         </div>
 
         <div className={`${styles.divinp}`}>
-          <label htmlFor="Cep" className="form-label">
+          <label htmlFor="Nascimento" className="form-label">
             Data de Nascimento
           </label>
           <div className="input-group">
