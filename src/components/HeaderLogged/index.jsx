@@ -69,7 +69,7 @@ export default function HeaderLogged() {
               ) : null}
             </ul>
 
-            <div className={`my-2 my-lg-2 mx-3 dropstart`}>
+            <div className={`my-2 my-lg-2 mx-3 `}>
               <ul className="navbar-nav">
                 <li className="nav-item dropdown">
                   <button
@@ -79,7 +79,7 @@ export default function HeaderLogged() {
                   >
                     {name}
                   </button>
-                  <ul className="dropdown-menu dropdown-menu-lg-start dropdown-menu-dark">
+                  <ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-start dropdown-menu-dark">
                     <li>
                       <Link to="" className="text-light nav-link dropdown-item">
                         Account
