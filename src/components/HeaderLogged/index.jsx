@@ -81,7 +81,10 @@ export default function HeaderLogged() {
                   </button>
                   <ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-start dropdown-menu-dark">
                     <li>
-                      <Link to="" className="text-light nav-link dropdown-item">
+                      <Link
+                        to="/private/account"
+                        className="text-light nav-link dropdown-item"
+                      >
                         Account
                       </Link>
                     </li>

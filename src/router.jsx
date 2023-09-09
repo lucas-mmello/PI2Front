@@ -9,6 +9,7 @@ import EstudioPrivate from "./components/Auth/Private/EstudioPrivate";
 import ProfilePage from "./pages/Estudio/Profile";
 import Search from "./pages/Search";
 import EstudioSearch from "./pages/Search/EstudioSearch";
+import Account from "./pages/Account";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
           {
             path: "estudio/:id", // Rota de pesquisa
             element: <EstudioSearch />,
+          },
+          {
+            path: "account",
+            element: <Account />,
           },
           {
             path: "estudioPrivate",

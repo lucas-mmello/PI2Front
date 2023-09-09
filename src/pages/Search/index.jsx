@@ -1,7 +1,14 @@
 import Estudio from "../../components/Card/Estudio";
 import "../../styles/search.scss";
+import { useState } from "react";
 
 export default function Search() {
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleChange = (event) => {
+    setSelectedOption(event.target.value); // Atualiza o estado com a opção selecionada
+  };
+
   const estudiosData = [
     {
       id: 1,
@@ -73,8 +80,10 @@ export default function Search() {
               <select
                 className="form-select my-2"
                 aria-label="Default select example"
+                value={selectedOption}
+                onChange={handleChange}
               >
-                <option selected>Estado</option>
+                <option value="">Estado</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
                 <option value="3">Three</option>
@@ -82,8 +91,10 @@ export default function Search() {
               <select
                 className="form-select my-2"
                 aria-label="Default select example"
+                value={selectedOption}
+                onChange={handleChange}
               >
-                <option selected>Cidade</option>
+                <option value="">Cidade</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
                 <option value="3">Three</option>
@@ -91,8 +102,10 @@ export default function Search() {
               <select
                 className="form-select"
                 aria-label="Default select example"
+                value={selectedOption}
+                onChange={handleChange}
               >
-                <option selected>Estilos de Tatuagem</option>
+                <option value="">Estilos de Tatuagem</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
                 <option value="3">Three</option>
@@ -118,6 +131,7 @@ export default function Search() {
         <h3>Resultados da Busca</h3>
         {estudiosData.map((estudio) => (
           <Estudio
+            key={estudio.id}
             id={estudio.id}
             name={estudio.name}
             cep={estudio.cep}
