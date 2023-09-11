@@ -60,14 +60,14 @@ export default function EstudioAccount() {
           <p className="card-text">Celular: {studioData.Celular}</p>
           {/* Adicione mais informações do estúdio aqui */}
           <button
-            className="btn btn-primary mx-1"
+            className="btn btn-primary mx-1 my-1"
             data-bs-toggle="modal"
             data-bs-target="#alterarModal"
           >
             Editar Informações
           </button>
           <button
-            className="btn btn-danger mx-1"
+            className="btn btn-danger mx-1 my-1"
             data-bs-toggle="modal"
             data-bs-target="#excluirModal"
           >

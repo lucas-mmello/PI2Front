@@ -3,4 +3,9 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  @media (max-width: 540px) {
+    width: 280px;
+    margin: 0 auto;
+  }
 }

@@ -50,14 +50,14 @@ export default function UserAccount() {
           <p className="card-text">Data de Nascimento: {userData.birthDate}</p>
           {/* Adicione mais informações do usuário aqui */}
           <button
-            className="btn btn-primary mx-1"
+            className="btn btn-primary mx-1 my-1"
             data-bs-toggle="modal"
             data-bs-target="#alterarModal"
           >
             Editar Informações
           </button>
           <button
-            className="btn btn-danger mx-1"
+            className="btn btn-danger mx-1 my-1"
             data-bs-toggle="modal"
             data-bs-target="#excluirModal"
           >
