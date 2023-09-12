@@ -3,8 +3,11 @@ import Header from "./components/Header";
 import HeaderLogged from "./components/HeaderLogged";
 import "./styles/app.scss";
 import { Outlet } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function App() {
+  AOS.init();
   const user = sessionStorage.getItem("user"); // Aqui ele irá armazenar se o user está logado
   return (
     <>

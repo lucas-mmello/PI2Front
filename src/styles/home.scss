@@ -50,11 +50,66 @@
 }
 
 #clienteDiv {
-  background: rgba(0, 255, 251, 0.8);
+  background-image: linear-gradient(
+    to bottom,
+    #e6f8fd 0%,
+    #71e7ff 50%,
+    #262626 100%
+  );
 }
 
 #tatooDiv {
-  background: rgba(114, 255, 250, 0.8);
+  background-image: linear-gradient(
+    to bottom,
+    #3c3b3b 0%,
+    #5fc2d6 50%,
+    #cef4ff 100%
+  );
+}
+
+/* Estilo para a seção de contato */
+#contact {
+  text-align: center;
+  padding: 2rem;
+
+  h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Para alinhar os ícones e o texto verticalmente */
+
+    .contact-info {
+      display: flex;
+      align-items: center;
+
+      .icon {
+        font-size: 2rem;
+        color: #007bff;
+        text-decoration: none;
+        margin-right: 0.5rem;
+        transition: color 0.3s;
+
+        &:hover {
+          color: #0056b3;
+          filter: drop-shadow(-1px 14px 16px #000000);
+        }
+      }
+
+      .text {
+        font-size: 1.2rem;
+        margin: 0;
+      }
+    }
+  }
+
+  p {
+    font-size: 1.2rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -105,6 +160,27 @@
       p {
         font-size: 0.9rem;
       }
+    }
+  }
+  #contact {
+    h2 {
+      font-size: 2rem;
+    }
+
+    .icons {
+      .contact-info {
+        .icon {
+          font-size: 1.8rem;
+        }
+
+        .text {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    p {
+      font-size: 1rem;
     }
   }
 }
