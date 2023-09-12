@@ -85,12 +85,7 @@ export default function HeaderLogged() {
                         to="/private/account"
                         className="text-light nav-link dropdown-item"
                       >
-                        Account
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="" className="text-light nav-link dropdown-item">
-                        Something
+                        <i className="bi bi-person-fill px-2"></i> Account
                       </Link>
                     </li>
                     <li>
@@ -99,6 +94,7 @@ export default function HeaderLogged() {
                         className="text-light nav-link dropdown-item"
                         onClick={LogOut}
                       >
+                        <i class="bi bi-arrow-left-circle px-2"></i>
                         Log Out
                       </Link>
                     </li>

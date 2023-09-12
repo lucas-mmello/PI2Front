@@ -20,6 +20,8 @@ export default function Home() {
         <div
           className="col-md-6 text-left align-items-center"
           data-aos="fade-up-right"
+          data-aos-duration="1500"
+          data-aos-once="true"
         >
           <h1>Clientes</h1>
           <p>
@@ -30,7 +32,8 @@ export default function Home() {
         <div
           className="col-md-6"
           data-aos="fade-down-left"
-          data-aos-duration="1000"
+          data-aos-duration="1500"
+          data-aos-once="true"
         >
           <img
             src={tatuador}
@@ -41,12 +44,19 @@ export default function Home() {
         </div>
       </div>
       <div className="section d-flex mb-4" id="tatooDiv">
-        <div className="col-md-6" data-aos="flip-right">
+        <div
+          className="col-md-6"
+          data-aos="flip-right"
+          data-aos-duration="1500"
+          data-aos-once="true"
+        >
           <img src={cliente} alt="Imagem à Esquerda 2" className="img-fluid" />
         </div>
         <div
           className="col-md-6 text-right align-items-center"
           data-aos="zoom-in-left"
+          data-aos-duration="1500"
+          data-aos-once="true"
         >
           <h1>Estudios</h1>
           <p>
@@ -56,17 +66,33 @@ export default function Home() {
         </div>
       </div>
       <section id="contact">
-        <h2>Entre em contato</h2>
+        <h2
+          data-aos="zoom-in-down"
+          data-aos-duration="1000"
+          data-aos-once="true"
+        >
+          Entre em contato
+        </h2>
 
         <div className="icons">
-          <div className="contact-info">
+          <div
+            className="contact-info"
+            data-aos="zoom-in-right"
+            data-aos-duration="1000"
+            data-aos-once="true"
+          >
             <a href="mailto:support@example.com" className="icon">
               <i className="bi bi-envelope"></i>
             </a>
             <p className="text">support@example.com</p>
           </div>
 
-          <div className="contact-info">
+          <div
+            className="contact-info"
+            data-aos="zoom-in-left"
+            data-aos-duration="1000"
+            data-aos-once="true"
+          >
             <a href="tel:+15555555555" className="icon">
               <i className="bi bi-phone"></i>
             </a>
@@ -74,7 +100,9 @@ export default function Home() {
           </div>
         </div>
 
-        <p>Horário de funcionamento: 9h às 18h, de segunda a sexta-feira.</p>
+        <p data-aos="zoom-in-up" data-aos-duration="1000" data-aos-once="true">
+          Horário de funcionamento: 9h às 18h, de segunda a sexta-feira.
+        </p>
       </section>
     </div>
   );
