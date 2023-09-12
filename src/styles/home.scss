@@ -5,11 +5,106 @@
 }
 
 .div-carousel {
-  padding: 0 0 1rem 0;
+  padding: 0;
   margin: 0 auto 0 auto;
 }
 
 .buttons {
   padding: 3rem;
   margin-bottom: 3rem;
+}
+
+.section {
+  display: flex;
+  flex-direction: row; /* Alterado para dispor o texto ao lado da imagem */
+  height: 100vh; /* Cada seção ocupará 100vh */
+  align-items: center;
+
+  h1 {
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  .text-left,
+  .text-right {
+    flex-basis: 47%; /* Distribuí 50% para cada parte do texto e da imagem */
+    padding: 1rem;
+
+    p {
+      font-size: 1.6rem;
+    }
+  }
+
+  .image-left,
+  .image-right {
+    height: 100%; /* A altura da imagem será igual à altura da seção */
+    flex-basis: 50%; /* Distribuí 50% para cada parte da imagem e do texto */
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+#clienteDiv {
+  background: rgba(0, 255, 251, 0.8);
+}
+
+#tatooDiv {
+  background: rgba(114, 255, 250, 0.8);
+}
+
+@media (max-width: 768px) {
+  .section {
+    flex-direction: column; /* Mudar para empilhar a imagem abaixo do texto */
+
+    .image-left,
+    .image-right {
+      margin-top: 1rem; /* Adicionar espaço entre a imagem e o texto */
+    }
+  }
+  #tatooDiv {
+    flex-direction: column-reverse;
+  }
+}
+
+@media (max-width: 580px) {
+  .section {
+    height: 80vh; /* Cada seção ocupará 100vh */
+  }
+}
+
+@media (max-width: 465px) {
+  .section {
+    height: 70vh; /* Cada seção ocupará 100vh */
+    h1 {
+      font-size: 2.6rem;
+    }
+
+    .text-left,
+    .text-right {
+      p {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 395px) {
+  .section {
+    height: 57vh; /* Cada seção ocupará 100vh */
+    h1 {
+      font-size: 2.2rem;
+    }
+
+    .text-left,
+    .text-right {
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  }
 }
