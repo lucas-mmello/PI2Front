@@ -73,7 +73,9 @@ export default function HeaderLogged() {
               <ul className="navbar-nav">
                 <li className="nav-item dropdown">
                   <button
-                    className="btn btn-dark dropdown-toggle text-light"
+                    className={`btn btn-dark dropdown-toggle text-light ${
+                      name.length < 6 ? "py-2 px-3 mx-4" : ""
+                    }`}
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
