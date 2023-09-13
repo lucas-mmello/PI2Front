@@ -1,20 +1,30 @@
 import styles from "./styles.module.scss";
 import { Form, Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import ViaCEPService from "../../../../services/cep";
 
 export default function EstudioRegister(props) {
   const [registerData, setRegisterData] = useState({
     name: "",
     email: "",
     password: "",
+    cnpj: "",
+    cep: "",
+    rua: "",
+    residencia: "",
+    cidade: "",
+    estado: "",
+    celular: "",
+    telefone: "",
   });
   const [passwordError, setPasswordError] = useState("");
+  const [cepData, setCepData] = useState(null);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
     // Verifica se a senha atende aos requisitos
-    if (!validatePassword(loginData.password)) {
+    if (!validatePassword(registerData.password)) {
       setPasswordError(
         "A senha deve conter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial."
       );
@@ -35,7 +45,16 @@ export default function EstudioRegister(props) {
       name: "",
       email: "",
       password: "",
+      cnpj: "",
+      cep: "",
+      rua: "",
+      residencia: "",
+      cidade: "",
+      estado: "",
+      celular: "",
+      telefone: "",
     });
+    setCepData(null);
   };
 
   const validatePassword = (password) => {
@@ -43,6 +62,36 @@ export default function EstudioRegister(props) {
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return regex.test(password);
   };
+
+  const fetchCEPData = async () => {
+    const { cep } = registerData;
+    if (cep.length === 8) {
+      try {
+        const data = await ViaCEPService.getCEP(cep);
+        setCepData(data);
+
+        setRegisterData({
+          ...registerData,
+          rua: data.logradouro,
+          cidade: data.localidade,
+          estado: data.uf,
+        });
+      } catch (error) {
+        console.error("Erro ao consultar o CEP:", error);
+        setCepData(null);
+        setRegisterData({
+          ...registerData,
+          rua: "",
+          cidade: "",
+          estado: "",
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchCEPData();
+  }, [registerData.cep]);
 
   return (
     <div className={`${styles.teste}`}>
@@ -65,8 +114,8 @@ export default function EstudioRegister(props) {
               id="Name"
               className="form-control"
               placeholder="Nome..."
-              name="name" // adiciona o atributo name para identificar o campo
-              value={registerData.name} // conecta o valor ao estado registerData
+              name="name"
+              value={registerData.name}
               onChange={(e) => handleInputChange(e, "name")}
             />
           </div>
@@ -85,8 +134,8 @@ export default function EstudioRegister(props) {
               id="Email"
               className="form-control"
               placeholder="user@user.com"
-              name="email" // adiciona o atributo name para identificar o campo
-              value={registerData.email} // conecta o valor ao estado registerData
+              name="email"
+              value={registerData.email}
               onChange={(e) => handleInputChange(e, "email")}
             />
           </div>
@@ -102,7 +151,7 @@ export default function EstudioRegister(props) {
             <input
               type="password"
               id="Senha"
-              className={`form-control ${passwordError ? "is-invalid" : ""}`} // Adiciona a classe is-invalid se houver erro de senha
+              className={`form-control ${passwordError ? "is-invalid" : ""}`}
               placeholder="••••••••"
               name="password"
               value={registerData.password}
@@ -110,14 +159,13 @@ export default function EstudioRegister(props) {
             />
             {passwordError && (
               <div className="invalid-feedback">{passwordError}</div>
-            )}{" "}
-            {/* Mostra a mensagem de erro */}
+            )}
           </div>
         </div>
 
         <div className={`${styles.divinp}`}>
           <label htmlFor="Cnpj" className="form-label">
-            Cnpj
+            CNPJ
           </label>
           <div className="input-group">
             <span className="input-group-text">
@@ -128,8 +176,8 @@ export default function EstudioRegister(props) {
               id="Cnpj"
               className="form-control"
               placeholder="Cnpj..."
-              name="cnpj" // adiciona o atributo name para identificar o campo
-              value={registerData.cnpj} // conecta o valor ao estado registerData
+              name="cnpj"
+              value={registerData.cnpj}
               onChange={(e) => handleInputChange(e, "cnpj")}
             />
           </div>
@@ -148,9 +196,10 @@ export default function EstudioRegister(props) {
               id="Cep"
               className="form-control"
               placeholder="Cep..."
-              name="cep" // adiciona o atributo name para identificar o campo
-              value={registerData.cep} // conecta o valor ao estado registerData
+              name="cep"
+              value={registerData.cep}
               onChange={(e) => handleInputChange(e, "cep")}
+              maxLength={8}
             />
           </div>
         </div>
@@ -167,12 +216,14 @@ export default function EstudioRegister(props) {
               type="text"
               id="Rua"
               className="form-control"
-              name="rua" // adiciona o atributo name para identificar o campo
-              value={registerData.rua} // conecta o valor ao estado registerData
+              disabled
+              name="rua"
+              value={registerData.rua}
               onChange={(e) => handleInputChange(e, "rua")}
             />
           </div>
         </div>
+
         <div className={`${styles.divinp}`}>
           <label htmlFor="Residencia" className="form-label">
             Numero da Residencia
@@ -183,11 +234,10 @@ export default function EstudioRegister(props) {
             </span>
             <input
               type="text"
-              disabled
               id="Residencia"
               className="form-control"
-              name="residencia" // adiciona o atributo name para identificar o campo
-              value={registerData.residencia} // conecta o valor ao estado registerData
+              name="residencia"
+              value={registerData.residencia}
               onChange={(e) => handleInputChange(e, "residencia")}
             />
           </div>
@@ -206,8 +256,8 @@ export default function EstudioRegister(props) {
               disabled
               id="Cidade"
               className="form-control"
-              name="cidade" // adiciona o atributo name para identificar o campo
-              value={registerData.cidade} // conecta o valor ao estado registerData
+              name="cidade"
+              value={registerData.cidade}
               onChange={(e) => handleInputChange(e, "cidade")}
             />
           </div>
@@ -226,8 +276,8 @@ export default function EstudioRegister(props) {
               disabled
               id="Estado"
               className="form-control"
-              name="estado" // adiciona o atributo name para identificar o campo
-              value={registerData.estado} // conecta o valor ao estado registerData
+              name="estado"
+              value={registerData.estado}
               onChange={(e) => handleInputChange(e, "estado")}
             />
           </div>
@@ -245,8 +295,8 @@ export default function EstudioRegister(props) {
               type="text"
               id="Celular"
               className="form-control"
-              name="celular" // adiciona o atributo name para identificar o campo
-              value={registerData.celular} // conecta o valor ao estado registerData
+              name="celular"
+              value={registerData.celular}
               onChange={(e) => handleInputChange(e, "celular")}
             />
           </div>
@@ -264,8 +314,8 @@ export default function EstudioRegister(props) {
               type="text"
               id="Telefone"
               className="form-control"
-              name="telefone" // adiciona o atributo name para identificar o campo
-              value={registerData.telefone} // conecta o valor ao estado registerData
+              name="telefone"
+              value={registerData.telefone}
               onChange={(e) => handleInputChange(e, "telefone")}
             />
           </div>

@@ -1,25 +1,33 @@
 import styles from "./styles.module.scss";
 import { Form, Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import ViaCEPService from "../../../../services/cep";
 
 export default function UserRegister(props) {
   const [registerData, setRegisterData] = useState({
     name: "",
     email: "",
     password: "",
+    cep: "", // Adicione um campo para o CEP
+    cidade: "", // Adicione um campo para a cidade
+    estado: "", // Adicione um campo para o estado
   });
   const [passwordError, setPasswordError] = useState("");
+  const [cepData, setCepData] = useState(null); // Para armazenar os dados do CEP
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
     // Verifica se a senha atende aos requisitos
-    if (!validatePassword(loginData.password)) {
+    if (!validatePassword(registerData.password)) {
       setPasswordError(
         "A senha deve conter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial."
       );
       return;
     }
+
+    // Agora você pode enviar todos os dados (incluindo os dados do CEP) para o seu backend.
+    // registerData conterá todos os dados do formulário, incluindo os dados do CEP (cepData).
 
     props.onSubmit(registerData);
     clearFormInputs();
@@ -35,7 +43,11 @@ export default function UserRegister(props) {
       name: "",
       email: "",
       password: "",
+      cep: "", // Certifique-se de limpar o campo CEP
+      cidade: "", // Certifique-se de limpar o campo cidade
+      estado: "", // Certifique-se de limpar o campo estado
     });
+    setCepData(null); // Limpa os dados do CEP
   };
 
   const validatePassword = (password) => {
@@ -43,6 +55,38 @@ export default function UserRegister(props) {
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return regex.test(password);
   };
+
+  // Função para buscar os dados do CEP
+  const fetchCEPData = async () => {
+    const { cep } = registerData;
+    if (cep.length === 8) {
+      try {
+        const data = await ViaCEPService.getCEP(cep);
+        setCepData(data);
+
+        // Preencha automaticamente os campos relacionados ao CEP
+        setRegisterData({
+          ...registerData,
+          cidade: data.localidade,
+          estado: data.uf,
+        });
+      } catch (error) {
+        console.error("Erro ao consultar o CEP:", error);
+        // Lida com o erro, por exemplo, CEP não encontrado
+        setCepData(null);
+        setRegisterData({
+          ...registerData,
+          cidade: "",
+          estado: "",
+        });
+      }
+    }
+  };
+
+  // Use o useEffect para chamar a função fetchCEPData sempre que o CEP mudar
+  useEffect(() => {
+    fetchCEPData();
+  }, [registerData.cep]);
 
   return (
     <div className={`${styles.teste}`}>
@@ -150,6 +194,7 @@ export default function UserRegister(props) {
               name="cep" // adiciona o atributo name para identificar o campo
               value={registerData.cep} // conecta o valor ao estado registerData
               onChange={(e) => handleInputChange(e, "cep")}
+              maxLength={8}
             />
           </div>
         </div>

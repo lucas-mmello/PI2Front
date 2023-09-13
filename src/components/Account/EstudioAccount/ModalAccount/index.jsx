@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Form } from "react-router-dom";
+import ViaCEPService from "../../../../services/cep";
 
 export default function ModalAccount({
   mode,
@@ -22,6 +23,7 @@ export default function ModalAccount({
   const [Telefone, setTelefone] = useState("");
   const [Celular, setCelular] = useState("");
   const [idEstudio, setIdEstudio] = useState("");
+  const [cepInfo, setCepInfo] = useState(null); // Estado para armazenar as informações do CEP
 
   // Verificar se estudioData está definido antes de definir os valores iniciais
   useEffect(() => {
@@ -40,6 +42,30 @@ export default function ModalAccount({
       setIdEstudio(estudioData.id || "");
     }
   }, [estudioData]);
+
+  // Função para buscar informações do CEP
+  const fetchCEPInfo = async () => {
+    if (cep.length !== 8) {
+      console.error("O CEP deve conter exatamente 8 caracteres.");
+      return;
+    }
+    try {
+      const info = await ViaCEPService.getCEP(cep);
+      // Preencha os campos com as informações do CEP
+      setCidade(info.localidade);
+      setEstado(info.uf);
+      setRua(info.logradouro);
+    } catch (error) {
+      console.error("Erro ao buscar informações do CEP", error);
+    }
+  };
+
+  // Chamado quando o CEP é alterado
+  useEffect(() => {
+    if (cep) {
+      fetchCEPInfo();
+    }
+  }, [cep]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -161,7 +187,9 @@ export default function ModalAccount({
                       type="text"
                       className="form-control"
                       value={cep}
+                      maxLength={8}
                       onChange={(e) => setCep(e.target.value)}
+                      onBlur={fetchCEPInfo} // Busca informações do CEP ao perder o foco
                     />
                   </div>
                   <div className="mb-3">
@@ -171,6 +199,7 @@ export default function ModalAccount({
                     <input
                       type="text"
                       className="form-control"
+                      disabled
                       value={cidade}
                       onChange={(e) => setCidade(e.target.value)}
                     />
@@ -182,6 +211,7 @@ export default function ModalAccount({
                     <input
                       type="text"
                       className="form-control"
+                      disabled
                       value={estado}
                       onChange={(e) => setEstado(e.target.value)}
                     />
@@ -193,6 +223,7 @@ export default function ModalAccount({
                     <input
                       type="text"
                       className="form-control"
+                      disabled
                       value={rua}
                       onChange={(e) => setRua(e.target.value)}
                     />

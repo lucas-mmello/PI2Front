@@ -73,14 +73,13 @@ export default function HeaderLogged() {
               <ul className="navbar-nav">
                 <li className="nav-item dropdown">
                   <button
-                    className={`btn btn-dark dropdown-toggle text-light ${
-                      name.length < 6 ? "py-2 px-3 mx-4" : ""
-                    }`}
+                    className={`btn btn-dark dropdown-toggle text-light me-5 `}
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    {name}
+                    {name.length > 15 ? `${name.slice(0, 12)}...` : name}
                   </button>
+
                   <ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-start dropdown-menu-dark">
                     <li>
                       <Link

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Form } from "react-router-dom";
+import ViaCEPService from "../../../../services/cep";
 
 export default function ModalAccount({
   mode,
@@ -18,6 +19,29 @@ export default function ModalAccount({
   const [estado, setEstado] = useState("");
   const [birthDate, setBirthDate] = useState("");
   const [userId, setUserId] = useState("");
+
+  // Função para buscar informações do CEP
+  const fetchCEPInfo = async () => {
+    if (cep.length !== 8) {
+      console.error("O CEP deve conter exatamente 8 caracteres.");
+      return;
+    }
+    try {
+      const info = await ViaCEPService.getCEP(cep);
+      // Preencha os campos com as informações do CEP
+      setCidade(info.localidade);
+      setEstado(info.uf);
+    } catch (error) {
+      console.error("Erro ao buscar informações do CEP", error);
+    }
+  };
+
+  // Chamado quando o CEP é alterado
+  useEffect(() => {
+    if (cep) {
+      fetchCEPInfo();
+    }
+  }, [cep]);
 
   useEffect(() => {
     if (userData) {
@@ -142,6 +166,8 @@ export default function ModalAccount({
                       className="form-control"
                       value={cep}
                       onChange={(e) => setCep(e.target.value)}
+                      maxLength={8}
+                      onBlur={fetchCEPInfo} // Busca informações do CEP ao perder o foco
                     />
                   </div>
                   <div className="mb-3">
@@ -152,6 +178,7 @@ export default function ModalAccount({
                       type="text"
                       className="form-control"
                       value={cidade}
+                      disabled
                       onChange={(e) => setCidade(e.target.value)}
                     />
                   </div>
@@ -163,6 +190,7 @@ export default function ModalAccount({
                       type="text"
                       className="form-control"
                       value={estado}
+                      disabled
                       onChange={(e) => setEstado(e.target.value)}
                     />
                   </div>
