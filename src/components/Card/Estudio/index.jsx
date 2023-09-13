@@ -12,7 +12,7 @@ export default function Estudio({ name, cep, state, city, street, id }) {
       </div>
       <button className={`${styles.btn} ${styles["btn-primary"]}`}>
         <Link className={styles.link} to={`/private/estudio/${id}`}>
-          Ver Estúdio
+          <i class="bi bi-eye pe-1"></i>Ver Estúdio
         </Link>
       </button>
     </div>

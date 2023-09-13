@@ -45,33 +45,54 @@ export default function EstudioAccount() {
       <div className="card p-3 my-3">
         <div className="card-body">
           <h2 className="card-title">Informações do Estúdio</h2>
-          <p className="card-text">CNPJ: {studioData.cnpj}</p>
-          <p className="card-text">Nome: {studioData.name}</p>
-          <p className="card-text">Email: {studioData.email}</p>
-          <p className="card-text">Senha: *****</p>
-          <p className="card-text">CEP: {studioData.cep}</p>
-          <p className="card-text">Cidade: {studioData.cidade}</p>
-          <p className="card-text">Estado: {studioData.estado}</p>
-          <p className="card-text">Rua: {studioData.rua}</p>
           <p className="card-text">
-            Número Residencial: {studioData.NumResidencia}
+            <i class="bi bi-person-vcard px-2"></i>CNPJ: {studioData.cnpj}
           </p>
-          <p className="card-text">Telefone: {studioData.Telefone}</p>
-          <p className="card-text">Celular: {studioData.Celular}</p>
+          <p className="card-text">
+            <i class="bi bi-brush px-2"></i>Nome: {studioData.name}
+          </p>
+          <p className="card-text">
+            <i class="bi bi-envelope px-2"></i>Email: {studioData.email}
+          </p>
+          <p className="card-text">
+            <i class="bi bi-key px-2"></i>Senha: *****
+          </p>
+          <p className="card-text">
+            <i class="bi bi-pin-map px-2"></i>CEP: {studioData.cep}
+          </p>
+          <p className="card-text">
+            <i class="bi bi-building px-2"></i>Cidade: {studioData.cidade}
+          </p>
+          <p className="card-text">
+            <i class="bi bi-map px-2"></i>Estado: {studioData.estado}
+          </p>
+          <p className="card-text">
+            <i class="bi bi-signpost px-2"></i>Rua: {studioData.rua}
+          </p>
+          <p className="card-text">
+            <i class="bi bi-123 px-2"></i>Número Residencial:{" "}
+            {studioData.NumResidencia}
+          </p>
+          <p className="card-text">
+            <i class="bi bi-telephone px-2"></i>Telefone: {studioData.Telefone}
+          </p>
+          <p className="card-text">
+            <i class="bi bi-phone px-2"></i>Celular: {studioData.Celular}
+          </p>
           {/* Adicione mais informações do estúdio aqui */}
           <button
             className="btn btn-primary mx-1 my-1"
             data-bs-toggle="modal"
             data-bs-target="#alterarModal"
           >
-            Editar Informações
+            <i class="bi bi-pencil pe-2"></i>Editar Informações
           </button>
           <button
             className="btn btn-danger mx-1 my-1"
             data-bs-toggle="modal"
             data-bs-target="#excluirModal"
           >
-            Excluir Conta
+            <i class="bi bi-trash3 pe-2"></i>Excluir Conta
           </button>
         </div>
       </div>

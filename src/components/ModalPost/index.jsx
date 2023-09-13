@@ -83,6 +83,11 @@ export default function ModalPost({
                   </div>
                 </>
               )}
+              {mode === "delete" && (
+                <div>
+                  <p>Tem certeza que deseja excluir este post?</p>
+                </div>
+              )}
               {mode !== "create" && (
                 <input type="hidden" name="postId" value={postId} />
               )}

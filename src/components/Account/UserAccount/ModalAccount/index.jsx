@@ -90,7 +90,9 @@ export default function ModalAccount({
               {mode !== "delete" && (
                 <>
                   <div className="mb-3">
-                    <label className="form-label">Nome</label>
+                    <label className="form-label">
+                      <i className="bi bi-person px-2"></i>Nome
+                    </label>
                     <input
                       type="text"
                       className="form-control"
@@ -99,7 +101,9 @@ export default function ModalAccount({
                     />
                   </div>
                   <div className="mb-3">
-                    <label className="form-label">Email</label>
+                    <label className="form-label">
+                      <i className="bi bi-envelope px-2"></i>Email
+                    </label>
                     <input
                       type="email"
                       className="form-control"
@@ -108,7 +112,9 @@ export default function ModalAccount({
                     />
                   </div>
                   <div className="mb-3">
-                    <label className="form-label">Senha</label>
+                    <label className="form-label">
+                      <i className="bi bi-key px-2"></i>Senha
+                    </label>
                     <input
                       type="password"
                       className="form-control"
@@ -117,7 +123,9 @@ export default function ModalAccount({
                     />
                   </div>
                   <div className="mb-3">
-                    <label className="form-label">Data de Nascimento</label>
+                    <label className="form-label">
+                      <i className="bi bi-calendar px-2"></i>Data de Nascimento
+                    </label>
                     <input
                       type="date"
                       className="form-control"
@@ -126,7 +134,9 @@ export default function ModalAccount({
                     />
                   </div>
                   <div className="mb-3">
-                    <label className="form-label">CEP</label>
+                    <label className="form-label">
+                      <i className="bi bi-pin-map px-2"></i>CEP
+                    </label>
                     <input
                       type="text"
                       className="form-control"
@@ -135,7 +145,9 @@ export default function ModalAccount({
                     />
                   </div>
                   <div className="mb-3">
-                    <label className="form-label">Cidade</label>
+                    <label className="form-label">
+                      <i className="bi bi-building px-2"></i>Cidade
+                    </label>
                     <input
                       type="text"
                       className="form-control"
@@ -144,7 +156,9 @@ export default function ModalAccount({
                     />
                   </div>
                   <div className="mb-3">
-                    <label className="form-label">Estado</label>
+                    <label className="form-label">
+                      <i className="bi bi-map px-2"></i>Estado
+                    </label>
                     <input
                       type="text"
                       className="form-control"

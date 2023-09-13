@@ -214,7 +214,7 @@ export default function EstudioRegister(props) {
         </div>
 
         <div className={`${styles.divinp}`}>
-          <label htmlFor="Cep" className="form-label">
+          <label htmlFor="Estado" className="form-label">
             Estado
           </label>
           <div className="input-group">

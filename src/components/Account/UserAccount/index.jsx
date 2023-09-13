@@ -41,27 +41,42 @@ export default function UserAccount() {
       <div className="card p-3 my-3">
         <div className="card-body">
           <h2 className="card-title">Informações do Usuário</h2>
-          <p className="card-text">Nome: {userData.name}</p>
-          <p className="card-text">Email: {userData.email}</p>
-          <p className="card-text">Senha: *****</p>
-          <p className="card-text">CEP: {userData.cep}</p>
-          <p className="card-text">Cidade: {userData.cidade}</p>
-          <p className="card-text">Estado: {userData.estado}</p>
-          <p className="card-text">Data de Nascimento: {userData.birthDate}</p>
+          <p className="card-text">
+            <i className="bi bi-person px-2"></i>Nome: {userData.name}
+          </p>
+          <p className="card-text">
+            <i className="bi bi-envelope px-2"></i>Email: {userData.email}
+          </p>
+          <p className="card-text">
+            <i className="bi bi-key px-2"></i>Senha: *****
+          </p>
+          <p className="card-text">
+            <i className="bi bi-pin-map px-2"></i>CEP: {userData.cep}
+          </p>
+          <p className="card-text">
+            <i className="bi bi-building px-2"></i>Cidade: {userData.cidade}
+          </p>
+          <p className="card-text">
+            <i className="bi bi-map px-2"></i>Estado: {userData.estado}
+          </p>
+          <p className="card-text">
+            <i className="bi bi-calendar px-2"></i>Data de Nascimento:{" "}
+            {userData.birthDate}
+          </p>
           {/* Adicione mais informações do usuário aqui */}
           <button
             className="btn btn-primary mx-1 my-1"
             data-bs-toggle="modal"
             data-bs-target="#alterarModal"
           >
-            Editar Informações
+            <i class="bi bi-pencil pe-2"></i>Editar Informações
           </button>
           <button
             className="btn btn-danger mx-1 my-1"
             data-bs-toggle="modal"
             data-bs-target="#excluirModal"
           >
-            Excluir Conta
+            <i class="bi bi-trash3 pe-2"></i>Excluir Conta
           </button>
         </div>
       </div>

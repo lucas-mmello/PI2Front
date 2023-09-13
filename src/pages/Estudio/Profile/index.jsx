@@ -77,7 +77,7 @@ export default function ProfilePage() {
             data-bs-toggle="modal"
             data-bs-target="#postModal"
           >
-            Criar Post
+            <i class="bi bi-plus-circle pe-2"></i>Criar Post
           </button>
         </div>
         <div className="row postContainer">
