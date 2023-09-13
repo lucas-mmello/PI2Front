@@ -96,7 +96,7 @@ export default function HeaderLogged() {
                         className="text-light nav-link dropdown-item"
                         onClick={LogOut}
                       >
-                        <i class="bi bi-arrow-left-circle px-2"></i>
+                        <i className="bi bi-arrow-left-circle px-2"></i>
                         Log Out
                       </Link>
                     </li>

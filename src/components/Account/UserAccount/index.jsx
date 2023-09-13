@@ -69,14 +69,14 @@ export default function UserAccount() {
             data-bs-toggle="modal"
             data-bs-target="#alterarModal"
           >
-            <i class="bi bi-pencil pe-2"></i>Editar Informações
+            <i className="bi bi-pencil pe-2"></i>Editar Informações
           </button>
           <button
             className="btn btn-danger mx-1 my-1"
             data-bs-toggle="modal"
             data-bs-target="#excluirModal"
           >
-            <i class="bi bi-trash3 pe-2"></i>Excluir Conta
+            <i className="bi bi-trash3 pe-2"></i>Excluir Conta
           </button>
         </div>
       </div>
