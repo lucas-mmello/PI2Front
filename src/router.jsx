@@ -13,11 +13,11 @@ import Account from "./pages/Account";
 
 const router = createBrowserRouter([
   {
-    path: "/PI2Front",
+    path: "/",
     element: <App />,
     children: [
       {
-        path: "/PI2Front", // Página inicial
+        path: "/", // Página inicial
         element: <Home />,
       },
       {
@@ -59,11 +59,11 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/PI2Front/Register", // Rota de registro
+    path: "/Register", // Rota de registro
     element: <Register />,
   },
   {
-    path: "/PI2Front/Login", // Rota de login
+    path: "/Login", // Rota de login
     element: <Login />,
   },
   {
