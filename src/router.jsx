@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/", // Página inicial
+        path: "/PI2Front", // Página inicial
         element: <Home />,
       },
       {
@@ -59,11 +59,11 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/Register", // Rota de registro
+    path: "/PI2Front/Register", // Rota de registro
     element: <Register />,
   },
   {
-    path: "/Login", // Rota de login
+    path: "/PI2Front/Login", // Rota de login
     element: <Login />,
   },
   {
