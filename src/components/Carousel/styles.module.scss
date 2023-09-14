@@ -12,6 +12,10 @@
   object-fit: cover;
 }
 
+.filtro {
+  filter: brightness(90%);
+}
+
 @media (max-width: 1024px) {
   .imgWrapper {
     height: 65vh;

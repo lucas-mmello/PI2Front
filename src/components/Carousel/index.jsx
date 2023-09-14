@@ -21,7 +21,7 @@ export default function Carousel(props) {
           <div className={styles.imgWrapper}>
             <img
               src={props.image2}
-              className={`d-block ${styles.img}`}
+              className={`d-block ${styles.img} ${styles.filtro}`}
               alt={props.alt}
             />
           </div>
