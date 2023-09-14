@@ -13,7 +13,7 @@ import Account from "./pages/Account";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/PI2Front",
     element: <App />,
     children: [
       {
