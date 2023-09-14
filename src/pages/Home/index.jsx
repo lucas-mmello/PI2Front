@@ -1,7 +1,7 @@
 import Carousel from "../../components/Carousel";
 import "../../styles/home.scss";
 import image1 from "../../assets/images/teste.png";
-import carrosel2 from "../../assets/images/carrosel2.jpg";
+import carrosel2 from "../../assets/images/carrosel2.png";
 import carrosel3 from "../../assets/images/carrosel3.jpg";
 import tatuador from "../../assets/images/Tatuador.jpg";
 import cliente from "../../assets/images/Clientes.jpg";
