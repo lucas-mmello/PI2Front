@@ -2,22 +2,21 @@ import React from "react";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import styles from "./styles.module.scss";
 import { useState } from "react";
+import CookiesService from "../../services/cookies";
 
 export default function HeaderLogged() {
   const [RedirectToHome, setRedirectToHome] = useState(false);
-  const permission = sessionStorage.getItem("permission");
-
-  const user = sessionStorage.getItem("user");
+  const userData = CookiesService.getCookie("userdata");
+  const permission = userData ? userData.permission : null;
   let name = "";
+  console.log(userData);
 
-  if (user) {
-    const parsedUser = JSON.parse(user);
-    name = parsedUser.email;
+  if (userData?.userName) {
+    name = userData.userName;
   }
 
   const LogOut = () => {
-    sessionStorage.removeItem("user");
-    sessionStorage.removeItem("permission");
+    CookiesService.deleteCookie("userdata");
     setRedirectToHome(true);
   };
 

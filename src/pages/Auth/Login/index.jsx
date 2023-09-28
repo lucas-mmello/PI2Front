@@ -1,10 +1,17 @@
 import Estudio from "./Estudio";
 import User from "./User";
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 import "../../../styles/login.scss";
+import CookiesService from "../../../services/cookies";
 
 export default function Login() {
   const [escolhaLogin, setEscolhaLogin] = useState(true);
+  const isAuthenticated = CookiesService.getCookie("userdata");
+
+  if (isAuthenticated) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <>

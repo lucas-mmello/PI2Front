@@ -1,7 +1,9 @@
 import { Outlet, Navigate, useLocation } from "react-router-dom";
 import { errorHandlers } from "../../../../configs/Error";
+import CookiesService from "../../../../services/cookies";
 export default function EstudioPrivate() {
-  const isPermited = sessionStorage.getItem("permission");
+  const userData = CookiesService.getCookie("userdata");
+  const isPermited = userData.permission;
 
   // Funções para lidar com os erros
 

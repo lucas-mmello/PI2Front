@@ -1,7 +1,8 @@
 import { Outlet, Navigate, useLocation } from "react-router-dom";
 import { errorHandlers } from "../../../configs/Error";
+import CookiesService from "../../../services/cookies";
 export default function Private() {
-  const isAuthenticated = sessionStorage.getItem("user");
+  const isAuthenticated = CookiesService.getCookie("userdata");
 
   // Funções para lidar com os erros
 

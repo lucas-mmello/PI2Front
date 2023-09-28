@@ -2,9 +2,17 @@ import Estudio from "./Estudio";
 import User from "./User";
 import { useState } from "react";
 import "../../../styles/register.scss";
+import { Navigate } from "react-router-dom";
+import CookiesService from "../../../services/cookies";
 
 export default function Register() {
   const [escolhaRegister, setEscolhaRegister] = useState(true);
+
+  const isAuthenticated = CookiesService.getCookie("userdata");
+
+  if (isAuthenticated) {
+    return <Navigate to="/" />;
+  }
   return (
     <>
       <h3 className="danger pt-4 d-flex justify-content-center align-items-center">

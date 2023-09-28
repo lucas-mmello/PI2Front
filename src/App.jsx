@@ -5,10 +5,11 @@ import "./styles/app.scss";
 import { Outlet } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import CookiesService from "./services/cookies";
 
 export default function App() {
   AOS.init();
-  const user = sessionStorage.getItem("user"); // Aqui ele irá armazenar se o user está logado
+  const user = CookiesService.getCookie("userdata"); // Aqui ele irá armazenar se o user está logado
   return (
     <>
       {

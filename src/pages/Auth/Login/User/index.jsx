@@ -2,6 +2,7 @@ import Login from "../../../../components/Auth/Login";
 import { Navigate, json } from "react-router-dom";
 import { useState } from "react";
 import UserService from "../../../../services/users";
+import CookiesService from "../../../../services/cookies";
 
 export default function User() {
   const [RedirectToHome, setRedirectToHome] = useState(false);
@@ -12,9 +13,24 @@ export default function User() {
         email: formData.email,
         password: formData.password,
       };
-      sessionStorage.setItem("user", JSON.stringify(user));
 
       // await UserService.login(user); comentei pq ainda não tem a api pronta
+
+      //para fins de testes, depois deve ser ajustado
+      const emailParts = formData.email.split("@");
+      const userName = emailParts[0];
+      const email = formData.email;
+      const permission = "2"; // Permissão como string "2"
+      const jwtToken = "seu_token_jwt_teste"; // Substitua pelo seu token JWT
+
+      // Adicionando ao cookie "userdata"
+      CookiesService.createCookie(
+        "userdata",
+        userName,
+        permission,
+        email,
+        jwtToken
+      );
       setRedirectToHome(true);
     } catch (error) {
       alert(`Erro: ${error}`);
