@@ -13,7 +13,7 @@ export default function EstudioAccount() {
       name: "Nome do Estúdio",
       email: "estudio@email.com",
       password: "Te1ste@teste",
-      cep: "12345-678",
+      cep: "12345678",
       cidade: "Cidade",
       estado: "Estado",
       rua: "Rua da Amostra",

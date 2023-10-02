@@ -12,7 +12,7 @@ export default function UserAccount() {
       name: "Nome do Usuário",
       email: "usuario@email.com",
       password: "MinhaSenhaSegura",
-      cep: "54321-678",
+      cep: "54321678",
       cidade: "Outra Cidade",
       estado: "Outro Estado",
       birthDate: "1990-01-01",
