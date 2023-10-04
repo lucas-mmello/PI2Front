@@ -1,6 +1,7 @@
 import { Form } from "react-router-dom";
 import "../../../styles/stylesPage.scss";
 import { useState } from "react";
+import CustomModal from "../../../components/CustomModal";
 
 export default function StylesPage() {
   const [formIncluir, setFormIncluir] = useState(false);
@@ -10,16 +11,30 @@ export default function StylesPage() {
     { id: 3, name: "Estilo 3" },
   ];
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState(null);
+
+  const handleOpenModal = (itemId) => {
+    setIsModalOpen(true);
+    setSelectedItemId(itemId); // Salva o ID do item selecionado
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleConfirm = (itemId) => {
+    console.log("Confirmação recebida para o item com ID:", itemId);
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <h1 className="text-center mt-4">Estilos do Estudio</h1>
       {!formIncluir && (
         <div className="d-flex justify-content-center align-itens-center my-4">
-          <button
-            className="btn btn-info"
-            onClick={(e) => setFormIncluir(true)}
-          >
-            <i class="bi bi-brush pe-2"></i>Novo Estilo
+          <button className="btn btn-info" onClick={() => setFormIncluir(true)}>
+            <i className="bi bi-brush pe-2"></i>Novo Estilo
           </button>
         </div>
       )}
@@ -42,7 +57,7 @@ export default function StylesPage() {
           <button
             className="btn btn-success my-3 "
             type="submit"
-            onClick={(e) => setFormIncluir(false)}
+            onClick={() => setFormIncluir(false)}
           >
             Adicionar
           </button>
@@ -64,7 +79,11 @@ export default function StylesPage() {
                 <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>
-                  <button value={item.id} className="btn btn-danger">
+                  <button
+                    value={item.id}
+                    onClick={() => handleOpenModal(item.id)}
+                    className="btn btn-danger"
+                  >
                     Excluir
                   </button>
                 </td>
@@ -73,6 +92,14 @@ export default function StylesPage() {
           </tbody>
         </table>
       </div>
+
+      {isModalOpen && (
+        <CustomModal
+          message="Você tem certeza que deseja excluir?"
+          onCancel={() => handleCancel()}
+          onConfirm={() => handleConfirm(selectedItemId)}
+        />
+      )}
     </>
   );
 }

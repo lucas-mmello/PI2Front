@@ -1,0 +1,30 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modalContent {
+  font-size: 1.2rem;
+  background: white;
+  padding: 2rem;
+  border-radius: 5px;
+
+  @media (max-width: 400px) {
+    font-size: 1rem;
+    padding: 1.5rem;
+    width: 250px;
+  }
+}
+
+.buttons {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}

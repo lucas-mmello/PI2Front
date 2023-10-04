@@ -17,7 +17,7 @@ export default function Profile({ studioInfo }) {
         <p>Celular: {studioInfo.cellphone}</p>
         <button className="btn btn-info">
           <Link to="/private/estudioPrivate/styles" className={styles.link}>
-            <i class="bi bi-brush pe-2"></i> Ver Estilos
+            <i className="bi bi-brush pe-2"></i> Ver Estilos
           </Link>
         </button>
       </div>
