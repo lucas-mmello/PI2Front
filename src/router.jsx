@@ -10,6 +10,7 @@ import ProfilePage from "./pages/Estudio/Profile";
 import Search from "./pages/Search";
 import EstudioSearch from "./pages/Search/EstudioSearch";
 import Account from "./pages/Account";
+import StylesPage from "./pages/Estudio/StylesPage";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
               {
                 path: "profile",
                 element: <ProfilePage />,
+              },
+              {
+                path: "styles",
+                element: <StylesPage />,
               },
             ],
           },

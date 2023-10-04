@@ -1,0 +1,56 @@
+.form-incluir {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  margin: 1rem auto;
+  padding: 1rem;
+
+  @media (max-width: 530px) {
+    width: 380px;
+  }
+  @media (max-width: 400px) {
+    width: 280px;
+    padding: 0.5rem;
+  }
+}
+
+.div-table {
+  max-width: 750px;
+  margin: 2rem auto;
+
+  .table-custom {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    color: #212529;
+    background-color: transparent;
+
+    th,
+    td {
+      padding: 0.75rem;
+      vertical-align: top;
+      border-top: 1px solid #dee2e6;
+    }
+
+    thead th {
+      vertical-align: bottom;
+      border-bottom: 2px solid #dee2e6;
+      background-color: rgb(252, 252, 252);
+    }
+
+    tbody + tbody {
+      border-top: 2px solid #dee2e6;
+    }
+
+    tbody {
+      tr {
+        background-color: rgb(252, 252, 252);
+        &:nth-of-type(odd) {
+          background-color: rgba(0, 0, 0, 0.05);
+        }
+      }
+    }
+  }
+}
