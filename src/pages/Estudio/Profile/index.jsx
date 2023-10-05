@@ -69,7 +69,7 @@ export default function ProfilePage() {
 
   return (
     <>
-      <Profile studioInfo={studioInfo} />
+      <Profile studioInfo={studioInfo} ownProfile={true} />
       <div className="profilePage">
         <div className="div-button">
           <button
