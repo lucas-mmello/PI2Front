@@ -2,6 +2,8 @@ import { Form } from "react-router-dom";
 import "../../../styles/stylesPage.scss";
 import { useState } from "react";
 import CustomModal from "../../../components/CustomModal";
+import TattooStyles from "../../../components/Card/TattooStyles";
+import svgImage from "../../../assets/images/Tattoo.svg";
 
 export default function StylesPage() {
   const [formIncluir, setFormIncluir] = useState(false);
@@ -11,28 +13,40 @@ export default function StylesPage() {
     { id: 3, name: "Estilo 3" },
   ];
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalRemoverOpen, setIsModalRemoverOpen] = useState(false);
+  const [isModaladicionarOpen, setIsModalAdicionarOpen] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
 
-  const handleOpenModal = (itemId) => {
-    setIsModalOpen(true);
+  const handleOpenModal = (itemId, tipoModal) => {
+    if (tipoModal === 1) {
+      setIsModalRemoverOpen(true);
+    } else {
+      setIsModalAdicionarOpen(true);
+    }
     setSelectedItemId(itemId); // Salva o ID do item selecionado
   };
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
+  const handleCancel = (tipoModal) => {
+    if (tipoModal === 1) {
+      setIsModalRemoverOpen(false);
+    } else {
+      setIsModalAdicionarOpen(false);
+    }
   };
 
-  const handleConfirm = (itemId) => {
+  const handleConfirm = (itemId, tipoModal) => {
     console.log("Confirmação recebida para o item com ID:", itemId);
-    setIsModalOpen(false);
+    if (tipoModal === 1) {
+      setIsModalRemoverOpen(false);
+    } else {
+      setIsModalAdicionarOpen(false);
+    }
   };
 
   return (
     <>
-      <h1 className="text-center mt-4">Estilos do Estudio</h1>
       {!formIncluir && (
-        <div className="d-flex justify-content-center align-itens-center my-4">
+        <div className="d-flex justify-content-center align-itens-center mt-5">
           <button className="btn btn-info" onClick={() => setFormIncluir(true)}>
             <i className="bi bi-brush pe-2"></i>Novo Estilo
           </button>
@@ -40,64 +54,62 @@ export default function StylesPage() {
       )}
 
       {formIncluir && (
-        <Form
-          className="form-incluir"
+        <div
+          className="profilePage"
           data-aos={formIncluir ? "fade-up" : ""}
           data-aos-duration={formIncluir ? "1700" : ""}
           data-aos-once={formIncluir ? "true" : ""}
         >
-          <h3 className="p-2">Incluir novo Estilo</h3>
-          <select className="form-select">
+          <div className="d-flex align-itens-center justify-content-center my-3">
+            <button
+              className="btn btn-danger "
+              onClick={() => setFormIncluir(false)}
+            >
+              Fechar
+            </button>
+          </div>
+
+          <div className="row postContainer">
             {data.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.name}
-              </option>
+              <div key={item.id} className="col postCol">
+                <TattooStyles
+                  image={svgImage}
+                  description={item.name}
+                  onAdd={() => handleOpenModal(item.id, 0)}
+                />
+              </div>
             ))}
-          </select>
-          <button
-            className="btn btn-success my-3 "
-            type="submit"
-            onClick={() => setFormIncluir(false)}
-          >
-            Adicionar
-          </button>
-        </Form>
+          </div>
+        </div>
       )}
 
-      <div className="div-table my-5">
-        <table className="table-custom">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nome do Estilo</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.name}</td>
-                <td>
-                  <button
-                    value={item.id}
-                    onClick={() => handleOpenModal(item.id)}
-                    className="btn btn-danger"
-                  >
-                    Excluir
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="profilePage">
+        <h1 className="text-center mt-2 mb-4">Estilos do Estudio</h1>
+        <div className="row postContainer">
+          {data.map((item) => (
+            <div key={item.id} className="col postCol">
+              <TattooStyles
+                image={svgImage}
+                description={item.name}
+                onDelete={() => handleOpenModal(item.id, 1)}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
-      {isModalOpen && (
+      {isModalRemoverOpen && (
         <CustomModal
-          message="Você tem certeza que deseja excluir?"
-          onCancel={() => handleCancel()}
-          onConfirm={() => handleConfirm(selectedItemId)}
+          message="Você tem certeza que deseja remover?"
+          onCancel={() => handleCancel(1)}
+          onConfirm={() => handleConfirm(selectedItemId, 1)}
+        />
+      )}
+      {isModaladicionarOpen && (
+        <CustomModal
+          message="Você tem certeza que deseja adicionar?"
+          onCancel={() => handleCancel(0)}
+          onConfirm={() => handleConfirm(selectedItemId, 0)}
         />
       )}
     </>

@@ -3,6 +3,7 @@ import Post from "../../../components/Card/Post";
 import "../../../styles/profile.scss";
 import logo from "../../../assets/icon/logo.png";
 import icon from "../../../assets/icon/favicon-32x32.png";
+import svgTeste from "../../../assets/images/Tattoo.svg";
 
 export default function EstudioSearch() {
   const postsData = [
@@ -13,7 +14,7 @@ export default function EstudioSearch() {
     },
     {
       id: 2,
-      image: "url_da_imagem_2",
+      image: svgTeste,
       description: "Descrição do post 2",
     },
     {
