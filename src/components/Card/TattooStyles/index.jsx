@@ -8,7 +8,7 @@ export default function TattooStyles(props) {
     <div className={`card ${styles.cardPost} h-100`}>
       <img src={image} className="card-img-top " alt="Imagem do Post" />
       <div className="card-body">
-        <p className="card-text">{description}</p>
+        <p className="h5">{description}</p>
       </div>
       <div className="card-body">
         {onAdd && (
