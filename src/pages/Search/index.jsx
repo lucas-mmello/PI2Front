@@ -1,6 +1,7 @@
 import Estudio from "../../components/Card/Estudio";
 import "../../styles/search.scss";
 import { useState } from "react";
+import CustomModal from "../../components/CustomModal";
 
 export default function Search() {
   const [selectedOption, setSelectedOption] = useState("");
@@ -17,6 +18,7 @@ export default function Search() {
       state: "Estado 1",
       city: "Cidade 1",
       street: "Rua 1",
+      styles: ["estilo 1", "outro", "teste"],
     },
     {
       id: 2,
@@ -25,9 +27,31 @@ export default function Search() {
       state: "Estado 2",
       city: "Cidade 2",
       street: "Rua 2",
+      styles: ["estilo 2", "outrom", "testem"],
     },
     // ... outros objetos de estúdio
   ];
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState(null);
+
+  const handleOpenModal = (itemId) => {
+    setSelectedItemId(itemId);
+    setIsModalOpen(true);
+  };
+
+  const message = (itemId) => {
+    // Find the estudio with the given itemId
+    const estudio = estudiosData.find((item) => item.id === itemId);
+
+    // Return the styles of the found estudio, or an empty string if not found
+    return estudio ? estudio.styles.join(", ") : "";
+  };
+
+  const handleConfirm = (itemId) => {
+    console.log("Confirmação recebida para o item com ID:", itemId);
+    setIsModalOpen(false);
+  };
 
   return (
     <div>
@@ -138,9 +162,17 @@ export default function Search() {
             state={estudio.state}
             city={estudio.city}
             street={estudio.street}
+            stylesClick={() => handleOpenModal(estudio.id)}
           />
         ))}
       </div>
+      {isModalOpen && (
+        <CustomModal
+          btnConfirmMessage="Ok"
+          onConfirm={() => handleConfirm()}
+          message={message(selectedItemId)}
+        />
+      )}
     </div>
   );
 }
