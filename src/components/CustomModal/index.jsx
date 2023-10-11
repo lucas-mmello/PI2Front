@@ -13,12 +13,12 @@ export default function CustomModal({
         <div className={styles.buttons}>
           {onCancel && (
             <button className="btn btn-danger mx-2" onClick={onCancel}>
-              {"Cancelar" || btnCancelMessage}
+              {btnCancelMessage ?? "Cancelar"}
             </button>
           )}
           {onConfirm && (
             <button className="btn btn-success mx-2" onClick={onConfirm}>
-              {"Confirmar" || btnConfirmMessage}
+              {btnConfirmMessage ?? "Confirmar"}
             </button>
           )}
         </div>
