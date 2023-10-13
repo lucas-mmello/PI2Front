@@ -45,7 +45,11 @@ export default function Search() {
     const estudio = estudiosData.find((item) => item.id === itemId);
 
     // Return the styles of the found estudio, or an empty string if not found
-    return estudio ? estudio.styles.join(", ") : "";
+    return estudio
+      ? estudio.styles
+          .map((style) => style.charAt(0).toUpperCase() + style.slice(1))
+          .join(", ")
+      : "";
   };
 
   const handleConfirm = (itemId) => {
@@ -168,9 +172,11 @@ export default function Search() {
       </div>
       {isModalOpen && (
         <CustomModal
+          title="Estilos do Estudio"
           btnConfirmMessage="Ok"
           onConfirm={() => handleConfirm()}
           message={message(selectedItemId)}
+          bgCustom={true}
         />
       )}
     </div>

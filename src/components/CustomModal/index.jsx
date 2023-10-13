@@ -1,6 +1,8 @@
 import styles from "./styles.module.scss";
 export default function CustomModal({
+  title,
   message,
+  bgCustom,
   btnCancelMessage,
   btnConfirmMessage,
   onCancel,
@@ -8,7 +10,10 @@ export default function CustomModal({
 }) {
   return (
     <div className={styles.modal}>
-      <div className={styles.modalContent}>
+      <div
+        className={`${styles.modalContent} ${bgCustom ? styles.customBg : ""}`}
+      >
+        <p className={`text-center mb-2 ${styles.title}`}>{title}</p>
         <p>{message}</p>
         <div className={styles.buttons}>
           {onCancel && (
