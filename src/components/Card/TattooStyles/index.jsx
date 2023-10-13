@@ -13,7 +13,7 @@ export default function TattooStyles(props) {
       <div className="card-body">
         {onAdd && (
           <button onClick={onAdd} className={`card-link px-2 btn btn-success`}>
-            Adicionar
+            <i className="bi bi-plus-circle pe-2"></i>Adicionar
           </button>
         )}
         {onDelete && (
@@ -21,7 +21,7 @@ export default function TattooStyles(props) {
             onClick={onDelete}
             className={`card-link px-2 btn btn-danger`}
           >
-            Remover
+            <i className="bi bi-trash3 pe-2"></i>Remover
           </button>
         )}
       </div>

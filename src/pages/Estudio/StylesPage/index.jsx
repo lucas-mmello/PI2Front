@@ -47,7 +47,10 @@ export default function StylesPage() {
     <>
       {!formIncluir && (
         <div className="d-flex justify-content-center align-itens-center mt-5">
-          <button className="btn btn-info" onClick={() => setFormIncluir(true)}>
+          <button
+            className="btn btn-info btn-custom"
+            onClick={() => setFormIncluir(true)}
+          >
             <i className="bi bi-brush pe-2"></i>Novo Estilo
           </button>
         </div>
@@ -55,23 +58,24 @@ export default function StylesPage() {
 
       {formIncluir && (
         <div
-          className="profilePage"
+          className="stylesPage"
           data-aos={formIncluir ? "fade-up" : ""}
           data-aos-duration={formIncluir ? "1700" : ""}
           data-aos-once={formIncluir ? "true" : ""}
         >
+          <h2 className="text-center mb-3">Estilos Disponíveis</h2>
           <div className="d-flex align-itens-center justify-content-center my-3">
             <button
-              className="btn btn-danger "
+              className="btn btn-danger btn-custom"
               onClick={() => setFormIncluir(false)}
             >
-              Fechar
+              <i class="bi bi-brush pe-2"></i>Fechar
             </button>
           </div>
 
-          <div className="row postContainer">
+          <div className="row styleContainer">
             {data.map((item) => (
-              <div key={item.id} className="col postCol">
+              <div key={item.id} className="col styleCol">
                 <TattooStyles
                   image={svgImage}
                   description={item.name}
@@ -83,11 +87,11 @@ export default function StylesPage() {
         </div>
       )}
 
-      <div className="profilePage">
+      <div className="stylesPage">
         <h1 className="text-center mt-2 mb-4">Estilos do Estudio</h1>
-        <div className="row postContainer">
+        <div className="row styleContainer">
           {data.map((item) => (
-            <div key={item.id} className="col postCol">
+            <div key={item.id} className="col styleCol">
               <TattooStyles
                 image={svgImage}
                 description={item.name}
