@@ -1,10 +1,14 @@
 import styles from "./styles.module.scss";
 
-export default function NoContent({ title, message, additionalMessage }) {
+export default function NoContent({ title, message, additionalMessage, icon }) {
   return (
     <div className={styles.noContent}>
       <div className={styles.iconContainer}>
-        <i className={`bi bi-emoji-smile ${styles.smileIcon}`}></i>
+        <i
+          className={`${
+            icon === "search" ? "bi bi-search" : "bi bi-file-earmark-x"
+          } ${styles.smileIcon}`}
+        ></i>
       </div>
       <div className={styles.textContainer}>
         <h1 className={styles.title}>{title}</h1>

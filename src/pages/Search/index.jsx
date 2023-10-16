@@ -183,6 +183,7 @@ export default function Search() {
             </div>
           ) : (
             <NoContent
+              icon="search"
               title="Sem estudios compatíveis com a busca"
               message="Que tal refazer sua busca ou utilizar outros filtros?"
               additionalMessage="Verifique se escreveu corretamente o nome do estúdio"
@@ -191,6 +192,7 @@ export default function Search() {
         </>
       ) : (
         <NoContent
+          icon="search"
           title="Faça uma busca"
           message="Pesquise pelo nome do estudio e os filtros desejados"
           additionalMessage="Os estudios irão aparecer aqui se os dados forem compatíveis"
