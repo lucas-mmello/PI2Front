@@ -2,6 +2,7 @@ import Estudio from "../../components/Card/Estudio";
 import "../../styles/search.scss";
 import { useState } from "react";
 import CustomModal from "../../components/CustomModal";
+import NoContent from "../../components/NoContent";
 
 export default function Search() {
   const [selectedOption, setSelectedOption] = useState("");
@@ -34,10 +35,18 @@ export default function Search() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
+  const [didSearch, setDidSearch] = useState(false);
 
   const handleOpenModal = (itemId) => {
     setSelectedItemId(itemId);
     setIsModalOpen(true);
+  };
+
+  const search = () => {
+    if (!didSearch) {
+      setDidSearch(true);
+    }
+    //resto da implementação da api
   };
 
   const message = (itemId) => {
@@ -69,7 +78,7 @@ export default function Search() {
             aria-label="Example text with button addon"
             aria-describedby="button-addon1"
           />
-          <span className="input-group-text" onClick={null}>
+          <span className="input-group-text" onClick={search}>
             <i className="bi bi-search icon"></i>
           </span>
           <button
@@ -154,22 +163,40 @@ export default function Search() {
           </div>
         </div>
       </div>
+      {didSearch ? (
+        <>
+          {estudiosData.length !== 0 ? (
+            <div className="estudios">
+              <h3>Resultados da Busca</h3>
+              {estudiosData.map((estudio) => (
+                <Estudio
+                  key={estudio.id}
+                  id={estudio.id}
+                  name={estudio.name}
+                  cep={estudio.cep}
+                  state={estudio.state}
+                  city={estudio.city}
+                  street={estudio.street}
+                  stylesClick={() => handleOpenModal(estudio.id)}
+                />
+              ))}
+            </div>
+          ) : (
+            <NoContent
+              title="Sem estudios compatíveis com a busca"
+              message="Que tal refazer sua busca ou utilizar outros filtros?"
+              additionalMessage="Verifique se escreveu corretamente o nome do estúdio"
+            />
+          )}
+        </>
+      ) : (
+        <NoContent
+          title="Faça uma busca"
+          message="Pesquise pelo nome do estudio e os filtros desejados"
+          additionalMessage="Os estudios irão aparecer aqui se os dados forem compatíveis"
+        />
+      )}
 
-      <div className="estudios">
-        <h3>Resultados da Busca</h3>
-        {estudiosData.map((estudio) => (
-          <Estudio
-            key={estudio.id}
-            id={estudio.id}
-            name={estudio.name}
-            cep={estudio.cep}
-            state={estudio.state}
-            city={estudio.city}
-            street={estudio.street}
-            stylesClick={() => handleOpenModal(estudio.id)}
-          />
-        ))}
-      </div>
       {isModalOpen && (
         <CustomModal
           title="Estilos do Estudio"

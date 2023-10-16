@@ -4,6 +4,7 @@ import { useState } from "react";
 import CustomModal from "../../../components/CustomModal";
 import TattooStyles from "../../../components/Card/TattooStyles";
 import svgImage from "../../../assets/images/Tattoo.svg";
+import NoContent from "../../../components/NoContent";
 
 export default function StylesPage() {
   const [formIncluir, setFormIncluir] = useState(false);
@@ -57,50 +58,70 @@ export default function StylesPage() {
       )}
 
       {formIncluir && (
-        <div
-          className="stylesPage"
-          data-aos={formIncluir ? "fade-up" : ""}
-          data-aos-duration={formIncluir ? "1700" : ""}
-          data-aos-once={formIncluir ? "true" : ""}
-        >
-          <h2 className="text-center mb-3">Estilos Disponíveis</h2>
-          <div className="d-flex align-itens-center justify-content-center my-3">
-            <button
-              className="btn btn-danger btn-custom"
-              onClick={() => setFormIncluir(false)}
-            >
-              <i class="bi bi-brush pe-2"></i>Fechar
-            </button>
-          </div>
+        <>
+          <div
+            className="stylesPage"
+            data-aos={formIncluir ? "fade-up" : ""}
+            data-aos-duration={formIncluir ? "1700" : ""}
+            data-aos-once={formIncluir ? "true" : ""}
+          >
+            <h2 className="text-center mb-3">Estilos Disponíveis</h2>
+            <div className="d-flex align-itens-center justify-content-center my-3">
+              <button
+                className="btn btn-danger btn-custom"
+                onClick={() => setFormIncluir(false)}
+              >
+                <i class="bi bi-brush pe-2"></i>Fechar
+              </button>
+            </div>
 
+            {data.length !== 0 && (
+              <div className="row styleContainer">
+                {data.map((item) => (
+                  <div key={item.id} className="col styleCol">
+                    <TattooStyles
+                      image={svgImage}
+                      description={item.name}
+                      onAdd={() => handleOpenModal(item.id, 0)}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          {data.length === 0 && (
+            <NoContent
+              title="Sem estilos para adicionar"
+              message="Parece que seu estúdio já adicionou todos os estilos disponíveis"
+              additionalMessage="Verifique se seu estúdio trabalha com todos os estilos escolhidos"
+            />
+          )}
+        </>
+      )}
+
+      <div className="stylesPage">
+        <h1 className="text-center mt-2 mb-4">Estilos do Estudio</h1>
+        {data.length !== 0 && (
           <div className="row styleContainer">
             {data.map((item) => (
               <div key={item.id} className="col styleCol">
                 <TattooStyles
                   image={svgImage}
                   description={item.name}
-                  onAdd={() => handleOpenModal(item.id, 0)}
+                  onDelete={() => handleOpenModal(item.id, 1)}
                 />
               </div>
             ))}
           </div>
-        </div>
-      )}
-
-      <div className="stylesPage">
-        <h1 className="text-center mt-2 mb-4">Estilos do Estudio</h1>
-        <div className="row styleContainer">
-          {data.map((item) => (
-            <div key={item.id} className="col styleCol">
-              <TattooStyles
-                image={svgImage}
-                description={item.name}
-                onDelete={() => handleOpenModal(item.id, 1)}
-              />
-            </div>
-          ))}
-        </div>
+        )}
       </div>
+      {data.length === 0 && (
+        <NoContent
+          title="Sem estilos no momento"
+          message="Adicione estilos de tatuagem para o seu estúdio"
+          additionalMessage="Escolha de acordo com os estilos que o seu estúdio trabalha"
+        />
+      )}
 
       {isModalRemoverOpen && (
         <CustomModal

@@ -5,6 +5,7 @@ import logo from "../../../assets/icon/logo.png";
 import icon from "../../../assets/icon/favicon-32x32.png";
 import { useState } from "react";
 import ModalPost from "../../../components/ModalPost";
+import NoContent from "../../../components/NoContent";
 
 export default function ProfilePage() {
   const [selectedPost, setSelectedPost] = useState("");
@@ -80,24 +81,26 @@ export default function ProfilePage() {
             <i className="bi bi-plus-circle pe-2"></i>Criar Post
           </button>
         </div>
-        <div className="row postContainer">
-          {postsData.map((post) => (
-            <div key={post.id} className="col postCol">
-              <Post
-                image={post.image}
-                description={post.description}
-                onEdit={() => {
-                  setSelectedPost(post.id);
-                }}
-                onDelete={() => {
-                  setSelectedPost(post.id);
-                }}
-                idModalEd="#editModal"
-                idModalDel="#deleteModal"
-              />
-            </div>
-          ))}
-        </div>
+        {postsData.length !== 0 && (
+          <div className="row postContainer">
+            {postsData.map((post) => (
+              <div key={post.id} className="col postCol">
+                <Post
+                  image={post.image}
+                  description={post.description}
+                  onEdit={() => {
+                    setSelectedPost(post.id);
+                  }}
+                  onDelete={() => {
+                    setSelectedPost(post.id);
+                  }}
+                  idModalEd="#editModal"
+                  idModalDel="#deleteModal"
+                />
+              </div>
+            ))}
+          </div>
+        )}
 
         <ModalPost
           idModal="postModal"
@@ -122,6 +125,13 @@ export default function ProfilePage() {
           onDelete={handleDeletePost}
         />
       </div>
+      {postsData.length === 0 && (
+        <NoContent
+          title="Não há posts no momento"
+          message="Que tal criar algo incrível para compartilhar com todos?"
+          additionalMessage="Que tal explorar outras funcionalidades do sistema?"
+        />
+      )}
     </>
   );
 }

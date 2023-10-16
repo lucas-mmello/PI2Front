@@ -4,6 +4,7 @@ import "../../../styles/profile.scss";
 import logo from "../../../assets/icon/logo.png";
 import icon from "../../../assets/icon/favicon-32x32.png";
 import svgTeste from "../../../assets/images/Tattoo.svg";
+import NoContent from "../../../components/NoContent";
 
 export default function EstudioSearch() {
   const postsData = [
@@ -44,15 +45,24 @@ export default function EstudioSearch() {
   return (
     <>
       <Profile studioInfo={studioInfo} />
-      <div className="profilePage">
-        <div className="row postContainer">
-          {postsData.map((post) => (
-            <div key={post.id} className="col postCol">
-              <Post image={post.image} description={post.description} />
-            </div>
-          ))}
+
+      {postsData.length !== 0 ? (
+        <div className="profilePage">
+          <div className="row postContainer">
+            {postsData.map((post) => (
+              <div key={post.id} className="col postCol">
+                <Post image={post.image} description={post.description} />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      ) : (
+        <NoContent
+          title="Não há posts no momento"
+          message="Que tal criar algo incrível para compartilhar com todos?"
+          additionalMessage="Que tal explorar outros perfis de estúdios?"
+        />
+      )}
     </>
   );
 }
