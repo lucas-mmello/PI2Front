@@ -73,10 +73,11 @@ export default function Search() {
         <div className="input-group mb-3 search-group">
           <input
             type="text"
+            autoComplete="off"
             className="form-control inp-search"
-            placeholder=""
-            aria-label="Example text with button addon"
-            aria-describedby="button-addon1"
+            onKeyDown={(e) => {
+              e.key === "Enter" ? search() : "";
+            }}
           />
           <span className="input-group-text" onClick={search}>
             <i className="bi bi-search icon"></i>
