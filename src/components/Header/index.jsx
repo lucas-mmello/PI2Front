@@ -27,7 +27,7 @@ export default function Header() {
                 </Link>
               </li>
               <li className={`nav-item ${styles.li}`}>
-                <Link to="/private/search" className="text-light nav-link">
+                <Link to="/Login" className="text-light nav-link">
                   Search
                 </Link>
               </li>

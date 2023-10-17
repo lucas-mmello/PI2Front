@@ -1,14 +1,57 @@
 import Estudio from "../../components/Card/Estudio";
 import "../../styles/search.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CustomModal from "../../components/CustomModal";
 import NoContent from "../../components/NoContent";
 
 export default function Search() {
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedEstado, setSelectedEstado] = useState("");
+  const [selectedCidade, setSelectedCidade] = useState("");
+  const [selectedEstilo, setSelectedEstilo] = useState("");
 
-  const handleChange = (event) => {
-    setSelectedOption(event.target.value); // Atualiza o estado com a opção selecionada
+  const estados = [
+    { id: 1, nome: "Estado 1" },
+    { id: 2, nome: "Estado 2" },
+    { id: 3, nome: "Estado 3" },
+  ];
+
+  const cidades = [
+    { id: 1, nome: "Cidade A", estadoId: 1 },
+    { id: 2, nome: "Cidade B", estadoId: 1 },
+    { id: 3, nome: "Cidade C", estadoId: 2 },
+  ];
+
+  const estilos = [
+    { id: 1, nome: "Estilo A" },
+    { id: 2, nome: "Estilo B" },
+    { id: 3, nome: "Estilo C" },
+  ];
+
+  const fetchData = async () => {
+    try {
+      // Fazer a requisição à sua API
+    } catch (error) {
+      console.error("Erro ao buscar dados:", error);
+    }
+  };
+
+  useEffect(() => {
+    // Chamar a função de busca quando o componente for montado
+    fetchData();
+  }, []); // O array vazio [] garante que o useEffect só é chamado uma vez (ao montar o componente)
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "estado") {
+      setSelectedEstado(value);
+      // Limpa a cidade se o estado for alterado
+      setSelectedCidade("");
+    } else if (name === "cidade") {
+      setSelectedCidade(value);
+    } else if (name === "estilo") {
+      setSelectedEstilo(value);
+    }
   };
 
   const estudiosData = [
@@ -47,6 +90,16 @@ export default function Search() {
       setDidSearch(true);
     }
     //resto da implementação da api
+  };
+
+  const filtro = () => {
+    //aqui vai a lógica dos filtros
+    console.log(`Estado selecionado: ${selectedEstado}
+    Cidade selecionada: ${selectedCidade}
+    Estilo selecionado: ${selectedEstilo}`);
+    // Chame a função existente passando os valores selecionados
+    // Substitua essa chamada pela sua função real
+    //aplicarFiltros(estadoSelecionado, cidadeSelecionada, estiloSelecionado);
   };
 
   const message = (itemId) => {
@@ -114,39 +167,58 @@ export default function Search() {
               ></button>
             </div>
             <div className="modal-body">
-              {/* Conteúdo do modal de filtros */}
+              {/* Select de Estado */}
               <select
                 className="form-select my-2"
-                aria-label="Default select example"
-                value={selectedOption}
+                aria-label="Selecione o estado"
+                value={selectedEstado}
                 onChange={handleChange}
+                name="estado"
               >
-                <option value="">Estado</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="">Selecione o estado</option>
+                {estados.map((estado) => (
+                  <option key={estado.id} value={estado.id}>
+                    {estado.nome}
+                  </option>
+                ))}
               </select>
+
+              {/* Select de Cidade */}
+              {selectedEstado && (
+                <select
+                  className="form-select my-2"
+                  aria-label="Selecione a cidade"
+                  value={selectedCidade}
+                  onChange={handleChange}
+                  name="cidade"
+                >
+                  <option value="">Selecione a cidade</option>
+                  {cidades
+                    .filter(
+                      (cidade) => cidade.estadoId === parseInt(selectedEstado)
+                    )
+                    .map((cidade) => (
+                      <option key={cidade.id} value={cidade.id}>
+                        {cidade.nome}
+                      </option>
+                    ))}
+                </select>
+              )}
+
+              {/* Select de Estilos */}
               <select
                 className="form-select my-2"
-                aria-label="Default select example"
-                value={selectedOption}
+                aria-label="Selecione o estilo"
+                value={selectedEstilo}
                 onChange={handleChange}
+                name="estilo"
               >
-                <option value="">Cidade</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-              <select
-                className="form-select"
-                aria-label="Default select example"
-                value={selectedOption}
-                onChange={handleChange}
-              >
-                <option value="">Estilos de Tatuagem</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="">Selecione o estilo</option>
+                {estilos.map((estilo) => (
+                  <option key={estilo.id} value={estilo.id}>
+                    {estilo.nome}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="modal-footer">
@@ -157,7 +229,12 @@ export default function Search() {
               >
                 Fechar
               </button>
-              <button type="button" className="btn btn-primary">
+              <button
+                type="button"
+                className="btn btn-primary"
+                data-bs-dismiss="modal"
+                onClick={filtro}
+              >
                 Aplicar Filtros
               </button>
             </div>
