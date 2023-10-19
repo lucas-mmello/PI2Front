@@ -14,9 +14,7 @@ export default function Login(props) {
 
     // Verifica se a senha atende aos requisitos
     if (!validatePassword(loginData.password)) {
-      setPasswordError(
-        "A senha deve conter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial."
-      );
+      setPasswordError("Senha inválida!");
       return;
     }
 
@@ -61,6 +59,7 @@ export default function Login(props) {
               type="email"
               id="Login"
               className="form-control"
+              required
               placeholder={props.placeholderLogin}
               name="email" // adiciona o atributo name para identificar o campo
               value={loginData.email} // conecta o valor ao estado loginData
@@ -79,6 +78,7 @@ export default function Login(props) {
             <input
               type="password"
               id="Senha"
+              required
               className={`form-control ${passwordError ? "is-invalid" : ""}`} // Adiciona a classe is-invalid se houver erro de senha
               placeholder="••••••••"
               name="password"

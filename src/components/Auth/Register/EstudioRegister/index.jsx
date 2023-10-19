@@ -2,6 +2,7 @@ import styles from "./styles.module.scss";
 import { Form, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ViaCEPService from "../../../../services/cep";
+import Auth from "../../../../configs/Auth";
 
 export default function EstudioRegister(props) {
   const [registerData, setRegisterData] = useState({
@@ -24,7 +25,7 @@ export default function EstudioRegister(props) {
     event.preventDefault();
 
     // Verifica se a senha atende aos requisitos
-    if (!validatePassword(registerData.password)) {
+    if (!Auth.validatePassword(registerData.password)) {
       setPasswordError(
         "A senha deve conter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial."
       );
@@ -55,12 +56,6 @@ export default function EstudioRegister(props) {
       telefone: "",
     });
     setCepData(null);
-  };
-
-  const validatePassword = (password) => {
-    const regex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    return regex.test(password);
   };
 
   const fetchCEPData = async () => {
