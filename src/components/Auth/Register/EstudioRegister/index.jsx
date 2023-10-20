@@ -19,6 +19,7 @@ export default function EstudioRegister(props) {
     telefone: "",
   });
   const [passwordError, setPasswordError] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [cepData, setCepData] = useState(null);
 
   const handleFormSubmit = (event) => {
@@ -29,6 +30,11 @@ export default function EstudioRegister(props) {
       setPasswordError(
         "A senha deve conter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial."
       );
+      return;
+    }
+
+    if (!Auth.validateEmail(registerData.email)) {
+      setEmailError("Email inválido");
       return;
     }
 
@@ -127,12 +133,13 @@ export default function EstudioRegister(props) {
             <input
               type="email"
               id="Email"
-              className="form-control"
+              className={`form-control ${emailError ? "is-invalid" : ""}`}
               placeholder="user@user.com"
               name="email"
               value={registerData.email}
               onChange={(e) => handleInputChange(e, "email")}
             />
+            {emailError && <div className="invalid-feedback">{emailError}</div>}
           </div>
         </div>
         <div className={`${styles.divinp}`}>

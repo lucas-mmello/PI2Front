@@ -7,14 +7,19 @@ export default function Login(props) {
     email: "",
     password: "",
   });
-  const [passwordError, setPasswordError] = useState("");
+  const [error, setError] = useState("");
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
+    if (loginData.email === "" || loginData.password === "") {
+      setError("Login e/ou senha inválido(s)!");
+      return;
+    }
+
     // Verifica se a senha atende aos requisitos
     if (!validatePassword(loginData.password)) {
-      setPasswordError("Senha inválida!");
+      setError("Login e/ou senha inválido(s)!");
       return;
     }
 
@@ -58,13 +63,13 @@ export default function Login(props) {
             <input
               type="email"
               id="Login"
-              className="form-control"
-              required
+              className={`form-control ${error ? "is-invalid" : ""}`}
               placeholder={props.placeholderLogin}
               name="email" // adiciona o atributo name para identificar o campo
               value={loginData.email} // conecta o valor ao estado loginData
               onChange={(e) => handleInputChange(e, "email")}
             />
+            {error && <div className="invalid-feedback">{error}</div>}
           </div>
         </div>
         <div className={`${styles.divinp}`}>
@@ -78,16 +83,13 @@ export default function Login(props) {
             <input
               type="password"
               id="Senha"
-              required
-              className={`form-control ${passwordError ? "is-invalid" : ""}`} // Adiciona a classe is-invalid se houver erro de senha
+              className={`form-control ${error ? "is-invalid" : ""}`} // Adiciona a classe is-invalid se houver erro de senha
               placeholder="••••••••"
               name="password"
               value={loginData.password}
               onChange={(e) => handleInputChange(e, "password")}
             />
-            {passwordError && (
-              <div className="invalid-feedback">{passwordError}</div>
-            )}{" "}
+            {error && <div className="invalid-feedback">{error}</div>}
             {/* Mostra a mensagem de erro */}
           </div>
         </div>
