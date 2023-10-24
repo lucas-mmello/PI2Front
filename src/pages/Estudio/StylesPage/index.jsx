@@ -1,30 +1,66 @@
 import { Form } from "react-router-dom";
 import "../../../styles/stylesPage.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomModal from "../../../components/CustomModal";
 import TattooStyles from "../../../components/Card/TattooStyles";
 import svgImage from "../../../assets/images/Tattoo.svg";
 import NoContent from "../../../components/NoContent";
+import EstiloEstudioService from "../../../services/estiloEstudios";
+import EstiloService from "../../../services/estilos";
 
 export default function StylesPage() {
   const [formIncluir, setFormIncluir] = useState(false);
-  const data = [
-    { id: 1, name: "Estilo 1" },
-    { id: 2, name: "Estilo 2" },
-    { id: 3, name: "Estilo 3" },
-  ];
+  const [estilosEstudio, setEstilosEstudio] = useState("");
+  const [estilos, setEstilos] = useState("");
+
+  const ListarEstilosDoEstudio = async (id = 5) => {
+    try {
+      const req = await EstiloEstudioService.listarEstilosDoEstudio(id);
+      setEstilosEstudio(req.data);
+    } catch (error) {
+      console.log(`Erro ao listar estilos do estudio: ${error}`);
+    }
+  };
+
+  const ListarEstilos = async () => {
+    try {
+      const req = await EstiloService.listarEstilos();
+      setEstilos(req.data);
+    } catch (error) {
+      console.log(`Erro ao listar estilos: ${error}`);
+    }
+  };
+
+  const RemoverEstiloDoEstudio = async () => {
+    try {
+      const req = await EstiloEstudioService.removerEstiloDoEstudio(
+        idEstilo,
+        idEstudio
+      );
+      console.log(req);
+    } catch (error) {
+      console.log(`Erro ao remover estilo do estudio: ${error}`);
+    }
+  };
+
+  const getNomeEstiloPorId = (idEstilo) => {
+    const estilo = estilos.find((item) => item.idEstilo === idEstilo);
+    return estilo ? estilo.nome : "";
+  };
 
   const [isModalRemoverOpen, setIsModalRemoverOpen] = useState(false);
   const [isModaladicionarOpen, setIsModalAdicionarOpen] = useState(false);
-  const [selectedItemId, setSelectedItemId] = useState(null);
+  const [idEstudio, setidEstudio] = useState("");
+  const [idEstilo, setidEstilo] = useState("");
 
-  const handleOpenModal = (itemId, tipoModal) => {
+  const handleOpenModal = (idEstilo, idEstudio, tipoModal) => {
     if (tipoModal === 1) {
       setIsModalRemoverOpen(true);
     } else {
       setIsModalAdicionarOpen(true);
     }
-    setSelectedItemId(itemId); // Salva o ID do item selecionado
+    setidEstilo(idEstilo);
+    setidEstudio(idEstudio);
   };
 
   const handleCancel = (tipoModal) => {
@@ -35,14 +71,24 @@ export default function StylesPage() {
     }
   };
 
-  const handleConfirm = (itemId, tipoModal) => {
-    console.log("Confirmação recebida para o item com ID:", itemId);
+  const handleConfirm = (tipoModal) => {
+    console.log(
+      `Confirmação recebida para o item com IDs: ${idEstilo}, ${idEstudio}`
+    );
     if (tipoModal === 1) {
+      RemoverEstiloDoEstudio();
       setIsModalRemoverOpen(false);
+      ListarEstilosDoEstudio();
     } else {
+      //ListarEstilosDoEstudio();
       setIsModalAdicionarOpen(false);
     }
   };
+
+  useEffect(() => {
+    ListarEstilos();
+    ListarEstilosDoEstudio();
+  }, []);
 
   return (
     <>
@@ -71,14 +117,17 @@ export default function StylesPage() {
                 className="btn btn-danger btn-custom"
                 onClick={() => setFormIncluir(false)}
               >
-                <i class="bi bi-brush pe-2"></i>Fechar
+                <i className="bi bi-brush pe-2"></i>Fechar
               </button>
             </div>
 
-            {data.length !== 0 && (
+            {estilosEstudio.length !== 0 && (
               <div className="row styleContainer">
-                {data.map((item) => (
-                  <div key={item.id} className="col styleCol">
+                {estilosEstudio.map((item) => (
+                  <div
+                    key={`${item.idEstudio}-${item.idEstilo}`}
+                    className="col styleCol"
+                  >
                     <TattooStyles
                       image={svgImage}
                       description={item.name}
@@ -89,7 +138,7 @@ export default function StylesPage() {
               </div>
             )}
           </div>
-          {data.length === 0 && (
+          {estilosEstudio.length === 0 && (
             <NoContent
               title="Sem estilos para adicionar"
               message="Parece que seu estúdio já adicionou todos os estilos disponíveis"
@@ -101,21 +150,26 @@ export default function StylesPage() {
 
       <div className="stylesPage">
         <h1 className="text-center mt-2 mb-4">Estilos do Estudio</h1>
-        {data.length !== 0 && (
+        {estilosEstudio.length !== 0 && (
           <div className="row styleContainer">
-            {data.map((item) => (
-              <div key={item.id} className="col styleCol">
+            {estilosEstudio.map((item) => (
+              <div
+                key={`${item.idEstudio}-${item.idEstilo}`}
+                className="col styleCol"
+              >
                 <TattooStyles
                   image={svgImage}
-                  description={item.name}
-                  onDelete={() => handleOpenModal(item.id, 1)}
+                  description={getNomeEstiloPorId(item.idEstilo)}
+                  onDelete={() =>
+                    handleOpenModal(item.idEstilo, item.idEstudio, 1)
+                  }
                 />
               </div>
             ))}
           </div>
         )}
       </div>
-      {data.length === 0 && (
+      {estilosEstudio.length === 0 && (
         <NoContent
           title="Sem estilos no momento"
           message="Adicione estilos de tatuagem para o seu estúdio"
@@ -127,14 +181,14 @@ export default function StylesPage() {
         <CustomModal
           message="Você tem certeza que deseja remover?"
           onCancel={() => handleCancel(1)}
-          onConfirm={() => handleConfirm(selectedItemId, 1)}
+          onConfirm={() => handleConfirm(1)}
         />
       )}
       {isModaladicionarOpen && (
         <CustomModal
           message="Você tem certeza que deseja adicionar?"
           onCancel={() => handleCancel(0)}
-          onConfirm={() => handleConfirm(selectedItemId, 0)}
+          onConfirm={() => handleConfirm(0)}
         />
       )}
     </>

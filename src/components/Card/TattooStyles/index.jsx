@@ -8,7 +8,11 @@ export default function TattooStyles(props) {
     <div className={`card ${styles.cardPost} h-100`}>
       <img src={image} className="card-img-top " alt="Imagem do Post" />
       <div className="card-body">
-        <p className="h5">{description}</p>
+        <p className="h5">
+          {description
+            ? description.charAt(0).toUpperCase() + description.slice(1)
+            : ""}
+        </p>
       </div>
       <div className="card-body">
         {onAdd && (

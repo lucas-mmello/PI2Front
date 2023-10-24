@@ -36,7 +36,9 @@ export default function Search() {
       // Limpa a cidade se o estado for alterado
       setSelectedCidade("");
       setCidades("");
-      listaCidades();
+      if (value) {
+        listaCidades(value);
+      }
     } else if (name === "cidade") {
       setSelectedCidade(value);
     } else if (name === "estilo") {
@@ -103,11 +105,13 @@ export default function Search() {
     }
   };
 
-  const listaCidades = async () => {
-    if (selectedEstado === "") return;
+  const listaCidades = async (estado) => {
+    if (estado === "") {
+      return;
+    }
 
     try {
-      const req = await CidadeEstadoService.listarCidades(selectedEstado);
+      const req = await CidadeEstadoService.listarCidades(estado);
       setCidades(req.data);
     } catch (error) {
       console.log(`Erro ao listar cidades: ${error}`);
@@ -235,21 +239,26 @@ export default function Search() {
 
                   {/* Select de Cidade */}
                   {selectedEstado && (
-                    <select
-                      className="form-select my-2"
-                      aria-label="Selecione a cidade"
-                      value={selectedCidade}
-                      onChange={handleChange}
-                      name="cidade"
-                    >
-                      <option value="">Selecione a cidade</option>
-                      {cidades &&
-                        cidades.map((cidade) => (
-                          <option key={cidade.idCidade} value={cidade.idCidade}>
-                            {cidade.nome}
-                          </option>
-                        ))}
-                    </select>
+                    <>
+                      <select
+                        className="form-select my-2"
+                        aria-label="Selecione a cidade"
+                        value={selectedCidade}
+                        onChange={handleChange}
+                        name="cidade"
+                      >
+                        <option value="">Selecione a cidade</option>
+                        {cidades &&
+                          cidades.map((cidade) => (
+                            <option
+                              key={cidade.idCidade}
+                              value={cidade.idCidade}
+                            >
+                              {cidade.nome}
+                            </option>
+                          ))}
+                      </select>
+                    </>
                   )}
 
                   {/* Select de Estilos */}
