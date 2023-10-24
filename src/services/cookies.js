@@ -1,10 +1,11 @@
 const CookiesService = {
-  createCookie: (name, userName, permission, email, jwt) => {
+  createCookie: (name, userName, permission, email, jwt, id) => {
     const data = {
       userName,
       permission,
       email,
       jwt,
+      id,
     };
 
     const date = new Date();

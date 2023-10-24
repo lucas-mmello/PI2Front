@@ -1,7 +1,7 @@
 import Api from "./api";
 
 const EstiloService = {
-  // parametros aqui
+  listarEstilos: () => Api.get("/api/Estilos"),
 };
 
 export default EstiloService;

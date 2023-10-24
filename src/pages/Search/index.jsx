@@ -3,30 +3,17 @@ import "../../styles/search.scss";
 import { useState, useEffect } from "react";
 import CustomModal from "../../components/CustomModal";
 import NoContent from "../../components/NoContent";
+import CidadeEstadoService from "../../services/cidadeEstados";
+import EstiloService from "../../services/estilos";
 
 export default function Search() {
   const [selectedEstado, setSelectedEstado] = useState("");
   const [selectedCidade, setSelectedCidade] = useState("");
   const [selectedEstilo, setSelectedEstilo] = useState("");
   const [filterModal, setFilterModal] = useState(false);
-
-  const estados = [
-    { id: 1, nome: "Estado 1" },
-    { id: 2, nome: "Estado 2" },
-    { id: 3, nome: "Estado 3" },
-  ];
-
-  const cidades = [
-    { id: 1, nome: "Cidade A", estadoId: 1 },
-    { id: 2, nome: "Cidade B", estadoId: 1 },
-    { id: 3, nome: "Cidade C", estadoId: 2 },
-  ];
-
-  const estilos = [
-    { id: 1, nome: "Estilo A" },
-    { id: 2, nome: "Estilo B" },
-    { id: 3, nome: "Estilo C" },
-  ];
+  const [cidades, setCidades] = useState("");
+  const [estados, setEstados] = useState("");
+  const [estilos, setEsilos] = useState("");
 
   const fetchData = async () => {
     try {
@@ -48,6 +35,8 @@ export default function Search() {
       setSelectedEstado(value);
       // Limpa a cidade se o estado for alterado
       setSelectedCidade("");
+      setCidades("");
+      listaCidades();
     } else if (name === "cidade") {
       setSelectedCidade(value);
     } else if (name === "estilo") {
@@ -92,8 +81,43 @@ export default function Search() {
     setIsModalOpen(true);
   };
 
+  const listaEstados = async () => {
+    if (estados !== "") return;
+
+    try {
+      const req = await CidadeEstadoService.listarEstados();
+      setEstados(req.data);
+    } catch (error) {
+      console.log(`Erro ao listar estados: ${error}`);
+    }
+  };
+
+  const listaEstilos = async () => {
+    if (estilos !== "") return;
+
+    try {
+      const req = await EstiloService.listarEstilos();
+      setEsilos(req.data);
+    } catch (error) {
+      console.log(`Erro ao listar estilos: ${error}`);
+    }
+  };
+
+  const listaCidades = async () => {
+    if (selectedEstado === "") return;
+
+    try {
+      const req = await CidadeEstadoService.listarCidades(selectedEstado);
+      setCidades(req.data);
+    } catch (error) {
+      console.log(`Erro ao listar cidades: ${error}`);
+    }
+  };
+
   const openFilterModal = () => {
     setFilterModal(true);
+    listaEstados();
+    listaEstilos();
   };
 
   const closeFilterModal = () => {
@@ -201,11 +225,12 @@ export default function Search() {
                     name="estado"
                   >
                     <option value="">Selecione o estado</option>
-                    {estados.map((estado) => (
-                      <option key={estado.id} value={estado.id}>
-                        {estado.nome}
-                      </option>
-                    ))}
+                    {estados &&
+                      estados.map((estado) => (
+                        <option key={estado.idEstado} value={estado.idEstado}>
+                          {estado.nome}
+                        </option>
+                      ))}
                   </select>
 
                   {/* Select de Cidade */}
@@ -218,13 +243,9 @@ export default function Search() {
                       name="cidade"
                     >
                       <option value="">Selecione a cidade</option>
-                      {cidades
-                        .filter(
-                          (cidade) =>
-                            cidade.estadoId === parseInt(selectedEstado)
-                        )
-                        .map((cidade) => (
-                          <option key={cidade.id} value={cidade.id}>
+                      {cidades &&
+                        cidades.map((cidade) => (
+                          <option key={cidade.idCidade} value={cidade.idCidade}>
                             {cidade.nome}
                           </option>
                         ))}
@@ -240,11 +261,12 @@ export default function Search() {
                     name="estilo"
                   >
                     <option value="">Selecione o estilo</option>
-                    {estilos.map((estilo) => (
-                      <option key={estilo.id} value={estilo.id}>
-                        {estilo.nome}
-                      </option>
-                    ))}
+                    {estilos &&
+                      estilos.map((estilo) => (
+                        <option key={estilo.idEstilo} value={estilo.idEstilo}>
+                          {estilo.nome}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="modal-footer">

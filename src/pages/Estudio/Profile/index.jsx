@@ -3,12 +3,15 @@ import Post from "../../../components/Card/Post";
 import "../../../styles/profile.scss";
 import logo from "../../../assets/icon/logo.png";
 import icon from "../../../assets/icon/favicon-32x32.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ModalPost from "../../../components/ModalPost";
 import NoContent from "../../../components/NoContent";
+import PostService from "../../../services/posts";
+import CidadeEstadoService from "../../../services/cidadeEstados";
 
 export default function ProfilePage() {
   const [selectedPost, setSelectedPost] = useState("");
+  const [postsList, setPostsList] = useState("");
 
   const postsData = [
     {
@@ -53,20 +56,76 @@ export default function ProfilePage() {
     cellphone: "987-654-3210",
   };
 
-  const handleCreatePost = (postData) => {
+  async function ListarEstados() {
+    try {
+      const response = await CidadeEstadoService.Estados();
+      console.log(response);
+    } catch (error) {
+      console.log("Erro ao listar os estados:", error);
+    }
+  }
+
+  // fetch("https://localhost:44325/api/Estados")
+  //   .then((res) => res.json())
+  //   .then((res) => console.log(res));
+
+  // ListarEstados();
+
+  async function ListarPosts() {
+    try {
+      const response = await PostService.listarPostagens(5);
+      console.log(response.data);
+      setPostsList(response.data);
+    } catch (error) {
+      console.log("Erro ao listar os posts:", error);
+    }
+  }
+
+  const handleCreatePost = async (postData) => {
     // Lógica para criar um novo post com os dados fornecidos
-    console.log("Creating post with data:", postData);
+    try {
+      const req = await PostService.criarPost({
+        legenda: postData.legenda,
+        foto: postData.foto,
+        idEstudio: postData.idEstudio,
+      });
+      console.log(req);
+      ListarPosts();
+    } catch (error) {
+      console.log("Erro ao criar o post:", error);
+    }
   };
 
-  const handleEditPost = (postData) => {
+  const handleEditPost = async (postId, postData) => {
     // Lógica para editar um post existente com os dados fornecidos
-    console.log("Editing post with data:", postData);
+
+    try {
+      const req = await PostService.alterarPost(postId, {
+        idPostagem: postData.idPostagem,
+        legenda: postData.legenda,
+        foto: postData.foto,
+      });
+      console.log(req);
+      ListarPosts();
+    } catch (error) {
+      console.log("Erro ao alterar o post:", error);
+    }
   };
 
-  const handleDeletePost = (postId) => {
+  const handleDeletePost = async (postId) => {
     // Lógica para excluir um post com o ID fornecido
-    console.log("Deleting post with ID:", postId);
+    try {
+      const req = await PostService.excluirPost(postId);
+      console.log(req);
+      ListarPosts();
+    } catch (error) {
+      console.log("Erro ao excluir o post:", error);
+    }
   };
+
+  useEffect(() => {
+    ListarPosts();
+  }, []);
 
   return (
     <>
@@ -81,18 +140,18 @@ export default function ProfilePage() {
             <i className="bi bi-plus-circle pe-2"></i>Criar Post
           </button>
         </div>
-        {postsData.length !== 0 && (
+        {postsList.length !== 0 && (
           <div className="row postContainer">
-            {postsData.map((post) => (
-              <div key={post.id} className="col postCol">
+            {postsList.map((post) => (
+              <div key={post.idPostagem} className="col postCol">
                 <Post
-                  image={post.image}
-                  description={post.description}
+                  image={post.foto}
+                  description={post.legenda}
                   onEdit={() => {
-                    setSelectedPost(post.id);
+                    setSelectedPost(post.idPostagem);
                   }}
                   onDelete={() => {
-                    setSelectedPost(post.id);
+                    setSelectedPost(post.idPostagem);
                   }}
                   idModalEd="#editModal"
                   idModalDel="#deleteModal"
@@ -107,6 +166,7 @@ export default function ProfilePage() {
           mode="create"
           heading="Create Post"
           onSave={handleCreatePost}
+          estudioId={5}
         />
 
         <ModalPost
@@ -125,7 +185,7 @@ export default function ProfilePage() {
           onDelete={handleDeletePost}
         />
       </div>
-      {postsData.length === 0 && (
+      {postsList.length === 0 && (
         <NoContent
           title="Não há posts no momento"
           message="Que tal criar algo incrível para compartilhar com todos?"

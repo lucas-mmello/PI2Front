@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Form } from "react-router-dom";
+import PostService from "../../services/posts";
 
 export default function ModalPost({
   mode,
@@ -9,24 +10,36 @@ export default function ModalPost({
   onDelete,
   idModal,
   show,
+  estudioId,
 }) {
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState(null);
+  const [imageLink, setImageLink] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (mode === "create" || mode === "edit") {
       const postData = {
-        caption,
-        image,
-        id: postId,
+        legenda: caption,
       };
 
+      if (image) {
+        //enquanto não tiver como armazenar imagem, vai por link
+        setImage(
+          "https://static3.tcdn.com.br/img/img_prod/460977/teste_100485_1_cbc226c7d23a19c784fb4752ffe61337.png"
+        );
+        postData.foto = image;
+      } else if (mode === "edit" && imageLink) {
+        // Use imageLink if image is null in Edit mode
+        postData.foto = imageLink;
+        postData.idPostagem = postId;
+      }
       if (mode === "create") {
+        postData.idEstudio = estudioId;
         onSave(postData);
       } else if (mode === "edit") {
-        onSave(postData);
+        onSave(postId, postData);
       }
     } else if (mode === "delete") {
       onDelete(postId);
@@ -36,6 +49,22 @@ export default function ModalPost({
     setCaption("");
     setImage(null);
   };
+
+  useEffect(() => {
+    // Chamar SelecionarPost quando o componente é montado
+    if (mode === "edit" && postId) {
+      async function fetchData() {
+        try {
+          const response = await PostService.selecionarPost(postId);
+          setCaption(response.data.legenda);
+          setImageLink(response.data.foto);
+        } catch (error) {
+          console.log("Erro ao selecionar o post:", error);
+        }
+      }
+      fetchData();
+    }
+  }, [mode, postId]);
 
   return (
     <div
@@ -68,18 +97,30 @@ export default function ModalPost({
                       type="text"
                       className="form-control"
                       placeholder="Enter caption"
+                      required
                       value={caption}
                       onChange={(e) => setCaption(e.target.value)}
                     />
                   </div>
                   <div className="mb-3">
                     <label className="form-label">Imagem</label>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      className="form-control"
-                      onChange={(e) => setImage(e.target.files[0])}
-                    />
+                    {mode === "create" && (
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="form-control"
+                        required
+                        onChange={(e) => setImage(e.target.files[0])}
+                      />
+                    )}
+                    {mode === "edit" && (
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="form-control"
+                        onChange={(e) => setImage(e.target.files[0])}
+                      />
+                    )}
                   </div>
                 </>
               )}

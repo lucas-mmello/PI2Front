@@ -22,6 +22,7 @@ export default function Estudio() {
       const email = formData.email;
       const permission = "1"; // Permissão como string "2"
       const jwtToken = "seu_token_jwt_teste"; // Substitua pelo seu token JWT
+      const id = 5;
 
       // Adicionando ao cookie "userdata"
       CookiesService.createCookie(
@@ -29,7 +30,8 @@ export default function Estudio() {
         userName,
         permission,
         email,
-        jwtToken
+        jwtToken,
+        id
       );
       setRedirectToHome(true);
     } catch (error) {
