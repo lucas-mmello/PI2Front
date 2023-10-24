@@ -1,10 +1,11 @@
 import Estudio from "../../components/Card/Estudio";
 import "../../styles/search.scss";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import CustomModal from "../../components/CustomModal";
 import NoContent from "../../components/NoContent";
 import CidadeEstadoService from "../../services/cidadeEstados";
 import EstiloService from "../../services/estilos";
+import EstiloEstudioService from "../../services/estiloEstudios";
 
 export default function Search() {
   const [selectedEstado, setSelectedEstado] = useState("");
@@ -54,22 +55,20 @@ export default function Search() {
 
   const estudiosData = [
     {
-      id: 1,
+      id: 3,
       name: "Estúdio 1",
       cep: "12345-678",
       state: "Estado 1",
       city: "Cidade 1",
       street: "Rua 1",
-      styles: ["estilo 1", "outro", "teste"],
     },
     {
-      id: 2,
+      id: 5,
       name: "Estúdio 2",
       cep: "98765-432",
       state: "Estado 2",
       city: "Cidade 2",
       street: "Rua 2",
-      styles: ["estilo 2", "outrom", "testem"],
     },
     // ... outros objetos de estúdio
   ];
@@ -77,10 +76,12 @@ export default function Search() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [didSearch, setDidSearch] = useState(false);
+  const [estilosEstudio, setEstilosEstudio] = useState("");
 
   const handleOpenModal = (itemId) => {
     setSelectedItemId(itemId);
     setIsModalOpen(true);
+    ListarEstilosDoEstudio(itemId);
   };
 
   const listaEstados = async () => {
@@ -121,7 +122,6 @@ export default function Search() {
   const openFilterModal = () => {
     setFilterModal(true);
     listaEstados();
-    listaEstilos();
   };
 
   const closeFilterModal = () => {
@@ -152,22 +152,47 @@ export default function Search() {
     closeFilterModal();
   };
 
-  const message = (itemId) => {
-    // Find the estudio with the given itemId
-    const estudio = estudiosData.find((item) => item.id === itemId);
-
-    // Return the styles of the found estudio, or an empty string if not found
-    return estudio
-      ? estudio.styles
-          .map((style) => style.charAt(0).toUpperCase() + style.slice(1))
-          .join(", ")
-      : "";
+  const ListarEstilosDoEstudio = async (id) => {
+    try {
+      const req = await EstiloEstudioService.listarEstilosDoEstudio(id);
+      setEstilosEstudio(req.data);
+    } catch (error) {
+      console.log(`Erro ao listar estilos do estudio: ${error}`);
+    }
   };
+
+  const getNomeEstiloPorId = (idEstilo) => {
+    const estilo = estilos.find((item) => item.idEstilo === idEstilo);
+    return estilo ? estilo.nome : "";
+  };
+
+  const message = useMemo(() => {
+    if (estilosEstudio) {
+      if (Array.isArray(estilosEstudio) && estilosEstudio.length !== 0) {
+        const estudio = estilosEstudio.map((estilo) => {
+          return getNomeEstiloPorId(estilo.idEstilo);
+        });
+        console.log(estudio);
+        // Retorne o resultado para renderização
+        return estudio.join(", ");
+      } else {
+        // Se estilosEstudio não for um array, retorne uma mensagem padrão ou o que for apropriado
+        return "Estudio sem estilos";
+      }
+    } else {
+      // Estilos ainda estão sendo buscados
+      return "Carregando estilos...";
+    }
+  }, [estilosEstudio]);
 
   const handleConfirm = () => {
     console.log("Confirmação recebida para o item com ID:", selectedItemId);
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    listaEstilos();
+  }, []);
 
   return (
     <div>
@@ -339,7 +364,7 @@ export default function Search() {
           title="Estilos do Estúdio"
           btnConfirmMessage="Ok"
           onConfirm={handleConfirm}
-          message={message(selectedItemId)}
+          message={message}
           bgCustom={true}
         />
       )}
