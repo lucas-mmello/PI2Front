@@ -8,6 +8,8 @@ import ModalPost from "../../../components/ModalPost";
 import NoContent from "../../../components/NoContent";
 import PostService from "../../../services/posts";
 import CidadeEstadoService from "../../../services/cidadeEstados";
+import { storage } from "../../../Firebase";
+import { deleteObject, ref } from "firebase/storage";
 
 export default function ProfilePage() {
   const [selectedPost, setSelectedPost] = useState("");
@@ -84,13 +86,17 @@ export default function ProfilePage() {
   const handleCreatePost = async (postData) => {
     // Lógica para criar um novo post com os dados fornecidos
     try {
-      const req = await PostService.criarPost({
-        legenda: postData.legenda,
-        foto: postData.foto,
-        idEstudio: postData.idEstudio,
-      });
-      console.log(req);
-      ListarPosts();
+      if (postData.legenda && postData.foto && postData.idEstudio) {
+        const req = await PostService.criarPost({
+          legenda: postData.legenda,
+          foto: postData.foto,
+          idEstudio: postData.idEstudio,
+        });
+        console.log(req);
+        ListarPosts();
+      } else {
+        console.log("Dados inválidos");
+      }
     } catch (error) {
       console.log("Erro ao criar o post:", error);
     }
@@ -116,11 +122,23 @@ export default function ProfilePage() {
     // Lógica para excluir um post com o ID fornecido
     try {
       const req = await PostService.excluirPost(postId);
-      console.log(req);
+      console.log(req.data);
+      imageDelete(req.data);
       ListarPosts();
     } catch (error) {
       console.log("Erro ao excluir o post:", error);
     }
+  };
+
+  const imageDelete = async (imageUrl) => {
+    const storageRef = ref(storage, imageUrl);
+    deleteObject(storageRef)
+      .then(() => {
+        console.log("Imagem excluída com sucesso.");
+      })
+      .catch((error) => {
+        console.error("Erro ao excluir a imagem:", error);
+      });
   };
 
   useEffect(() => {

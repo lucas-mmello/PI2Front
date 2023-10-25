@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Form } from "react-router-dom";
 import PostService from "../../services/posts";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { storage } from "../../Firebase";
 
 export default function ModalPost({
   mode,
@@ -14,31 +16,38 @@ export default function ModalPost({
 }) {
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState(null);
-  const [imageLink, setImageLink] = useState("");
 
-  const handleSubmit = (e) => {
+  const imageUpload = async () => {
+    const file = image;
+    if (!file) return;
+
+    const storageRef = ref(storage, `images/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    try {
+      await uploadTask;
+      const url = await getDownloadURL(uploadTask.snapshot.ref);
+      return url;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (mode === "create" || mode === "edit") {
       const postData = {
         legenda: caption,
       };
-
-      if (image) {
-        //enquanto não tiver como armazenar imagem, vai por link
-        setImage(
-          "https://static3.tcdn.com.br/img/img_prod/460977/teste_100485_1_cbc226c7d23a19c784fb4752ffe61337.png"
-        );
-        postData.foto = image;
-      } else if (mode === "edit" && imageLink) {
-        // Use imageLink if image is null in Edit mode
-        postData.foto = imageLink;
-        postData.idPostagem = postId;
-      }
       if (mode === "create") {
+        const url = await imageUpload();
+        console.log(url);
+        postData.foto = url;
         postData.idEstudio = estudioId;
         onSave(postData);
       } else if (mode === "edit") {
+        postData.idPostagem = postId;
         onSave(postId, postData);
       }
     } else if (mode === "delete") {
@@ -57,7 +66,6 @@ export default function ModalPost({
         try {
           const response = await PostService.selecionarPost(postId);
           setCaption(response.data.legenda);
-          setImageLink(response.data.foto);
         } catch (error) {
           console.log("Erro ao selecionar o post:", error);
         }
@@ -102,9 +110,10 @@ export default function ModalPost({
                       onChange={(e) => setCaption(e.target.value)}
                     />
                   </div>
-                  <div className="mb-3">
-                    <label className="form-label">Imagem</label>
-                    {mode === "create" && (
+                  {mode === "create" && (
+                    <div className="mb-3">
+                      <label className="form-label">Imagem</label>
+
                       <input
                         type="file"
                         accept="image/*"
@@ -112,16 +121,8 @@ export default function ModalPost({
                         required
                         onChange={(e) => setImage(e.target.files[0])}
                       />
-                    )}
-                    {mode === "edit" && (
-                      <input
-                        type="file"
-                        accept="image/*"
-                        className="form-control"
-                        onChange={(e) => setImage(e.target.files[0])}
-                      />
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </>
               )}
               {mode === "delete" && (
