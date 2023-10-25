@@ -12,8 +12,9 @@ export default function StylesPage() {
   const [formIncluir, setFormIncluir] = useState(false);
   const [estilosEstudio, setEstilosEstudio] = useState("");
   const [estilos, setEstilos] = useState("");
+  const [estilosDisponiveis, setEstilosDisponiveis] = useState("");
 
-  const ListarEstilosDoEstudio = async (id = 1) => {
+  const ListarEstilosDoEstudio = async (id) => {
     try {
       const req = await EstiloEstudioService.listarEstilosDoEstudio(id);
       setEstilosEstudio(req.data);
@@ -36,9 +37,35 @@ export default function StylesPage() {
       const req = await EstiloEstudioService.removerEstiloDoEstudio(
         idEstiloEstudio
       );
+      ListarEstilosDoEstudio(idEstudio);
+      ListarEstilosDisponiveis(idEstudio);
       console.log(req);
     } catch (error) {
       console.log(`Erro ao remover estilo do estudio: ${error}`);
+    }
+  };
+
+  const ListarEstilosDisponiveis = async (id) => {
+    try {
+      const req = await EstiloEstudioService.listarEstilosDisponiveis(id);
+      setEstilosDisponiveis(req.data);
+      console.log(req);
+    } catch (error) {
+      console.log(`Erro ao listar estilos disponíveis: ${error}`);
+    }
+  };
+
+  const AdicionarEstiloEstudio = async (idEstilo, idEstudio) => {
+    try {
+      const req = await EstiloEstudioService.adicionarEstiloEstudio({
+        idEstudio: idEstudio,
+        idEstilo: idEstilo,
+      });
+      ListarEstilosDoEstudio(idEstudio);
+      ListarEstilosDisponiveis(idEstudio);
+      console.log(req);
+    } catch (error) {
+      console.log(`Erro ao adicionar estilo ao estudio: ${error}`);
     }
   };
 
@@ -52,14 +79,17 @@ export default function StylesPage() {
   const [isModalRemoverOpen, setIsModalRemoverOpen] = useState(false);
   const [isModaladicionarOpen, setIsModalAdicionarOpen] = useState(false);
   const [idEstiloEstudio, setidEstiloEstudio] = useState("");
+  const idEstudio = 1; //depois ele deve pegar dos cookies;
+  const [idEstilo, setIdEstilo] = useState("");
 
-  const handleOpenModal = (idEstiloEstudio, tipoModal) => {
+  const handleOpenModal = (tipoModal, idEstiloEstudio, idEstilo) => {
     if (tipoModal === 1) {
       setIsModalRemoverOpen(true);
+      setidEstiloEstudio(idEstiloEstudio);
     } else {
       setIsModalAdicionarOpen(true);
+      setIdEstilo(idEstilo);
     }
-    setidEstiloEstudio(idEstiloEstudio);
   };
 
   const handleCancel = (tipoModal) => {
@@ -75,16 +105,16 @@ export default function StylesPage() {
     if (tipoModal === 1) {
       RemoverEstiloDoEstudio();
       setIsModalRemoverOpen(false);
-      ListarEstilosDoEstudio();
     } else {
-      //ListarEstilosDoEstudio();
+      AdicionarEstiloEstudio(idEstilo, idEstudio);
       setIsModalAdicionarOpen(false);
     }
   };
 
   useEffect(() => {
     ListarEstilos();
-    ListarEstilosDoEstudio();
+    ListarEstilosDoEstudio(idEstudio);
+    ListarEstilosDisponiveis(idEstudio);
   }, []);
 
   return (
@@ -118,17 +148,14 @@ export default function StylesPage() {
               </button>
             </div>
 
-            {estilosEstudio.length !== 0 && (
+            {estilosDisponiveis.length !== 0 && (
               <div className="row styleContainer">
-                {estilosEstudio.map((item) => (
-                  <div
-                    key={`${item.idEstiloEstudio}a`}
-                    className="col styleCol"
-                  >
+                {estilosDisponiveis.map((item) => (
+                  <div key={`${item.idEstilo}a`} className="col styleCol">
                     <TattooStyles
                       image={svgImage}
-                      description={item.name}
-                      onAdd={() => handleOpenModal(item.id, 0)}
+                      description={item.nome}
+                      onAdd={() => handleOpenModal(0, null, item.idEstilo)}
                     />
                   </div>
                 ))}
@@ -154,7 +181,7 @@ export default function StylesPage() {
                 <TattooStyles
                   image={svgImage}
                   description={getNomeEstiloPorId(item.idEstilo)}
-                  onDelete={() => handleOpenModal(item.idEstiloEstudio, 1)}
+                  onDelete={() => handleOpenModal(1, item.idEstiloEstudio)}
                 />
               </div>
             ))}
