@@ -13,7 +13,7 @@ export default function StylesPage() {
   const [estilosEstudio, setEstilosEstudio] = useState("");
   const [estilos, setEstilos] = useState("");
 
-  const ListarEstilosDoEstudio = async (id = 5) => {
+  const ListarEstilosDoEstudio = async (id = 1) => {
     try {
       const req = await EstiloEstudioService.listarEstilosDoEstudio(id);
       setEstilosEstudio(req.data);
@@ -34,8 +34,7 @@ export default function StylesPage() {
   const RemoverEstiloDoEstudio = async () => {
     try {
       const req = await EstiloEstudioService.removerEstiloDoEstudio(
-        idEstilo,
-        idEstudio
+        idEstiloEstudio
       );
       console.log(req);
     } catch (error) {
@@ -44,23 +43,23 @@ export default function StylesPage() {
   };
 
   const getNomeEstiloPorId = (idEstilo) => {
-    const estilo = estilos.find((item) => item.idEstilo === idEstilo);
+    const estilo = estilos
+      ? estilos.find((item) => item.idEstilo === idEstilo)
+      : "";
     return estilo ? estilo.nome : "";
   };
 
   const [isModalRemoverOpen, setIsModalRemoverOpen] = useState(false);
   const [isModaladicionarOpen, setIsModalAdicionarOpen] = useState(false);
-  const [idEstudio, setidEstudio] = useState("");
-  const [idEstilo, setidEstilo] = useState("");
+  const [idEstiloEstudio, setidEstiloEstudio] = useState("");
 
-  const handleOpenModal = (idEstilo, idEstudio, tipoModal) => {
+  const handleOpenModal = (idEstiloEstudio, tipoModal) => {
     if (tipoModal === 1) {
       setIsModalRemoverOpen(true);
     } else {
       setIsModalAdicionarOpen(true);
     }
-    setidEstilo(idEstilo);
-    setidEstudio(idEstudio);
+    setidEstiloEstudio(idEstiloEstudio);
   };
 
   const handleCancel = (tipoModal) => {
@@ -72,9 +71,7 @@ export default function StylesPage() {
   };
 
   const handleConfirm = (tipoModal) => {
-    console.log(
-      `Confirmação recebida para o item com IDs: ${idEstilo}, ${idEstudio}`
-    );
+    console.log(`Confirmação recebida para o item com ID: ${idEstiloEstudio}`);
     if (tipoModal === 1) {
       RemoverEstiloDoEstudio();
       setIsModalRemoverOpen(false);
@@ -125,7 +122,7 @@ export default function StylesPage() {
               <div className="row styleContainer">
                 {estilosEstudio.map((item) => (
                   <div
-                    key={`${item.idEstudio}-${item.idEstilo}`}
+                    key={`${item.idEstiloEstudio}a`}
                     className="col styleCol"
                   >
                     <TattooStyles
@@ -153,16 +150,11 @@ export default function StylesPage() {
         {estilosEstudio.length !== 0 && (
           <div className="row styleContainer">
             {estilosEstudio.map((item) => (
-              <div
-                key={`${item.idEstudio}-${item.idEstilo}`}
-                className="col styleCol"
-              >
+              <div key={item.idEstiloEstudio} className="col styleCol">
                 <TattooStyles
                   image={svgImage}
                   description={getNomeEstiloPorId(item.idEstilo)}
-                  onDelete={() =>
-                    handleOpenModal(item.idEstilo, item.idEstudio, 1)
-                  }
+                  onDelete={() => handleOpenModal(item.idEstiloEstudio, 1)}
                 />
               </div>
             ))}

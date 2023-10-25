@@ -55,7 +55,7 @@ export default function Search() {
 
   const estudiosData = [
     {
-      id: 3,
+      id: 1,
       name: "Estúdio 1",
       cep: "12345-678",
       state: "Estado 1",
@@ -63,7 +63,7 @@ export default function Search() {
       street: "Rua 1",
     },
     {
-      id: 5,
+      id: 2,
       name: "Estúdio 2",
       cep: "98765-432",
       state: "Estado 2",

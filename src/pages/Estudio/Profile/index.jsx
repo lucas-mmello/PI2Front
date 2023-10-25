@@ -73,7 +73,7 @@ export default function ProfilePage() {
 
   async function ListarPosts() {
     try {
-      const response = await PostService.listarPostagens(5);
+      const response = await PostService.listarPostagens(1);
       console.log(response.data);
       setPostsList(response.data);
     } catch (error) {
@@ -166,7 +166,7 @@ export default function ProfilePage() {
           mode="create"
           heading="Create Post"
           onSave={handleCreatePost}
-          estudioId={5}
+          estudioId={1}
         />
 
         <ModalPost
