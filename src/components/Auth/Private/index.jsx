@@ -3,13 +3,17 @@ import { errorHandlers } from "../../../configs/Error";
 import CookiesService from "../../../services/cookies";
 export default function Private() {
   const isAuthenticated = CookiesService.getCookie("userdata");
+  const location = useLocation();
 
   // Funções para lidar com os erros
+
+  if (location.pathname === "/private/account" && !isAuthenticated) {
+    return <Navigate to="/" />;
+  }
 
   if (!isAuthenticated) {
     return errorHandlers.handleUnauthorized();
   }
-  const location = useLocation();
 
   // Verifica se a URL é exatamente "/private"
   if (location.pathname === "/private" && isAuthenticated) {

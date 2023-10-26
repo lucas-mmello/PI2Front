@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Form } from "react-router-dom";
 import ViaCEPService from "../../../../services/cep";
+import CidadeEstadoService from "../../../../services/cidadeEstados";
 
 export default function ModalAccount({
   mode,
@@ -45,30 +46,54 @@ export default function ModalAccount({
 
   useEffect(() => {
     if (userData) {
-      setName(userData.name || "");
+      setName(userData.nome || "");
       setEmail(userData.email || "");
-      setPassword(userData.password || "");
+      setPassword(userData.senha || "");
       setCep(userData.cep || "");
       setCidade(userData.cidade || "");
       setEstado(userData.estado || "");
-      setBirthDate(userData.birthDate || "");
-      setUserId(userData.id || "");
+
+      // Formatação da data para "dia, mês e ano"
+      const rawBirthDate = userData.dataNascimento || "";
+      if (rawBirthDate) {
+        const date = new Date(rawBirthDate);
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, "0"); // +1 porque os meses em JavaScript são baseados em zero
+        const day = date.getDate().toString().padStart(2, "0");
+        const formattedBirthDate = `${year}-${month}-${day}`;
+        setBirthDate(formattedBirthDate);
+      } else {
+        setBirthDate("");
+      }
+
+      setUserId(userData.idCliente || "");
     }
   }, [userData]);
 
-  const handleSubmit = (e) => {
+  const SelecionarCidade = async () => {
+    try {
+      const req = await CidadeEstadoService.selecionarCidade(cidade);
+      return req.data.id;
+    } catch (error) {
+      console.log(`Erro ao procurar cidade: ${error}`);
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const idCidade = await SelecionarCidade();
+    console.log(idCidade);
 
     if (mode === "edit") {
       const userData = {
-        name,
-        email,
-        password,
-        cep,
-        cidade,
-        estado,
-        birthDate,
-        id: userId,
+        nome: name,
+        email: email,
+        senha: password,
+        cep: cep,
+        idCidade: idCidade,
+        dataNasc: birthDate,
+        idCliente: userId,
       };
 
       if (mode === "edit") {
@@ -179,7 +204,6 @@ export default function ModalAccount({
                       className="form-control"
                       value={cidade}
                       disabled
-                      onChange={(e) => setCidade(e.target.value)}
                     />
                   </div>
                   <div className="mb-3">
@@ -191,7 +215,6 @@ export default function ModalAccount({
                       className="form-control"
                       value={estado}
                       disabled
-                      onChange={(e) => setEstado(e.target.value)}
                     />
                   </div>
                 </>

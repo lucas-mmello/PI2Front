@@ -1,39 +1,78 @@
 import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 import ModalAccount from "./ModalAccount";
+import UserService from "../../../services/users";
+import { Navigate } from "react-router-dom";
 
 export default function UserAccount() {
   const [userData, setUserData] = useState({});
+  const id = 10;
+  const [RedirectToHome, setRedirectToHome] = useState(false);
+
+  const SelecionarUser = async () => {
+    try {
+      const req = await UserService.selecionarUser(id);
+      setUserData(req.data);
+    } catch (error) {
+      console.log(`Erro ao selecionar o usuario: ${error}`);
+    }
+  };
 
   useEffect(() => {
     // Simule a recuperação dos dados do usuário ao carregar a página
-    setUserData({
-      id: 1,
-      name: "Nome do Usuário",
-      email: "usuario@email.com",
-      password: "MinhaSenhaSegura",
-      cep: "54321678",
-      cidade: "Outra Cidade",
-      estado: "Outro Estado",
-      birthDate: "1990-01-01",
-      // ... outras informações do usuário
-    });
+    SelecionarUser();
+    // setUserData({
+    //   id: 1,
+    //   name: "Nome do Usuário",
+    //   email: "usuario@email.com",
+    //   password: "MinhaSenhaSegura",
+    //   cep: "54321678",
+    //   cidade: "Outra Cidade",
+    //   estado: "Outro Estado",
+    //   birthDate: "1990-01-01",
+    //   // ... outras informações do usuário
+    // });
   }, []);
+
+  const EditarUser = async (data) => {
+    try {
+      const req = await UserService.editarUser(id, data);
+      console.log(req);
+      SelecionarUser();
+    } catch (error) {
+      console.log(`Erro ao editar o usuario: ${error}`);
+    }
+  };
+
+  const ExcluirUser = async () => {
+    try {
+      const req = await UserService.excluirUser(id);
+      console.log(req);
+      setRedirectToHome(true);
+    } catch (error) {
+      console.log(`Erro ao excluir o usuario: ${error}`);
+    }
+  };
 
   const handleEdit = (userData) => {
     // Implemente aqui a lógica para salvar as informações editadas
     // Você pode enviar uma solicitação para o servidor com os dados atualizados
     // e atualizar o estado quando a resposta do servidor chegar
+    EditarUser(userData);
     console.log("Dados do Usuário Editados:", userData);
-    setUserData(userData);
   };
 
   const handleDelete = (userId) => {
     // Implemente aqui a lógica para excluir a conta do usuário
     // Você pode enviar uma solicitação para o servidor para excluir a conta
     // e redirecionar o usuário para a página de login ou alguma outra página apropriada
+    ExcluirUser();
     console.log("Conta do Usuário Excluída, ID:", userId);
   };
+
+  if (RedirectToHome && location.pathname !== "/") {
+    window.location.reload();
+  }
 
   return (
     <div className={styles.accountDiv}>
@@ -42,7 +81,7 @@ export default function UserAccount() {
         <div className="card-body">
           <h2 className="card-title">Informações do Usuário</h2>
           <p className="card-text">
-            <i className="bi bi-person px-2"></i>Nome: {userData.name}
+            <i className="bi bi-person px-2"></i>Nome: {userData.nome}
           </p>
           <p className="card-text">
             <i className="bi bi-envelope px-2"></i>Email: {userData.email}
@@ -61,7 +100,7 @@ export default function UserAccount() {
           </p>
           <p className="card-text">
             <i className="bi bi-calendar px-2"></i>Data de Nascimento:{" "}
-            {userData.birthDate}
+            {userData.dataNascimento}
           </p>
           {/* Adicione mais informações do usuário aqui */}
           <button

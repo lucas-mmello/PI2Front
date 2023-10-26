@@ -15,6 +15,12 @@ const UserService = {
     localStorage.setItem("user", JSON.stringify(response.data.user));
     localStorage.setItem("token", response.data.token);
   },
+  selecionarUser: (id) => Api.get(`/api/Clientes/${id}`),
+  editarUser: (id, params) => Api.put(`/api/Clientes/${id}`, params),
+  excluirUser: async (id) => {
+    await Api.delete(`/api/Clientes/${id}`);
+    CookiesService.deleteCookie("userdata");
+  },
 };
 
 export default UserService;
