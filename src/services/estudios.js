@@ -15,6 +15,11 @@ const EstudioService = {
     localStorage.setItem("user", JSON.stringify(response.data.user));
     localStorage.setItem("token", response.data.token);
   },
+  search: async (nome, query) =>
+    Api.get(`/api/Estudios/procura/${nome}`, {
+      query: { idCidade: query.idCidade, idEstilo: query.idEstilo },
+    }),
+  selecionarEstudio: (id) => Api.get(`/api/Estudios/estudio/${id}`),
 };
 
 export default EstudioService;

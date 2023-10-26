@@ -10,10 +10,12 @@ import PostService from "../../../services/posts";
 import CidadeEstadoService from "../../../services/cidadeEstados";
 import { storage } from "../../../Firebase";
 import { deleteObject, ref } from "firebase/storage";
+import EstudioService from "../../../services/estudios";
 
 export default function ProfilePage() {
   const [selectedPost, setSelectedPost] = useState("");
   const [postsList, setPostsList] = useState("");
+  const [studioInfo, setStudioInfo] = useState("");
 
   const postsData = [
     {
@@ -48,15 +50,15 @@ export default function ProfilePage() {
     // ... outros objetos
   ];
 
-  const studioInfo = {
-    name: "Nome do Estúdio",
-    address: "Endereço do Estúdio",
-    city: "Cidade",
-    state: "Estado",
-    cnpj: "123456789",
-    phone: "123-456-7890",
-    cellphone: "987-654-3210",
-  };
+  // const studioInfo = {
+  //   name: "Nome do Estúdio",
+  //   address: "Endereço do Estúdio",
+  //   city: "Cidade",
+  //   state: "Estado",
+  //   cnpj: "123456789",
+  //   phone: "123-456-7890",
+  //   cellphone: "987-654-3210",
+  // };
 
   async function ListarEstados() {
     try {
@@ -78,10 +80,21 @@ export default function ProfilePage() {
       const response = await PostService.listarPostagens(1);
       console.log(response.data);
       setPostsList(response.data);
+      console.log("aqui");
     } catch (error) {
       console.log("Erro ao listar os posts:", error);
     }
   }
+
+  const SelecionarEstudio = async (idEstudio = 1) => {
+    try {
+      const response = await EstudioService.selecionarEstudio(idEstudio);
+      console.log(response.data);
+      setStudioInfo(response.data);
+    } catch (error) {
+      console.log("Erro ao listar os dados do estudio:", error);
+    }
+  };
 
   const handleCreatePost = async (postData) => {
     // Lógica para criar um novo post com os dados fornecidos
@@ -142,6 +155,7 @@ export default function ProfilePage() {
   };
 
   useEffect(() => {
+    SelecionarEstudio();
     ListarPosts();
   }, []);
 
@@ -158,26 +172,27 @@ export default function ProfilePage() {
             <i className="bi bi-plus-circle pe-2"></i>Criar Post
           </button>
         </div>
-        {postsList.length !== 0 && (
-          <div className="row postContainer">
-            {postsList.map((post) => (
-              <div key={post.idPostagem} className="col postCol">
-                <Post
-                  image={post.foto}
-                  description={post.legenda}
-                  onEdit={() => {
-                    setSelectedPost(post.idPostagem);
-                  }}
-                  onDelete={() => {
-                    setSelectedPost(post.idPostagem);
-                  }}
-                  idModalEd="#editModal"
-                  idModalDel="#deleteModal"
-                />
-              </div>
-            ))}
-          </div>
-        )}
+        {postsList &&
+          postsList.length > 0 && ( // Verifique se postsList não é nulo e tem elementos
+            <div className="row postContainer">
+              {postsList.map((post) => (
+                <div key={post.idPostagem} className="col postCol">
+                  <Post
+                    image={post.foto}
+                    description={post.legenda}
+                    onEdit={() => {
+                      setSelectedPost(post.idPostagem);
+                    }}
+                    onDelete={() => {
+                      setSelectedPost(post.idPostagem);
+                    }}
+                    idModalEd="#editModal"
+                    idModalDel="#deleteModal"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
 
         <ModalPost
           idModal="postModal"

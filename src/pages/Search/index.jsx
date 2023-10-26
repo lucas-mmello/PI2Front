@@ -6,6 +6,7 @@ import NoContent from "../../components/NoContent";
 import CidadeEstadoService from "../../services/cidadeEstados";
 import EstiloService from "../../services/estilos";
 import EstiloEstudioService from "../../services/estiloEstudios";
+import EstudioService from "../../services/estudios";
 
 export default function Search() {
   const [selectedEstado, setSelectedEstado] = useState("");
@@ -15,6 +16,8 @@ export default function Search() {
   const [cidades, setCidades] = useState("");
   const [estados, setEstados] = useState("");
   const [estilos, setEsilos] = useState("");
+  const [searchName, setSearchName] = useState("");
+  const [estudiosData, setEstudiosData] = useState("");
 
   const fetchData = async () => {
     try {
@@ -52,26 +55,6 @@ export default function Search() {
     setSelectedCidade("");
     setSelectedEstilo("");
   };
-
-  const estudiosData = [
-    {
-      id: 1,
-      name: "Estúdio 1",
-      cep: "12345-678",
-      state: "Estado 1",
-      city: "Cidade 1",
-      street: "Rua 1",
-    },
-    {
-      id: 2,
-      name: "Estúdio 2",
-      cep: "98765-432",
-      state: "Estado 2",
-      city: "Cidade 2",
-      street: "Rua 2",
-    },
-    // ... outros objetos de estúdio
-  ];
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
@@ -128,12 +111,20 @@ export default function Search() {
     setFilterModal(false);
   };
 
-  const search = () => {
+  const search = async () => {
     if (!didSearch) {
       setDidSearch(true);
     }
+    if (searchName === "") return;
     //resto da implementação da api
-
+    try {
+      const query = { idCidade: selectedCidade, idEstilo: selectedEstilo };
+      const req = await EstudioService.search(searchName, query);
+      setEstudiosData(req.data);
+    } catch (error) {
+      console.log(`Erro ao buscar estudio: ${error}`);
+    }
+    setSearchName("");
     //no final remove os filtros
     removeFilters();
   };
@@ -203,6 +194,8 @@ export default function Search() {
             type="text"
             autoComplete="off"
             className="form-control inp-search"
+            value={searchName}
+            onChange={(e) => setSearchName(e.target.value)}
             onKeyDown={(e) => {
               e.key === "Enter" ? search() : "";
             }}
@@ -331,14 +324,14 @@ export default function Search() {
               <h3>Resultados da Busca</h3>
               {estudiosData.map((estudio) => (
                 <Estudio
-                  key={estudio.id}
-                  id={estudio.id}
-                  name={estudio.name}
+                  key={estudio.idEstudio}
+                  id={estudio.idEstudio}
+                  name={estudio.nome}
                   cep={estudio.cep}
-                  state={estudio.state}
-                  city={estudio.city}
-                  street={estudio.street}
-                  stylesClick={() => handleOpenModal(estudio.id)}
+                  state={estudio.estado}
+                  city={estudio.cidade}
+                  street={estudio.rua}
+                  stylesClick={() => handleOpenModal(estudio.idEstudio)}
                 />
               ))}
             </div>
