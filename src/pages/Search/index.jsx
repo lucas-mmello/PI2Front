@@ -17,7 +17,7 @@ export default function Search() {
   const [estados, setEstados] = useState("");
   const [estilos, setEsilos] = useState("");
   const [searchName, setSearchName] = useState("");
-  const [estudiosData, setEstudiosData] = useState("");
+  const [estudiosData, setEstudiosData] = useState([]);
 
   const fetchData = async () => {
     try {

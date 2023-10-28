@@ -1,24 +1,38 @@
 import Api from "./api";
 import CookiesService from "./cookies";
 
+const cookie = CookiesService.getCookie("userdata");
+const token = cookie ? cookie.jwt : "";
+
 const UserService = {
-  register: (params) => Api.post("/users/register", params),
-  login: async (params) => {
-    const response = await Api.post("/users/login", params);
-    CookiesService.createCookie(
-      "userdata",
-      userName,
-      permission,
-      email,
-      jwtToken
-    ); // usar aqui ao inves do de baixo
-    localStorage.setItem("user", JSON.stringify(response.data.user));
-    localStorage.setItem("token", response.data.token);
-  },
-  selecionarUser: (id) => Api.get(`/api/Clientes/${id}`),
-  editarUser: (id, params) => Api.put(`/api/Clientes/${id}`, params),
+  register: (params) => Api.post("/api/Clientes/", params),
+  login: async (params) =>
+    await Api.post(
+      `/api/Clientes/login?email=${params.email}&senha=${params.senha}`
+    ),
+
+  // "/api/Clientes/login", {
+  //   query: { email: params.email, senha: params.senha },
+  // }
+
+  selecionarUser: (id) =>
+    Api.get(`/api/Clientes/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Enviando o token JWT no cabeçalho de autorização
+      },
+    }),
+  editarUser: (id, params) =>
+    Api.put(`/api/Clientes/${id}`, params, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Enviando o token JWT no cabeçalho de autorização
+      },
+    }),
   excluirUser: async (id) => {
-    await Api.delete(`/api/Clientes/${id}`);
+    await Api.delete(`/api/Clientes/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Enviando o token JWT no cabeçalho de autorização
+      },
+    });
     CookiesService.deleteCookie("userdata");
   },
 };

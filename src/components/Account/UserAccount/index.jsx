@@ -3,10 +3,12 @@ import styles from "./styles.module.scss";
 import ModalAccount from "./ModalAccount";
 import UserService from "../../../services/users";
 import { Navigate } from "react-router-dom";
+import CookiesService from "../../../services/cookies";
 
 export default function UserAccount() {
   const [userData, setUserData] = useState({});
-  const id = 10;
+  const cookie = CookiesService.getCookie("userdata");
+  const id = cookie ? cookie.id : "";
   const [RedirectToHome, setRedirectToHome] = useState(false);
 
   const SelecionarUser = async () => {

@@ -17,15 +17,9 @@ export default function Login(props) {
       return;
     }
 
-    // Verifica se a senha atende aos requisitos
-    if (!validatePassword(loginData.password)) {
-      setError("Login e/ou senha inválido(s)!");
-      return;
-    }
-
     props.onSubmit(loginData);
     clearFormInputs();
-    setPasswordError(""); // Limpa o erro de senha
+    setError(""); // Limpa o erro de senha
   };
 
   const handleInputChange = (event, key) => {

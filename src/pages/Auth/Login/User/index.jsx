@@ -11,36 +11,30 @@ export default function User() {
     try {
       const user = {
         email: formData.email,
-        password: formData.password,
+        senha: formData.password,
       };
-
-      // await UserService.login(user); comentei pq ainda não tem a api pronta
-
-      //para fins de testes, depois deve ser ajustado
-      const emailParts = formData.email.split("@");
-      const userName = emailParts[0];
-      const email = formData.email;
-      const permission = "2"; // Permissão como string "2"
-      const jwtToken = "seu_token_jwt_teste"; // Substitua pelo seu token JWT
-      const id = 0;
-
-      // Adicionando ao cookie "userdata"
+      console.log(user);
+      const req = await UserService.login(user);
+      const cliente = req.data.cliente;
+      const token = req.data.token;
       CookiesService.createCookie(
         "userdata",
-        userName,
-        permission,
-        email,
-        jwtToken,
-        id
+        cliente.nome,
+        2,
+        cliente.email,
+        token,
+        cliente.id
       );
+      console.log(req);
+      //para fins de testes, depois deve ser ajustado
       setRedirectToHome(true);
     } catch (error) {
-      alert(`Erro: ${error}`);
+      alert(`Erro ao logar cliente: ${error}`);
     }
   };
 
   if (RedirectToHome) {
-    return <Navigate replace to={{ pathname: "/" }} />;
+    window.location.reload();
   }
 
   return (
