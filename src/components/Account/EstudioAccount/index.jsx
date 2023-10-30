@@ -14,7 +14,6 @@ export default function EstudioAccount() {
     try {
       const req = await EstudioService.selecionarEstudioAccount(id);
       setStudioData(req.data);
-      console.log(req.data);
     } catch (error) {
       console.log(`Erro ao selecionar o estudio: ${error}`);
     }
@@ -28,7 +27,6 @@ export default function EstudioAccount() {
   const EditarEstudio = async (data) => {
     try {
       const req = await EstudioService.editarEstudio(id, data);
-      console.log(req);
       SelecionarEstudio();
     } catch (error) {
       console.log(`Erro ao editar o estudio: ${error}`);
@@ -50,15 +48,13 @@ export default function EstudioAccount() {
     // Você pode enviar uma solicitação para o servidor com os dados atualizados
     // e atualizar o estado quando a resposta do servidor chegar
     EditarEstudio(estudioData);
-    console.log("Dados do Estúdio Editados:", estudioData);
   };
 
   const handleDelete = (estudioId) => {
     // Implemente aqui a lógica para excluir a conta do estúdio
     // Você pode enviar uma solicitação para o servidor para excluir a conta
     // e redirecionar o usuário para a página de login ou alguma outra página apropriada
-    //ExcluiEstudio(userData);
-    console.log("Conta do Estúdio Excluída, ID:", estudioId);
+    //ExcluiEstudio(estudioId);
   };
 
   if (RedirectToHome && location.pathname !== "/") {

@@ -37,12 +37,11 @@ export default function StylesPage() {
 
   const RemoverEstiloDoEstudio = async () => {
     try {
-      const req = await EstiloEstudioService.removerEstiloDoEstudio(
+      await EstiloEstudioService.removerEstiloDoEstudio(
         idEstiloEstudio
       );
-      ListarEstilosDoEstudio(idEstudio);
-      ListarEstilosDisponiveis(idEstudio);
-      console.log(req);
+      ListarEstilosDoEstudio();
+      ListarEstilosDisponiveis();
     } catch (error) {
       console.log(`Erro ao remover estilo do estudio: ${error}`);
     }
@@ -52,7 +51,6 @@ export default function StylesPage() {
     try {
       const req = await EstiloEstudioService.listarEstilosDisponiveis(id);
       setEstilosDisponiveis(req.data);
-      console.log(req);
     } catch (error) {
       console.log(`Erro ao listar estilos disponíveis: ${error}`);
     }
@@ -64,9 +62,8 @@ export default function StylesPage() {
         idEstudio: id,
         idEstilo: idEstilo,
       });
-      ListarEstilosDoEstudio(id);
-      ListarEstilosDisponiveis(id);
-      console.log(req);
+      ListarEstilosDoEstudio();
+      ListarEstilosDisponiveis();
     } catch (error) {
       console.log(`Erro ao adicionar estilo ao estudio: ${error}`);
     }
@@ -103,7 +100,6 @@ export default function StylesPage() {
   };
 
   const handleConfirm = (tipoModal) => {
-    console.log(`Confirmação recebida para o item com ID: ${idEstiloEstudio}`);
     if (tipoModal === 1) {
       RemoverEstiloDoEstudio();
       setIsModalRemoverOpen(false);

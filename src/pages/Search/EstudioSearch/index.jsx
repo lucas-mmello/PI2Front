@@ -15,9 +15,7 @@ export default function EstudioSearch() {
   async function ListarPosts() {
     try {
       const response = await PostService.listarPostagens(id);
-      console.log(response.data);
       setPostsList(response.data);
-      console.log("aqui");
     } catch (error) {
       console.log("Erro ao listar os posts:", error);
     }
@@ -26,7 +24,6 @@ export default function EstudioSearch() {
   const SelecionarEstudio = async () => {
     try {
       const response = await EstudioService.selecionarEstudio(id);
-      console.log(response.data);
       setStudioInfo(response.data);
     } catch (error) {
       console.log("Erro ao listar os dados do estudio:", error);

@@ -12,7 +12,6 @@ export default function Estudio() {
         email: formData.email,
         senha: formData.password,
       };
-      console.log(estudioData);
       const req = await EstudioService.login(estudioData);
       const estudio = req.data.estudio;
       const token = req.data.token;
@@ -24,7 +23,6 @@ export default function Estudio() {
         token,
         estudio.id
       );
-      console.log(req);
       setRedirectToHome(true);
     } catch (error) {
       alert(`Erro: ${error}`);

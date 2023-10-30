@@ -19,19 +19,6 @@ export default function Search() {
   const [searchName, setSearchName] = useState("");
   const [estudiosData, setEstudiosData] = useState([]);
 
-  const fetchData = async () => {
-    try {
-      // Fazer a requisição à sua API
-    } catch (error) {
-      console.error("Erro ao buscar dados:", error);
-    }
-  };
-
-  useEffect(() => {
-    // Chamar a função de busca quando o componente for montado
-    fetchData();
-  }, []); // O array vazio [] garante que o useEffect só é chamado uma vez (ao montar o componente)
-
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -134,12 +121,6 @@ export default function Search() {
     if (selectedEstado !== "" && selectedCidade === "") {
       return;
     }
-    console.log(`Estado selecionado: ${selectedEstado}
-    Cidade selecionada: ${selectedCidade}
-    Estilo selecionado: ${selectedEstilo}`);
-    // Chame a função existente passando os valores selecionados
-    // Substitua essa chamada pela sua função real
-    //aplicarFiltros(estadoSelecionado, cidadeSelecionada, estiloSelecionado);
     closeFilterModal();
   };
 
@@ -163,7 +144,6 @@ export default function Search() {
         const estudio = estilosEstudio.map((estilo) => {
           return getNomeEstiloPorId(estilo.idEstilo);
         });
-        console.log(estudio);
         // Retorne o resultado para renderização
         return estudio.join(", ");
       } else {
@@ -177,7 +157,6 @@ export default function Search() {
   }, [estilosEstudio]);
 
   const handleConfirm = () => {
-    console.log("Confirmação recebida para o item com ID:", selectedItemId);
     setIsModalOpen(false);
   };
 

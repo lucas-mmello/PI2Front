@@ -21,9 +21,7 @@ export default function ProfilePage() {
   async function ListarPosts() {
     try {
       const response = await PostService.listarPostagens(id);
-      console.log(response.data);
       setPostsList(response.data);
-      console.log("aqui");
     } catch (error) {
       console.log("Erro ao listar os posts:", error);
     }
@@ -32,7 +30,6 @@ export default function ProfilePage() {
   const SelecionarEstudio = async () => {
     try {
       const response = await EstudioService.selecionarEstudio(id);
-      console.log(response.data);
       setStudioInfo(response.data);
     } catch (error) {
       console.log("Erro ao listar os dados do estudio:", error);
@@ -43,12 +40,11 @@ export default function ProfilePage() {
     // Lógica para criar um novo post com os dados fornecidos
     try {
       if (postData.legenda && postData.foto && postData.idEstudio) {
-        const req = await PostService.criarPost({
+        await PostService.criarPost({
           legenda: postData.legenda,
           foto: postData.foto,
           idEstudio: postData.idEstudio,
         });
-        console.log(req);
         ListarPosts();
       } else {
         console.log("Dados inválidos");
@@ -62,12 +58,11 @@ export default function ProfilePage() {
     // Lógica para editar um post existente com os dados fornecidos
 
     try {
-      const req = await PostService.alterarPost(postId, {
+      await PostService.alterarPost(postId, {
         idPostagem: postData.idPostagem,
         legenda: postData.legenda,
         foto: postData.foto,
       });
-      console.log(req);
       ListarPosts();
     } catch (error) {
       console.log("Erro ao alterar o post:", error);
@@ -78,7 +73,6 @@ export default function ProfilePage() {
     // Lógica para excluir um post com o ID fornecido
     try {
       const req = await PostService.excluirPost(postId);
-      console.log(req.data);
       imageDelete(req.data);
       ListarPosts();
     } catch (error) {

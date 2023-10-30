@@ -13,7 +13,6 @@ export default function User() {
         email: formData.email,
         senha: formData.password,
       };
-      console.log(user);
       const req = await UserService.login(user);
       const cliente = req.data.cliente;
       const token = req.data.token;
@@ -25,7 +24,6 @@ export default function User() {
         token,
         cliente.id
       );
-      console.log(req);
       //para fins de testes, depois deve ser ajustado
       setRedirectToHome(true);
     } catch (error) {

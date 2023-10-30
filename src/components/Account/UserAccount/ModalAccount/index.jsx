@@ -82,7 +82,6 @@ export default function ModalAccount({
     e.preventDefault();
 
     const idCidade = await SelecionarCidade();
-    console.log(idCidade);
 
     if (mode === "edit") {
       const userData = {

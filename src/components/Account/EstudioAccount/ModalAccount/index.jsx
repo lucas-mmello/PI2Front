@@ -80,7 +80,6 @@ export default function ModalAccount({
     e.preventDefault();
 
     const idCidade = await SelecionarCidade();
-    console.log(idCidade);
 
     if (mode === "edit") {
       const estudioData = {
@@ -101,7 +100,6 @@ export default function ModalAccount({
         onSave(estudioData);
       }
     } else if (mode === "delete") {
-      console.log(idEstudio);
       onDelete(idEstudio);
     }
 

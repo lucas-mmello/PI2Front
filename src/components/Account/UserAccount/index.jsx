@@ -28,7 +28,6 @@ export default function UserAccount() {
   const EditarUser = async (data) => {
     try {
       const req = await UserService.editarUser(id, data);
-      console.log(req);
       SelecionarUser();
     } catch (error) {
       console.log(`Erro ao editar o usuario: ${error}`);
@@ -38,7 +37,6 @@ export default function UserAccount() {
   const ExcluirUser = async () => {
     try {
       const req = await UserService.excluirUser(id);
-      console.log(req);
       setRedirectToHome(true);
     } catch (error) {
       console.log(`Erro ao excluir o usuario: ${error}`);
@@ -50,7 +48,6 @@ export default function UserAccount() {
     // Você pode enviar uma solicitação para o servidor com os dados atualizados
     // e atualizar o estado quando a resposta do servidor chegar
     EditarUser(userData);
-    console.log("Dados do Usuário Editados:", userData);
   };
 
   const handleDelete = (userId) => {
@@ -58,7 +55,6 @@ export default function UserAccount() {
     // Você pode enviar uma solicitação para o servidor para excluir a conta
     // e redirecionar o usuário para a página de login ou alguma outra página apropriada
     ExcluirUser();
-    console.log("Conta do Usuário Excluída, ID:", userId);
   };
 
   if (RedirectToHome && location.pathname !== "/") {
