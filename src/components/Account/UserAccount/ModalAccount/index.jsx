@@ -48,7 +48,6 @@ export default function ModalAccount({
     if (userData) {
       setName(userData.nome || "");
       setEmail(userData.email || "");
-      setPassword(userData.senha || "");
       setCep(userData.cep || "");
       setCidade(userData.cidade || "");
       setEstado(userData.estado || "");
@@ -168,6 +167,7 @@ export default function ModalAccount({
                       type="password"
                       className="form-control"
                       value={password}
+                      placeholder="***********"
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>

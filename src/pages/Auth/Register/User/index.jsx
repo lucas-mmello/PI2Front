@@ -8,8 +8,15 @@ export default function User() {
   const [redirectToLogin, setRedirectToLogin] = useState(false);
   const handleUserRegister = async (formData) => {
     try {
-      // await UserService.Register(formData); comentei pq ainda não tem a api pronta
-
+      const user = {
+        nome: formData.name,
+        email: formData.email,
+        senha: formData.password,
+        dataNasc: formData.nascimento,
+        cep: formData.cep,
+        idCidade: formData.cidade,
+      };
+      await UserService.register(user);
       setRedirectToLogin(true);
     } catch (error) {
       alert(`Erro: ${error}`);

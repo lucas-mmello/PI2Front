@@ -3,12 +3,14 @@ import { Form, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ViaCEPService from "../../../../services/cep";
 import Auth from "../../../../configs/Auth";
+import CidadeEstadoService from "../../../../services/cidadeEstados";
 
 export default function UserRegister(props) {
   const [registerData, setRegisterData] = useState({
     name: "",
     email: "",
     password: "",
+    nascimento: "",
     cep: "", // Adicione um campo para o CEP
     cidade: "", // Adicione um campo para a cidade
     estado: "", // Adicione um campo para o estado
@@ -17,8 +19,22 @@ export default function UserRegister(props) {
   const [emailError, setEmailError] = useState("");
   const [cepData, setCepData] = useState(null); // Para armazenar os dados do CEP
 
-  const handleFormSubmit = (event) => {
+  const SelecionarCidade = async () => {
+    try {
+      const req = await CidadeEstadoService.selecionarCidade(
+        registerData.cidade
+      );
+      return req.data.id;
+    } catch (error) {
+      console.log(`Erro ao procurar cidade: ${error}`);
+    }
+  };
+
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
+
+    const idCidade = await SelecionarCidade();
+    registerData.cidade = idCidade;
 
     // Verifica se a senha atende aos requisitos
     if (!Auth.validatePassword(registerData.password)) {
@@ -35,7 +51,7 @@ export default function UserRegister(props) {
 
     // Agora você pode enviar todos os dados (incluindo os dados do CEP) para o seu backend.
     // registerData conterá todos os dados do formulário, incluindo os dados do CEP (cepData).
-
+    registerData.estado = null;
     props.onSubmit(registerData);
     clearFormInputs();
     setPasswordError(""); // Limpa o erro de senha
@@ -50,6 +66,7 @@ export default function UserRegister(props) {
       name: "",
       email: "",
       password: "",
+      nascimento: "",
       cep: "", // Certifique-se de limpar o campo CEP
       cidade: "", // Certifique-se de limpar o campo cidade
       estado: "", // Certifique-se de limpar o campo estado

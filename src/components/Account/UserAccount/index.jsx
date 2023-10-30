@@ -23,17 +23,6 @@ export default function UserAccount() {
   useEffect(() => {
     // Simule a recuperação dos dados do usuário ao carregar a página
     SelecionarUser();
-    // setUserData({
-    //   id: 1,
-    //   name: "Nome do Usuário",
-    //   email: "usuario@email.com",
-    //   password: "MinhaSenhaSegura",
-    //   cep: "54321678",
-    //   cidade: "Outra Cidade",
-    //   estado: "Outro Estado",
-    //   birthDate: "1990-01-01",
-    //   // ... outras informações do usuário
-    // });
   }, []);
 
   const EditarUser = async (data) => {

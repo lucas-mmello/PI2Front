@@ -1,43 +1,69 @@
 import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 import ModalAccount from "./ModalAccount";
+import CookiesService from "../../../services/cookies";
+import EstudioService from "../../../services/estudios";
 
 export default function EstudioAccount() {
   const [studioData, setStudioData] = useState({});
+  const [RedirectToHome, setRedirectToHome] = useState(false);
+  const cookie = CookiesService.getCookie("userdata");
+  const id = cookie ? cookie.id : "";
+
+  const SelecionarEstudio = async () => {
+    try {
+      const req = await EstudioService.selecionarEstudioAccount(id);
+      setStudioData(req.data);
+      console.log(req.data);
+    } catch (error) {
+      console.log(`Erro ao selecionar o estudio: ${error}`);
+    }
+  };
 
   useEffect(() => {
-    // Simule a recuperação dos dados do estúdio ao carregar a página
-    setStudioData({
-      id: 1,
-      cnpj: "1234567890",
-      name: "Nome do Estúdio",
-      email: "estudio@email.com",
-      password: "Te1ste@teste",
-      cep: "12345678",
-      cidade: "Cidade",
-      estado: "Estado",
-      rua: "Rua da Amostra",
-      NumResidencia: "123",
-      Telefone: "(12) 3456-7890",
-      Celular: "(12) 9876-54321",
-      // ... outras informações do estúdio
-    });
+    // Simule a recuperação dos dados do usuário ao carregar a página
+    SelecionarEstudio();
   }, []);
+
+  const EditarEstudio = async (data) => {
+    try {
+      const req = await EstudioService.editarEstudio(id, data);
+      console.log(req);
+      SelecionarEstudio();
+    } catch (error) {
+      console.log(`Erro ao editar o estudio: ${error}`);
+    }
+  };
+
+  // const ExcluirEstudio = async () => {
+  //   try {
+  //     const req = await EstudioService.excluirEstudio(id);
+  //     console.log(req);
+  //     setRedirectToHome(true);
+  //   } catch (error) {
+  //     console.log(`Erro ao excluir o estudio: ${error}`);
+  //   }
+  // };
 
   const handleEdit = (estudioData) => {
     // Implemente aqui a lógica para salvar as informações editadas
     // Você pode enviar uma solicitação para o servidor com os dados atualizados
     // e atualizar o estado quando a resposta do servidor chegar
+    EditarEstudio(estudioData);
     console.log("Dados do Estúdio Editados:", estudioData);
-    setStudioData(estudioData);
   };
 
   const handleDelete = (estudioId) => {
     // Implemente aqui a lógica para excluir a conta do estúdio
     // Você pode enviar uma solicitação para o servidor para excluir a conta
     // e redirecionar o usuário para a página de login ou alguma outra página apropriada
+    //ExcluiEstudio(userData);
     console.log("Conta do Estúdio Excluída, ID:", estudioId);
   };
+
+  if (RedirectToHome && location.pathname !== "/") {
+    window.location.reload();
+  }
 
   return (
     <div className={styles.accountDiv}>
@@ -49,7 +75,7 @@ export default function EstudioAccount() {
             <i className="bi bi-person-vcard px-2"></i>CNPJ: {studioData.cnpj}
           </p>
           <p className="card-text">
-            <i className="bi bi-brush px-2"></i>Nome: {studioData.name}
+            <i className="bi bi-brush px-2"></i>Nome: {studioData.nome}
           </p>
           <p className="card-text">
             <i className="bi bi-envelope px-2"></i>Email: {studioData.email}
@@ -71,14 +97,14 @@ export default function EstudioAccount() {
           </p>
           <p className="card-text">
             <i className="bi bi-123 px-2"></i>Número Residencial:{" "}
-            {studioData.NumResidencia}
+            {studioData.numResidencia}
           </p>
           <p className="card-text">
             <i className="bi bi-telephone px-2"></i>Telefone:{" "}
-            {studioData.Telefone}
+            {studioData.telefone}
           </p>
           <p className="card-text">
-            <i className="bi bi-phone px-2"></i>Celular: {studioData.Celular}
+            <i className="bi bi-phone px-2"></i>Celular: {studioData.celular}
           </p>
           {/* Adicione mais informações do estúdio aqui */}
           <button

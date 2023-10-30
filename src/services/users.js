@@ -5,7 +5,10 @@ const cookie = CookiesService.getCookie("userdata");
 const token = cookie ? cookie.jwt : "";
 
 const UserService = {
-  register: (params) => Api.post("/api/Clientes/", params),
+  register: async (params) => {
+    const req = await Api.post("/api/Clientes", params);
+    console.log(req);
+  },
   login: async (params) =>
     await Api.post(
       `/api/Clientes/login?email=${params.email}&senha=${params.senha}`

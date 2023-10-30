@@ -8,8 +8,19 @@ export default function Estudio() {
   const [redirectToLogin, setRedirectToLogin] = useState(false);
   const handleEstudioRegister = async (formData) => {
     try {
-      // await EstudioService.Register(formData); comentei pq ainda não tem a api pronta
-
+      const estudio = {
+        nome: formData.name,
+        email: formData.email,
+        senha: formData.password,
+        Cnpj: formData.cnpj,
+        cep: formData.cep,
+        idCidade: formData.cidade,
+        rua: formData.rua,
+        numResidencia: formData.residencia,
+        telefone: formData.telefone,
+        celular: formData.celular,
+      };
+      await EstudioService.register(estudio);
       setRedirectToLogin(true);
     } catch (error) {
       alert(`Erro: ${error}`);

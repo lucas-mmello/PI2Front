@@ -1,4 +1,3 @@
-import { Form } from "react-router-dom";
 import "../../../styles/stylesPage.scss";
 import { useEffect, useState } from "react";
 import CustomModal from "../../../components/CustomModal";
@@ -7,6 +6,7 @@ import svgImage from "../../../assets/images/Tattoo.svg";
 import NoContent from "../../../components/NoContent";
 import EstiloEstudioService from "../../../services/estiloEstudios";
 import EstiloService from "../../../services/estilos";
+import CookiesService from "../../../services/cookies";
 
 export default function StylesPage() {
   const [formIncluir, setFormIncluir] = useState(false);
@@ -14,7 +14,10 @@ export default function StylesPage() {
   const [estilos, setEstilos] = useState("");
   const [estilosDisponiveis, setEstilosDisponiveis] = useState("");
 
-  const ListarEstilosDoEstudio = async (id) => {
+  const cookie = CookiesService.getCookie("userdata");
+  const id = cookie ? cookie.id : "";
+
+  const ListarEstilosDoEstudio = async () => {
     try {
       const req = await EstiloEstudioService.listarEstilosDoEstudio(id);
       setEstilosEstudio(req.data);
@@ -45,7 +48,7 @@ export default function StylesPage() {
     }
   };
 
-  const ListarEstilosDisponiveis = async (id) => {
+  const ListarEstilosDisponiveis = async () => {
     try {
       const req = await EstiloEstudioService.listarEstilosDisponiveis(id);
       setEstilosDisponiveis(req.data);
@@ -55,14 +58,14 @@ export default function StylesPage() {
     }
   };
 
-  const AdicionarEstiloEstudio = async (idEstilo, idEstudio) => {
+  const AdicionarEstiloEstudio = async (idEstilo) => {
     try {
       const req = await EstiloEstudioService.adicionarEstiloEstudio({
-        idEstudio: idEstudio,
+        idEstudio: id,
         idEstilo: idEstilo,
       });
-      ListarEstilosDoEstudio(idEstudio);
-      ListarEstilosDisponiveis(idEstudio);
+      ListarEstilosDoEstudio(id);
+      ListarEstilosDisponiveis(id);
       console.log(req);
     } catch (error) {
       console.log(`Erro ao adicionar estilo ao estudio: ${error}`);
@@ -79,7 +82,6 @@ export default function StylesPage() {
   const [isModalRemoverOpen, setIsModalRemoverOpen] = useState(false);
   const [isModaladicionarOpen, setIsModalAdicionarOpen] = useState(false);
   const [idEstiloEstudio, setidEstiloEstudio] = useState("");
-  const idEstudio = 1; //depois ele deve pegar dos cookies;
   const [idEstilo, setIdEstilo] = useState("");
 
   const handleOpenModal = (tipoModal, idEstiloEstudio, idEstilo) => {
@@ -106,15 +108,15 @@ export default function StylesPage() {
       RemoverEstiloDoEstudio();
       setIsModalRemoverOpen(false);
     } else {
-      AdicionarEstiloEstudio(idEstilo, idEstudio);
+      AdicionarEstiloEstudio(idEstilo);
       setIsModalAdicionarOpen(false);
     }
   };
 
   useEffect(() => {
     ListarEstilos();
-    ListarEstilosDoEstudio(idEstudio);
-    ListarEstilosDisponiveis(idEstudio);
+    ListarEstilosDoEstudio();
+    ListarEstilosDisponiveis();
   }, []);
 
   return (
@@ -162,7 +164,7 @@ export default function StylesPage() {
               </div>
             )}
           </div>
-          {estilosEstudio.length === 0 && (
+          {estilosDisponiveis.length === 0 && (
             <NoContent
               title="Sem estilos para adicionar"
               message="Parece que seu estúdio já adicionou todos os estilos disponíveis"

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Form } from "react-router-dom";
 import ViaCEPService from "../../../../services/cep";
+import CidadeEstadoService from "../../../../services/cidadeEstados";
 
 export default function ModalAccount({
   mode,
@@ -28,18 +29,17 @@ export default function ModalAccount({
   // Verificar se estudioData está definido antes de definir os valores iniciais
   useEffect(() => {
     if (estudioData) {
-      setName(estudioData.name || "");
+      setName(estudioData.nome || "");
       setCnpj(estudioData.cnpj || "");
       setEmail(estudioData.email || "");
-      setPassword(estudioData.password || "");
       setCep(estudioData.cep || "");
       setCidade(estudioData.cidade || "");
       setEstado(estudioData.estado || "");
       setRua(estudioData.rua || "");
-      setNumResidencia(estudioData.NumResidencia || "");
-      setTelefone(estudioData.Telefone || "");
-      setCelular(estudioData.Celular || "");
-      setIdEstudio(estudioData.id || "");
+      setNumResidencia(estudioData.numResidencia || "");
+      setTelefone(estudioData.telefone || "");
+      setCelular(estudioData.celular || "");
+      setIdEstudio(estudioData.idEstudio || "");
     }
   }, [estudioData]);
 
@@ -67,23 +67,34 @@ export default function ModalAccount({
     }
   }, [cep]);
 
-  const handleSubmit = (e) => {
+  const SelecionarCidade = async () => {
+    try {
+      const req = await CidadeEstadoService.selecionarCidade(cidade);
+      return req.data.id;
+    } catch (error) {
+      console.log(`Erro ao procurar cidade: ${error}`);
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const idCidade = await SelecionarCidade();
+    console.log(idCidade);
 
     if (mode === "edit") {
       const estudioData = {
-        name,
-        cnpj,
-        email,
-        password,
-        cep,
-        cidade,
-        estado,
-        rua,
-        NumResidencia,
-        Telefone,
-        Celular,
-        id: idEstudio,
+        nome: name,
+        cnpj: cnpj,
+        email: email,
+        senha: password,
+        cep: cep,
+        idCidade: idCidade,
+        rua: rua,
+        numResidencia: NumResidencia,
+        telefone: Telefone,
+        celular: Celular,
+        idEstudio: idEstudio,
       };
 
       if (mode === "edit") {
@@ -176,6 +187,7 @@ export default function ModalAccount({
                       type="password"
                       className="form-control"
                       value={password}
+                      placeholder="***********"
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
