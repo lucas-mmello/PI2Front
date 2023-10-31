@@ -1,5 +1,4 @@
 import Login from "../../../../components/Auth/Login";
-import { Navigate } from "react-router-dom";
 import { useState } from "react";
 import CookiesService from "../../../../services/cookies";
 import EstudioService from "../../../../services/estudios";
@@ -30,7 +29,7 @@ export default function Estudio() {
   };
 
   if (RedirectToHome) {
-    return <Navigate replace to={{ pathname: "/" }} />;
+    window.location.reload();
   }
 
   return (
