@@ -3,6 +3,7 @@ import { Form } from "react-router-dom";
 import PostService from "../../services/posts";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../Firebase";
+import ImageConfig from "../../configs/Image";
 
 export default function ModalPost({
   mode,
@@ -20,8 +21,8 @@ export default function ModalPost({
   const imageUpload = async () => {
     const file = image;
     if (!file) return;
-
-    const storageRef = ref(storage, `images/${file.name}`);
+    const fileName = ImageConfig.imageName(estudioId, file.name);
+    const storageRef = ref(storage, `images/${fileName}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     try {

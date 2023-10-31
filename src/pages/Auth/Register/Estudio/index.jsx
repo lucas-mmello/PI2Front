@@ -6,8 +6,10 @@ import EstudioService from "../../../../services/estudios";
 
 export default function Estudio() {
   const [redirectToLogin, setRedirectToLogin] = useState(false);
+  const [loadRegister, setLoadRegister] = useState(false);
   const handleEstudioRegister = async (formData) => {
     try {
+      setLoadRegister(true);
       const estudio = {
         nome: formData.name,
         email: formData.email,
@@ -33,7 +35,10 @@ export default function Estudio() {
 
   return (
     <>
-      <EstudioRegister onSubmit={handleEstudioRegister} />
+      <EstudioRegister
+        onSubmit={handleEstudioRegister}
+        isLoading={loadRegister}
+      />
     </>
   );
 }

@@ -3,6 +3,9 @@ import styles from "./styles.module.scss";
 import ModalAccount from "./ModalAccount";
 import CookiesService from "../../../services/cookies";
 import EstudioService from "../../../services/estudios";
+import PostService from "../../../services/posts";
+import { storage } from "../../../Firebase";
+import { deleteObject, ref } from "firebase/storage";
 
 export default function EstudioAccount() {
   const [studioData, setStudioData] = useState({});
@@ -33,15 +36,32 @@ export default function EstudioAccount() {
     }
   };
 
-  // const ExcluirEstudio = async () => {
-  //   try {
-  //     const req = await EstudioService.excluirEstudio(id);
-  //     console.log(req);
-  //     setRedirectToHome(true);
-  //   } catch (error) {
-  //     console.log(`Erro ao excluir o estudio: ${error}`);
-  //   }
-  // };
+  const ExcluirEstudio = async () => {
+    try {
+      const images = await PostService.excluirTodos(id);
+      const imgsUrl = images.data;
+      console.log(imgsUrl);
+      const req = await EstudioService.excluirEstudio(id);
+      await imageDelete(imgsUrl);
+      console.log(req);
+      setRedirectToHome(true);
+    } catch (error) {
+      console.log(`Erro ao excluir o estudio: ${error}`);
+    }
+  };
+
+  const imageDelete = async (imagesUrl) => {
+    for (const imageUrl of imagesUrl) {
+      const storageRef = ref(storage, imageUrl);
+
+      try {
+        await deleteObject(storageRef);
+        console.log("Imagem excluída com sucesso:", imageUrl);
+      } catch (error) {
+        console.error("Erro ao excluir a imagem:", imageUrl, error);
+      }
+    }
+  };
 
   const handleEdit = (estudioData) => {
     // Implemente aqui a lógica para salvar as informações editadas
@@ -54,7 +74,7 @@ export default function EstudioAccount() {
     // Implemente aqui a lógica para excluir a conta do estúdio
     // Você pode enviar uma solicitação para o servidor para excluir a conta
     // e redirecionar o usuário para a página de login ou alguma outra página apropriada
-    //ExcluiEstudio(estudioId);
+    ExcluirEstudio(estudioId);
   };
 
   if (RedirectToHome && location.pathname !== "/") {

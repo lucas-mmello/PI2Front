@@ -35,6 +35,12 @@ const PostService = {
         Authorization: `Bearer ${token}`, // Enviando o token JWT no cabeçalho de autorização
       },
     }),
+  excluirTodos: (id) =>
+    Api.delete(`/api/Postagems/post/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Enviando o token JWT no cabeçalho de autorização
+      },
+    }),
 };
 
 export default PostService;

@@ -6,9 +6,11 @@ import CookiesService from "../../../../services/cookies";
 
 export default function User() {
   const [RedirectToHome, setRedirectToHome] = useState(false);
+  const [loadLogin, setLoadLogin] = useState(false);
 
   const handleUserLogin = async (formData) => {
     try {
+      setLoadLogin(true);
       const user = {
         email: formData.email,
         senha: formData.password,
@@ -40,6 +42,7 @@ export default function User() {
       <Login
         placeholderLogin={"usuario@example.com"}
         onSubmit={handleUserLogin}
+        isLoading={loadLogin}
       />
     </>
   );

@@ -5,8 +5,11 @@ import EstudioService from "../../../../services/estudios";
 
 export default function Estudio() {
   const [RedirectToHome, setRedirectToHome] = useState(false);
+  const [loadLogin, setLoadLogin] = useState(false);
+
   const handleEstudioLogin = async (formData) => {
     try {
+      setLoadLogin(true);
       const estudioData = {
         email: formData.email,
         senha: formData.password,
@@ -37,6 +40,7 @@ export default function Estudio() {
       <Login
         placeholderLogin={"estudio@example.com"}
         onSubmit={handleEstudioLogin}
+        isLoading={loadLogin}
       />
     </>
   );
