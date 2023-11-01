@@ -25,7 +25,8 @@ export default function Estudio() {
       await EstudioService.register(estudio);
       setRedirectToLogin(true);
     } catch (error) {
-      alert(`Erro: ${error}`);
+      console.log(`Erro: ${error}`);
+      setLoadRegister(false);
     }
   };
 

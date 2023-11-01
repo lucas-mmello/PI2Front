@@ -6,6 +6,7 @@ import UserService from "../../../../services/users";
 
 export default function User() {
   const [redirectToLogin, setRedirectToLogin] = useState(false);
+  const [loadRegister, setLoadRegister] = useState(false);
   const handleUserRegister = async (formData) => {
     try {
       const user = {
@@ -19,7 +20,8 @@ export default function User() {
       await UserService.register(user);
       setRedirectToLogin(true);
     } catch (error) {
-      alert(`Erro: ${error}`);
+      console.log(`Erro: ${error}`);
+      setLoadRegister(false);
     }
   };
 
@@ -29,7 +31,7 @@ export default function User() {
 
   return (
     <>
-      <UserRegister onSubmit={handleUserRegister} />
+      <UserRegister onSubmit={handleUserRegister} isLoading={loadRegister} />
     </>
   );
 }

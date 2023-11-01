@@ -27,7 +27,8 @@ export default function Estudio() {
       );
       setRedirectToHome(true);
     } catch (error) {
-      alert(`Erro: ${error}`);
+      console.log(`Erro: ${error}`);
+      setLoadLogin(false);
     }
   };
 

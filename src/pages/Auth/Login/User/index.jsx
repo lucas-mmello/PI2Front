@@ -29,7 +29,8 @@ export default function User() {
       //para fins de testes, depois deve ser ajustado
       setRedirectToHome(true);
     } catch (error) {
-      alert(`Erro ao logar cliente: ${error}`);
+      console.log(`Erro ao logar cliente: ${error}`);
+      setLoadLogin(false);
     }
   };
 
