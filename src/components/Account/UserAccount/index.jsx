@@ -4,6 +4,7 @@ import ModalAccount from "./ModalAccount";
 import UserService from "../../../services/users";
 import { Navigate } from "react-router-dom";
 import CookiesService from "../../../services/cookies";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function UserAccount() {
   const [userData, setUserData] = useState({});
@@ -30,6 +31,16 @@ export default function UserAccount() {
       const req = await UserService.editarUser(id, data);
       SelecionarUser();
     } catch (error) {
+      toast.error("Erro ao editar conta!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       console.log(`Erro ao editar o usuario: ${error}`);
     }
   };
@@ -123,6 +134,7 @@ export default function UserAccount() {
         userData={userData}
         onDelete={handleDelete}
       />
+      <ToastContainer />
     </div>
   );
 }

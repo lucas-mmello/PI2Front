@@ -6,6 +6,7 @@ import EstudioService from "../../../services/estudios";
 import PostService from "../../../services/posts";
 import { storage } from "../../../Firebase";
 import { deleteObject, ref } from "firebase/storage";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function EstudioAccount() {
   const [studioData, setStudioData] = useState({});
@@ -32,6 +33,16 @@ export default function EstudioAccount() {
       const req = await EstudioService.editarEstudio(id, data);
       SelecionarEstudio();
     } catch (error) {
+      toast.error("Erro ao editar conta!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       console.log(`Erro ao editar o estudio: ${error}`);
     }
   };
@@ -156,6 +167,7 @@ export default function EstudioAccount() {
         estudioData={studioData}
         onDelete={handleDelete}
       />
+      <ToastContainer />
     </div>
   );
 }

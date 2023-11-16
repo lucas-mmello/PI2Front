@@ -2,6 +2,7 @@ import Login from "../../../../components/Auth/Login";
 import { useState } from "react";
 import CookiesService from "../../../../services/cookies";
 import EstudioService from "../../../../services/estudios";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Estudio() {
   const [RedirectToHome, setRedirectToHome] = useState(false);
@@ -27,6 +28,16 @@ export default function Estudio() {
       );
       setRedirectToHome(true);
     } catch (error) {
+      toast.error("Erro ao logar!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       console.log(`Erro: ${error}`);
       setLoadLogin(false);
     }
@@ -43,6 +54,7 @@ export default function Estudio() {
         onSubmit={handleEstudioLogin}
         isLoading={loadLogin}
       />
+      <ToastContainer />
     </>
   );
 }

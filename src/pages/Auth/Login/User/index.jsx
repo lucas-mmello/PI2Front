@@ -3,6 +3,7 @@ import { Navigate, json } from "react-router-dom";
 import { useState } from "react";
 import UserService from "../../../../services/users";
 import CookiesService from "../../../../services/cookies";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function User() {
   const [RedirectToHome, setRedirectToHome] = useState(false);
@@ -29,6 +30,16 @@ export default function User() {
       //para fins de testes, depois deve ser ajustado
       setRedirectToHome(true);
     } catch (error) {
+      toast.error("Erro ao logar!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       console.log(`Erro ao logar cliente: ${error}`);
       setLoadLogin(false);
     }
@@ -45,6 +56,7 @@ export default function User() {
         onSubmit={handleUserLogin}
         isLoading={loadLogin}
       />
+      <ToastContainer />
     </>
   );
 }

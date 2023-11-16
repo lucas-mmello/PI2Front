@@ -9,6 +9,7 @@ import { storage } from "../../../Firebase";
 import { deleteObject, ref } from "firebase/storage";
 import EstudioService from "../../../services/estudios";
 import CookiesService from "../../../services/cookies";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function ProfilePage() {
   const [selectedPost, setSelectedPost] = useState("");
@@ -50,6 +51,16 @@ export default function ProfilePage() {
         console.log("Dados inválidos");
       }
     } catch (error) {
+      toast.error("Erro ao criar post!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       console.log("Erro ao criar o post:", error);
     }
   };
@@ -65,6 +76,16 @@ export default function ProfilePage() {
       });
       ListarPosts();
     } catch (error) {
+      toast.error("Erro ao editar post!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       console.log("Erro ao alterar o post:", error);
     }
   };
@@ -76,6 +97,16 @@ export default function ProfilePage() {
       imageDelete(req.data);
       ListarPosts();
     } catch (error) {
+      toast.error("Erro ao excluir post!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       console.log("Erro ao excluir o post:", error);
     }
   };
@@ -162,6 +193,7 @@ export default function ProfilePage() {
           additionalMessage="Que tal explorar outras funcionalidades do sistema?"
         />
       )}
+      <ToastContainer />
     </>
   );
 }
