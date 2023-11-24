@@ -30,6 +30,7 @@ export default function EstudioRegister(props) {
         registerData.cidade
       );
       return req.data.id;
+      console.log(req.data.id);
     } catch (error) {
       console.log(`Erro ao procurar cidade: ${error}`);
     }
@@ -40,6 +41,7 @@ export default function EstudioRegister(props) {
 
     const idCidade = await SelecionarCidade();
     registerData.cidade = idCidade;
+    console.log(idCidade);
     // Verifica se a senha atende aos requisitos
     if (!Auth.validatePassword(registerData.password)) {
       setPasswordError(
