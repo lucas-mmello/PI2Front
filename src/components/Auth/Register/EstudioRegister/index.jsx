@@ -3,8 +3,8 @@ import { Form, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ViaCEPService from "../../../../services/cep";
 import Auth from "../../../../configs/Auth";
-import CidadeEstadoService from "../../../../services/cidadeEstados";
 import Loading from "../../../Loading";
+import CidadeEstadoService from "../../../../services/cidadeEstados";
 
 export default function EstudioRegister(props) {
   const [registerData, setRegisterData] = useState({
@@ -40,10 +40,19 @@ export default function EstudioRegister(props) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    try {
+      console.log("aqui");
+      const req = await CidadeEstadoService.selecionarCidade(
+        registerData.cidade
+      );
+      console.log(req);
+      console.log(req.data);
+    } catch (error) {
+      console.log(`Erro ao procurar cidade: ${error}`);
+    }
 
-    const idCidade = await SelecionarCidade();
-    registerData.cidade = idCidade;
-    console.log(idCidade);
+    //    const idCidade = await SelecionarCidade();
+    registerData.cidade = req.data.id;
     // Verifica se a senha atende aos requisitos
     if (!Auth.validatePassword(registerData.password)) {
       setPasswordError(
