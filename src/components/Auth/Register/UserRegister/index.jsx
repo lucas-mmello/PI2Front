@@ -21,13 +21,19 @@ export default function UserRegister(props) {
 
   const SelecionarCidade = async () => {
     try {
-      const req = await CidadeEstadoService.selecionarCidade(
-        registerData.cidade
-      );
+      const cidade = removeAccents(registerData.cidade);
+      const req = await CidadeEstadoService.selecionarCidade(cidade);
       return req.data.id;
     } catch (error) {
       console.log(`Erro ao procurar cidade: ${error}`);
     }
+  };
+
+  const removeAccents = (str) => {
+    return str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-zA-Z0-9\s]/g, "");
   };
 
   const handleFormSubmit = async (event) => {

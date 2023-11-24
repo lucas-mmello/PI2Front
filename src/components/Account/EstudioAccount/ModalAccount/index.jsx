@@ -67,9 +67,17 @@ export default function ModalAccount({
     }
   }, [cep]);
 
+  const removeAccents = (str) => {
+    return str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-zA-Z0-9\s]/g, "");
+  };
+
   const SelecionarCidade = async () => {
     try {
-      const req = await CidadeEstadoService.selecionarCidade(cidade);
+      const cidadeNorm = removeAccents(cidade)
+      const req = await CidadeEstadoService.selecionarCidade(cidadeNorm);
       return req.data.id;
     } catch (error) {
       console.log(`Erro ao procurar cidade: ${error}`);

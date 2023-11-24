@@ -26,13 +26,9 @@ export default function EstudioRegister(props) {
 
   const SelecionarCidade = async () => {
     try {
-      console.log("aqui");
-      const req = await CidadeEstadoService.selecionarCidade(
-        registerData.cidade
-      );
-      console.log(req);
+      const cidade = removeAccents(registerData.cidade);
+      const req = await CidadeEstadoService.selecionarCidade(cidade);
       return req.data.id;
-      console.log(req.data);
     } catch (error) {
       console.log(`Erro ao procurar cidade: ${error}`);
     }
@@ -47,21 +43,9 @@ export default function EstudioRegister(props) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    try {
-      console.log("aqui");
-      console.log(registerData.cidade);
-      const cidade = removeAccents(registerData.cidade);
-      console.log(cidade);
-      const req = await CidadeEstadoService.selecionarCidade(cidade);
-      console.log(req);
-      console.log(req.data);
-      registerData.cidade = req.data.id;
-    } catch (error) {
-      console.log(`Erro ao procurar cidade: ${error}`);
-    }
 
-    //    const idCidade = await SelecionarCidade();
-    //registerData.cidade = req.data.id;
+    const idCidade = await SelecionarCidade();
+    registerData.cidade = idCidade;
     // Verifica se a senha atende aos requisitos
     if (!Auth.validatePassword(registerData.password)) {
       setPasswordError(
