@@ -38,14 +38,20 @@ export default function EstudioRegister(props) {
     }
   };
 
+  const removeAccents = (str) => {
+    return str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-zA-Z0-9]/g, "");
+  };
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
       console.log("aqui");
       console.log(registerData.cidade);
-      const req = await CidadeEstadoService.selecionarCidade(
-        registerData.cidade
-      );
+      const cidade = removeAccents(registerData.cidade);
+      const req = await CidadeEstadoService.selecionarCidade(cidade);
       console.log(req);
       console.log(req.data);
       registerData.cidade = req.data.id;
