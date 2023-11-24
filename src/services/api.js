@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const Api = axios.create({
-  baseURL: "https://inksearchprojetoi2.azurewebsites.net",
+  baseURL: "https://localhost:44325",
 });
 
 export default Api;
