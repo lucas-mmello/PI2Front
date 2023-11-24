@@ -42,17 +42,19 @@ export default function EstudioRegister(props) {
     event.preventDefault();
     try {
       console.log("aqui");
+      console.log(registerData.cidade);
       const req = await CidadeEstadoService.selecionarCidade(
         registerData.cidade
       );
       console.log(req);
       console.log(req.data);
+      registerData.cidade = req.data.id;
     } catch (error) {
       console.log(`Erro ao procurar cidade: ${error}`);
     }
 
     //    const idCidade = await SelecionarCidade();
-    registerData.cidade = req.data.id;
+    //registerData.cidade = req.data.id;
     // Verifica se a senha atende aos requisitos
     if (!Auth.validatePassword(registerData.password)) {
       setPasswordError(
