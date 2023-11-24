@@ -15,7 +15,7 @@ export default function Estudio() {
         nome: formData.name,
         email: formData.email,
         senha: formData.password,
-        Cnpj: formData.cnpj,
+        cnpj: formData.cnpj,
         cep: formData.cep,
         idCidade: formData.cidade,
         rua: formData.rua,
