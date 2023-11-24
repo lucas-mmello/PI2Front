@@ -26,9 +26,11 @@ export default function EstudioRegister(props) {
 
   const SelecionarCidade = async () => {
     try {
+      console.log("aqui");
       const req = await CidadeEstadoService.selecionarCidade(
         registerData.cidade
       );
+      console.log(req);
       return req.data.id;
       console.log(req.data);
     } catch (error) {
