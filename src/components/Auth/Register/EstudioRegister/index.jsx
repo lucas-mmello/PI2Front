@@ -30,7 +30,7 @@ export default function EstudioRegister(props) {
         registerData.cidade
       );
       return req.data.id;
-      console.log(req.data.id);
+      console.log(req.data);
     } catch (error) {
       console.log(`Erro ao procurar cidade: ${error}`);
     }
