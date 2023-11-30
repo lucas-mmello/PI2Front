@@ -23,6 +23,7 @@
   h1 {
     font-size: 3rem;
     text-align: center;
+    color: $text-main;
   }
 
   .text-left,
@@ -32,6 +33,7 @@
 
     p {
       font-size: 1.6rem;
+      color: $text-secondary;
     }
   }
 
@@ -50,21 +52,11 @@
 }
 
 #clienteDiv {
-  background-image: linear-gradient(
-    to bottom,
-    #e6f8fd 0%,
-    #71e7ff 50%,
-    #262626 100%
-  );
+  background: $background-main;
 }
 
 #tatooDiv {
-  background-image: linear-gradient(
-    to bottom,
-    #3c3b3b 0%,
-    #5fc2d6 50%,
-    #cef4ff 100%
-  );
+  background: $background-secondary;
 }
 
 /* Estilo para a seção de contato */
@@ -89,13 +81,13 @@
 
       .icon {
         font-size: 2rem;
-        color: #007bff;
+        color: $blue-main;
         text-decoration: none;
         margin-right: 0.5rem;
         transition: color 0.3s;
 
         &:hover {
-          color: #0056b3;
+          color: $blue-secondary;
           filter: drop-shadow(-1px 14px 16px #000000);
         }
       }

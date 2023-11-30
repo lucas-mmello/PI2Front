@@ -1,8 +1,4 @@
-$login-gradient: linear-gradient(
-  to right,
-  rgba(173, 226, 225, 0.8),
-  rgba(135, 206, 235, 0.8)
-);
+@import "../../../../styles/variables.scss";
 
 .teste {
   animation: float 5s ease-in-out infinite;
@@ -24,7 +20,7 @@ $login-gradient: linear-gradient(
   padding: 1rem;
   max-width: 500px;
   margin: 1rem auto;
-  background: $login-gradient;
+  background: $blue-lighter;
   animation: shadow-pulse 3s infinite;
 }
 
@@ -54,7 +50,7 @@ $login-gradient: linear-gradient(
 
 .logo {
   font-size: 4rem;
-  color: #4444e7;
+  color: darken($color: $blue-main, $amount: 20%);
 }
 
 .add {

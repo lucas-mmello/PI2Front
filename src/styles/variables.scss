@@ -1,14 +1,23 @@
-$background-gradient: linear-gradient(
-  to right,
-  rgba(220, 255, 254, 0.8),
-  rgba(180, 248, 247, 0.8),
-  rgba(138, 192, 192, 0.8)
-);
+// Cores Principais
+$blue-main: #007bff;
+$blue-secondary: #003366;
+$blue-lighter: #5faee3;
+
+// Cor Adicional
+$additional-color: #8a2be2; // Violeta
+
+// Cores de Texto
+$text-main: #000000; // Preto
+$text-secondary: #333333; // Preto mais claro
+
+// Fundos
+$background-main: #ffffff; // Branco
+$background-secondary: #f0f0f0; // Branco levemente mais escuro
 
 $blue1: #498cff;
 $blue2: #a0c3ff;
 
-$footer-gradient: linear-gradient(to right, #007bff, #003366);
+$nav-gradient: linear-gradient(to right, $blue-main, $blue-secondary);
 
 $card-background: linear-gradient(to bottom, #ffffff, #dbdbdb);
 

@@ -1,7 +1,7 @@
 @import "./variables.scss";
 
 #root {
-  background: $background-gradient;
+  background: $background-main;
   position: relative;
   min-height: 100vh;
   margin: 0;
@@ -9,6 +9,6 @@
 }
 
 .div-footer {
-  background: $footer-gradient;
+  background: $nav-gradient;
   margin-top: auto; /* Adicionado para alinhar no final */
 }

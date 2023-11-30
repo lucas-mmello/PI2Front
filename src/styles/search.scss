@@ -1,5 +1,5 @@
 /* StudioSearchPage.module.scss */
-
+@import "./variables.scss";
 h2,
 h3 {
   padding-top: 1rem;
@@ -42,7 +42,7 @@ h3 {
 }
 
 .estudios {
-  background-color: #e4fffe;
+  background-color: $background-secondary;
   min-height: 90vh;
 }
 

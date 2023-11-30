@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .errorContent {
   display: flex;
   flex-direction: column;
@@ -8,13 +10,13 @@
 
   .errorTitle {
     font-size: 3rem;
-    color: #ff5733;
+    color: $additional-color;
     margin-bottom: 1rem;
   }
 
   .errorDescription {
     font-size: 1.2rem;
-    color: #333;
+    color: $text-secondary;
   }
 
   .buttonContainer {
@@ -24,7 +26,7 @@
   }
 
   .button {
-    background-color: #ff5733;
+    background-color: $blue-main;
     color: white;
     border: none;
     border-radius: 0.3rem;
