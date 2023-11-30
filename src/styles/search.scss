@@ -22,6 +22,7 @@ h3 {
       padding: 0.2rem;
       flex: 1;
       font-size: 14px;
+      background-color: $background-secondary;
 
       @media (max-width: 470px) {
         padding: 0.2rem 0 0.2rem 0;
