@@ -23,7 +23,8 @@ h3 {
       flex: 1;
       font-size: 14px;
       background-color: $background-secondary;
-      border: 0.5px solid $text-secondary;
+      border: 0.3px solid $text-secondary;
+      border-right: 0px;
 
       @media (max-width: 470px) {
         padding: 0.2rem 0 0.2rem 0;
@@ -31,6 +32,9 @@ h3 {
     }
     .icon {
       padding: 0.2rem;
+      background-color: $background-secondary;
+      border: 0.3px solid $text-secondary;
+      border-left: 0px;
 
       @media (max-width: 470px) {
         padding: 0.2rem 0 0.2rem 0;
