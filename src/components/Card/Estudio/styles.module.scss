@@ -1,13 +1,15 @@
 /* StudioCard.module.scss */
 
+@import "../../../styles/variables.scss";
+
 .studio-card {
   margin: 0 auto 0.4rem auto;
   width: 90%;
   display: flex;
   align-items: center;
   padding: 1rem;
-  background-color: #f0f2f5;
-  border: 1px solid #ccc;
+  background-color: $blue-lighter;
+  border: 1px solid $background-main;
   border-radius: 8px;
   flex-direction: row;
   @media (max-width: 540px) {
@@ -25,7 +27,7 @@
 
   .studio-location {
     font-size: 1rem;
-    color: #555;
+    color: $text-main;
   }
 
   .div-btn {
@@ -35,14 +37,14 @@
 
     .btn {
       padding: 0.5rem 1rem;
-      background-color: #007bff;
+      background-color: $blue-main;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       transition: background-color 0.3s ease;
 
       &:hover {
-        background-color: #0056b3;
+        background-color: $blue-secondary;
       }
 
       .link {
