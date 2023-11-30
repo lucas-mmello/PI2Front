@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .noContent {
   display: flex;
   align-items: center;
@@ -5,7 +7,7 @@
   flex-direction: column;
   text-align: center;
   padding: 3rem 1.5rem;
-  background: linear-gradient(135deg, #6ab1d7, #33d9b2);
+  background: linear-gradient(135deg, $blue-main, $blue-lighter);
   border: 2px dashed #ccc;
   border-radius: 0.5rem;
   width: 600px;
@@ -44,7 +46,7 @@
   .title {
     font-size: 1.8rem;
     margin-bottom: 0.6rem;
-    color: #333;
+    color: $text-main;
 
     @media (min-width: 1920px) {
       margin-bottom: 0.9rem;
@@ -55,7 +57,7 @@
   .message {
     font-size: 1.1rem;
     margin-bottom: 1.2rem;
-    color: #2e2e2e;
+    color: $text-secondary;
     @media (min-width: 1920px) {
       margin-bottom: 1.8rem;
       font-size: 2.1rem;
@@ -64,7 +66,7 @@
 
   .additionalMessage {
     font-size: 0.9rem;
-    color: #464545;
+    color: $text-secondary;
     @media (min-width: 1920px) {
       margin-bottom: 1.5rem;
       font-size: 1.9rem;
