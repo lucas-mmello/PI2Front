@@ -13,7 +13,7 @@
 
 .modalContent {
   font-size: 1.2rem;
-  background: white;
+  background: $background-main;
   padding: 2rem;
   border-radius: 5px;
 
@@ -29,7 +29,7 @@
 }
 
 .customBg {
-  background: $modal-bg;
+  background: $background-main;
 }
 
 .buttons {
