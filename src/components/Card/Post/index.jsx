@@ -5,18 +5,10 @@ export default function Post(props) {
   const { image, description, onEdit, onDelete, idModalEd, idModalDel } = props;
 
   return (
-    <div className={`card ${styles.cardPost} h-100 d-flex flex-column`}>
-      <div className={styles.imageContainer}>
-        <img
-          src={image}
-          className={`card-img-top ${styles.image}`}
-          alt="Imagem do Post"
-        />
-        <div className={`card-body ${styles.overlay}`}>
-          <p className="card-text">{description}</p>
-        </div>
-      </div>
+    <div className={`card ${styles.cardPost} h-100`}>
+      <img src={image} className={`card-img-top`} alt="Imagem do Post" />
       <div className={`card-body ${styles.actions}`}>
+        <p className="card-text">{description}</p>
         {onEdit && (
           <button
             data-bs-toggle="modal"
