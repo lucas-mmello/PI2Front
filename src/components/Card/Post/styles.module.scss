@@ -5,17 +5,25 @@
   background: lighten($color: $background-secondary, $amount: 5%);
   display: flex;
   flex-direction: column;
-  position: relative; // Adicionei essa propriedade
+  position: relative;
+}
+
+.imageContainer {
+  overflow: hidden;
 }
 
 .card-img-top {
   width: 100%;
-  height: 100%;
-  flex-grow: 1; // Adicionei essa propriedade
+  height: auto;
+  max-height: 200px; // Defina a altura máxima desejada para a imagem
 }
 
 .card-body {
-  flex-grow: 1;
+  height: 30%; // Defina a altura desejada para o card-body
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem;
 }
 
 .button {
