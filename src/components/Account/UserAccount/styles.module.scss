@@ -1,8 +1,11 @@
+@import "../../../styles/variables.scss";
+
 .accountDiv {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background: $blue-lighter;
 
   @media (max-width: 540px) {
     width: 280px;
