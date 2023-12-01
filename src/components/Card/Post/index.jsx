@@ -12,11 +12,11 @@ export default function Post(props) {
           className={`card-img-top ${styles.image}`}
           alt="Imagem do Post"
         />
+        <div className={`card-body ${styles.overlay}`}>
+          <p className="card-text">{description}</p>
+        </div>
       </div>
-      <div className="card-body">
-        <p className="card-text">{description}</p>
-      </div>
-      <div className="card-body">
+      <div className={`card-body ${styles.actions}`}>
         {onEdit && (
           <button
             data-bs-toggle="modal"
