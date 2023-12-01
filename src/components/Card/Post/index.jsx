@@ -10,7 +10,9 @@ export default function Post(props) {
         <img src={image} className={`card-img-top`} alt="Imagem do Post" />
       </div>
       <div className={`card-body ${styles.actions}`}>
-        <p className="card-text">{description}</p>
+        <div className={styles["card-text-container"]}>
+          <p className={`card-text ${styles["card-text"]}`}>{description}</p>
+        </div>
         {onEdit && (
           <button
             data-bs-toggle="modal"
