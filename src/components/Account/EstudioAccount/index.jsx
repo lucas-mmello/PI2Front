@@ -95,7 +95,7 @@ export default function EstudioAccount() {
   return (
     <div className={styles.accountDiv}>
       <h1 className="pt-3">Conta do Estúdio</h1>
-      <div className="card p-3 my-3">
+      <div className={`card p-3 my-3 ${styles.accountCard}`}>
         <div className="card-body">
           <h2 className="card-title">Informações do Estúdio</h2>
           <p className="card-text">
