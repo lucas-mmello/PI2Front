@@ -1,15 +1,11 @@
 .cardPost {
+  position: relative;
   width: 100%;
   text-align: center;
   border-radius: 0.5rem;
   background: lighten($color: $background-secondary, $amount: 5%);
   display: flex;
   flex-direction: column;
-  position: relative;
-
-  .card-body {
-    flex-grow: 1; // Ocupa o espaço restante no contêiner flexível
-  }
 }
 
 .imageContainer {
@@ -18,10 +14,16 @@
 
 .card-img-top {
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-height: 200px; // Defina a altura máxima desejada para a imagem
 }
 
 .card-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px; // Defina a altura desejada para o card-body
   display: flex;
   justify-content: space-around;
   align-items: center;
