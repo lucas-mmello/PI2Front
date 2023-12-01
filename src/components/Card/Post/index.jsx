@@ -6,7 +6,9 @@ export default function Post(props) {
 
   return (
     <div className={`card ${styles.cardPost} h-100 d-flex flex-column`}>
-      <img src={image} className="card-img-top" alt="Imagem do Post" />
+      <div className={styles.imageContainer}>
+        <img src={image} className="card-img-top" alt="Imagem do Post" />
+      </div>
       <div className="card-body">
         <p className="card-text">{description}</p>
       </div>
