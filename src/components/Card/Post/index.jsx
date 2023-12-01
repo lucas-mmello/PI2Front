@@ -11,34 +11,34 @@ export default function Post(props) {
         className="card-img-top flex-grow-1"
         alt="Imagem do Post"
       />
-      <div className="card-body">
+      <div className={`card-body d-flex flex-column ${styles.postBody}`}>
         <p className="card-text">{description}</p>
-      </div>
-      <div className="card-body">
-        {onEdit && (
-          <button
-            data-bs-toggle="modal"
-            data-bs-target={idModalEd}
-            onClick={onEdit}
-            className={`card-link ${styles.button}`}
-          >
-            <span>
-              <i className={`bi bi-pencil ${styles.icon}`}></i>
-            </span>
-          </button>
-        )}
-        {onDelete && (
-          <button
-            data-bs-toggle="modal"
-            data-bs-target={idModalDel}
-            onClick={onDelete}
-            className={`card-link ${styles.button}`}
-          >
-            <span>
-              <i className={`bi bi-trash3 ${styles.icon}`}></i>
-            </span>
-          </button>
-        )}
+        <div className="mt-auto">
+          {onEdit && (
+            <button
+              data-bs-toggle="modal"
+              data-bs-target={idModalEd}
+              onClick={onEdit}
+              className={`card-link ${styles.button}`}
+            >
+              <span>
+                <i className={`bi bi-pencil ${styles.icon}`}></i>
+              </span>
+            </button>
+          )}
+          {onDelete && (
+            <button
+              data-bs-toggle="modal"
+              data-bs-target={idModalDel}
+              onClick={onDelete}
+              className={`card-link ${styles.button}`}
+            >
+              <span>
+                <i className={`bi bi-trash3 ${styles.icon}`}></i>
+              </span>
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
