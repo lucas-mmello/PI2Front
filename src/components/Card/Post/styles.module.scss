@@ -3,21 +3,19 @@
   text-align: center;
   border-radius: 0.5rem;
   background: lighten($color: $background-secondary, $amount: 5%);
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  position: relative; // Adicionei essa propriedade
 }
 
 .card-img-top {
   width: 100%;
   height: auto;
+  flex-grow: 1; // Adicionei essa propriedade
 }
 
 .card-body {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.8);
+  flex-grow: 1;
 }
 
 .button {
