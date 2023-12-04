@@ -139,9 +139,9 @@ export default function ProfilePage() {
           >
             <i className="bi bi-plus-circle pe-2"></i>Criar Post
           </button> */}
-          <button className={`botao-circular`}>
+          <span className={`botao-circular`}>
             <i className={`bi bi-pencil`}></i>
-          </button>
+          </span>
         </div>
         {postsList &&
           postsList.length > 0 && ( // Verifique se postsList não é nulo e tem elementos
