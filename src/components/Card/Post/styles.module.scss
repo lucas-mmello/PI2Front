@@ -42,15 +42,15 @@
       padding: 10px;
       border: 1px solid $blue-secondary;
       border-radius: 50%; // Adiciona uma borda redonda ao ícone
-      transition: background-color 0.3s ease; // Adiciona uma transição suave para a cor de fundo
+      transition: 0.3s ease; // Adiciona uma transição suave para a cor de fundo
 
       &:hover {
-        background-color: $blue-main; // Adiciona uma cor de fundo no hover
+        background: $blue-main; // Adiciona uma cor de fundo no hover
       }
 
       &.red-button {
         &:hover {
-          background-color: #f91818;
+          background: #f91818;
         }
       }
 
