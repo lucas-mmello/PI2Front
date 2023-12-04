@@ -42,16 +42,16 @@
     .button {
       padding: 10px;
       border: 1px solid $blue-secondary;
-      border-radius: 50%; // Adiciona uma borda redonda ao ícone
-      transition: 0.3s ease; // Adiciona uma transição suave para a cor de fundo
-      background: none; // Adiciona um fundo transparente
+      border-radius: 50%; // Agora o botão será redondo
+      transition: 0.3s ease;
+      background: none;
 
       &:hover {
-        background: $blue-main; // Adiciona uma cor de fundo no hover
+        background: $blue-main;
       }
 
       &.redButton {
-        border: 1px solid red; // Altera a cor da borda para o botão vermelho
+        border: 1px solid red;
         &:hover {
           background: #f91818;
         }
