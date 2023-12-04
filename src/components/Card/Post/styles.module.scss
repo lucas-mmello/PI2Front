@@ -40,7 +40,8 @@
     }
 
     .button {
-      padding: 10px;
+      width: 2rem;
+      height: 2rem;
       border: 1px solid $blue-secondary;
       border-radius: 50%; // Agora o botão será redondo
       transition: 0.3s ease;
