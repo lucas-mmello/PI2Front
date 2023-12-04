@@ -74,26 +74,4 @@
     text-decoration: none;
     color: white;
   }
-
-  .botao-circular {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
-    border-radius: 50%;
-    background-color: transparent;
-    border: 1px solid $blue-main;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-
-    // Adicionando o ícone do Bootstrap Icons
-
-    font-size: 1.5em; // Ajuste o tamanho do ícone conforme necessário
-    color: $text-main;
-
-    // Efeito de hover
-    &:hover {
-      background-color: $blue-lighter;
-    }
-  }
 }

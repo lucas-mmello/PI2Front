@@ -132,14 +132,13 @@ export default function ProfilePage() {
       <Profile studioInfo={studioInfo} ownProfile={true} />
       <div className="profilePage">
         <div className="div-button">
-          {/* <button
+          <button
             className="btn btn-info"
             data-bs-toggle="modal"
             data-bs-target="#postModal"
           >
             <i className="bi bi-plus-circle pe-2"></i>Criar Post
-          </button> */}
-          <i className={`botao-circular bi bi-pencil`}></i>
+          </button>
         </div>
         {postsList &&
           postsList.length > 0 && ( // Verifique se postsList não é nulo e tem elementos

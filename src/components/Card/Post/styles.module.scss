@@ -39,28 +39,31 @@
       }
     }
 
-    .btn {
-      padding: 0.5rem 1rem;
-      background-color: $blue-lighter;
-      border: none;
-      border-radius: 4px;
+    .botaoCircular {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+      border-radius: 50%;
+      background-color: transparent;
+      border: 1px solid $blue-main;
       cursor: pointer;
       transition: background-color 0.3s ease;
+
+      // Adicionando o ícone do Bootstrap Icons
+
+      font-size: 1.5em; // Ajuste o tamanho do ícone conforme necessário
       color: $text-main;
 
+      // Efeito de hover
       &:hover {
-        background-color: $blue-secondary;
+        background-color: $blue-lighter;
       }
 
-      &.redButton {
+      &.vermelho {
         &:hover {
-          background: #f91818;
+          background-color: #fc1616;
         }
-      }
-
-      .icon {
-        font-size: 18px;
-        color: $text-main;
       }
     }
   }

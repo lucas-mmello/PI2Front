@@ -14,28 +14,20 @@ export default function Post(props) {
           <p className={`card-text ${styles["card-text"]}`}>{description}</p>
         </div>
         {onEdit && (
-          <button
+          <i
             data-bs-toggle="modal"
             data-bs-target={idModalEd}
             onClick={onEdit}
-            className={`${styles.btn} ${styles["btn-primary"]}`}
-          >
-            <span>
-              <i className={`bi bi-pencil pe-2 ${styles.icon}`}></i>Editar
-            </span>
-          </button>
+            className={`${styles.botaoCircular} bi bi-pencil`}
+          ></i>
         )}
         {onDelete && (
-          <button>
-            <span
-              data-bs-toggle="modal"
-              data-bs-target={idModalDel}
-              onClick={onDelete}
-              className={` ${styles.btn} ${styles.redButton} ${styles["btn-primary"]}`}
-            >
-              <i className={`bi bi-trash3 pe-2 ${styles.icon}`}></i>Excluir
-            </span>
-          </button>
+          <i
+            data-bs-toggle="modal"
+            data-bs-target={idModalDel}
+            onClick={onDelete}
+            className={`${styles.botaoCircular} ${styles.vermelho} bi bi-trash3`}
+          ></i>
         )}
       </div>
     </div>
