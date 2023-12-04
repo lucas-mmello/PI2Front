@@ -20,7 +20,7 @@ export default function Post(props) {
             onClick={onEdit}
             className={`${styles.button}`}
           >
-            <i className={`bi bi-pencil ${styles.icon}`}></i>
+            {/* <i className={`bi bi-pencil ${styles.icon}`}></i> */}
           </span>
         )}
         {onDelete && (
@@ -30,7 +30,7 @@ export default function Post(props) {
             onClick={onDelete}
             className={` ${styles.button} ${styles.redButton}`}
           >
-            <i className={`bi bi-trash3 ${styles.icon}`}></i>
+            {/* <i className={`bi bi-trash3 ${styles.icon}`}></i> */}
           </span>
         )}
       </div>
