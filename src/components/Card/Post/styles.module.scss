@@ -44,7 +44,7 @@
       border: 1px solid $blue-secondary;
       border-radius: 50%; // Agora o botão será redondo
       transition: 0.3s ease;
-      background: none;
+      background: transparent;
       text-decoration: none;
 
       &:hover {
