@@ -40,19 +40,16 @@
     }
 
     .button {
-      padding: 1rem;
-      border: 1px solid $blue-secondary;
-      border-radius: 50%; // Agora o botão será redondo
       transition: 0.3s ease;
       background: transparent;
       text-decoration: none;
+      cursor: pointer;
 
       &:hover {
         background: $blue-main;
       }
 
       &.redButton {
-        border: 1px solid red;
         &:hover {
           background: #f91818;
         }
@@ -62,6 +59,9 @@
         font-size: 1.6rem;
         color: $text-main;
         border: none;
+        padding: 1rem;
+        border: 1px solid $blue-secondary;
+        border-radius: 50%; // Agora o botão será redondo
       }
     }
   }
