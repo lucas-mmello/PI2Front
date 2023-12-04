@@ -68,6 +68,31 @@
     &:hover {
       transform: translateX(10px);
     }
+
+    .btn {
+      padding: 0.5rem;
+      background-color: $blue-lighter;
+      border: 1px solid $blue-main;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      color: $text-main;
+
+      &:hover {
+        background-color: $blue-secondary;
+      }
+
+      &.redButton {
+        &:hover {
+          background: #f91818;
+        }
+      }
+
+      .icon {
+        font-size: 18px;
+        color: $text-main;
+      }
+    }
   }
 
   .criar-text {

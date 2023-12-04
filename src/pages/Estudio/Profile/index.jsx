@@ -132,12 +132,22 @@ export default function ProfilePage() {
       <Profile studioInfo={studioInfo} ownProfile={true} />
       <div className="profilePage">
         <div className="div-button">
-          <button
+          {/* <button
             className="btn btn-info"
             data-bs-toggle="modal"
             data-bs-target="#postModal"
           >
             <i className="bi bi-plus-circle pe-2"></i>Criar Post
+          </button> */}
+          <button
+            data-bs-toggle="modal"
+            data-bs-target={idModalEd}
+            onClick={onEdit}
+            className={`${styles.btn} ${styles["btn-primary"]}`}
+          >
+            <span>
+              <i className={`bi bi-pencil pe-2 ${styles.icon}`}></i>Editar
+            </span>
           </button>
         </div>
         {postsList &&
