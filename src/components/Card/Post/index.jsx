@@ -14,40 +14,24 @@ export default function Post(props) {
           <p className={`card-text ${styles["card-text"]}`}>{description}</p>
         </div>
         {onEdit && (
-          <a
+          <span
             data-bs-toggle="modal"
             data-bs-target={idModalEd}
             onClick={onEdit}
-            className={`${styles.button} ${styles.editButton}`}
+            className={`${styles.button}`}
           >
-            <svg
-              className={styles.icon}
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 21 21"
-            >
-              {/* ... seu código SVG ... */}
-            </svg>
-          </a>
+            <i className={`bi bi-pencil ${styles.icon}`}></i>
+          </span>
         )}
         {onDelete && (
-          <button
+          <span
             data-bs-toggle="modal"
             data-bs-target={idModalDel}
             onClick={onDelete}
-            className={` ${styles.button} ${styles.redButton} ${styles.deleteButton}`}
+            className={` ${styles.button} ${styles.redButton}`}
           >
-            <svg
-              className={styles.icon}
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 18 20"
-            >
-              {/* ... seu código SVG ... */}
-            </svg>
-          </button>
+            <i className={`bi bi-trash3 ${styles.icon}`}></i>
+          </span>
         )}
       </div>
     </div>
@@ -57,6 +41,6 @@ export default function Post(props) {
 Post.propTypes = {
   image: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  onEdit: PropTypes.func,
-  onDelete: PropTypes.func,
+  onEdit: PropTypes.func, // Função para editar um post
+  onDelete: PropTypes.func, // Função para excluir um post
 };
