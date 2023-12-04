@@ -21,7 +21,7 @@ export default function Post(props) {
             className={`${styles.btn}`}
           >
             <span>
-              <i className={`bi bi-pencil me-2 ${styles.icon}`}></i>Editar
+              <i className={`bi bi-pencil pe-2 ${styles.icon}`}></i>Editar
             </span>
           </button>
         )}
@@ -33,7 +33,7 @@ export default function Post(props) {
               onClick={onDelete}
               className={` ${styles.btn} ${styles.redButton}`}
             >
-              <i className={`bi bi-trash3 me-2 ${styles.icon}`}></i>Excluir
+              <i className={`bi bi-trash3 pe-2 ${styles.icon}`}></i>Excluir
             </span>
           </button>
         )}
