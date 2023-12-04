@@ -141,7 +141,7 @@ export default function ProfilePage() {
           </button> */}
           <button className={`button}`}>
             <span>
-              <i className={`bi bi-pencil pe-2 ${styles.icon}`}></i>Editar
+              <i className={`bi bi-pencil pe-2 icon`}></i>Editar
             </span>
           </button>
         </div>
