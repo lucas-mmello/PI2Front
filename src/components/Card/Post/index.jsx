@@ -18,7 +18,7 @@ export default function Post(props) {
             data-bs-toggle="modal"
             data-bs-target={idModalEd}
             onClick={onEdit}
-            className={`${styles.button} mx-2`}
+            className={`${styles.button}`}
           >
             <span>
               <i className={`bi bi-pencil ${styles.icon}`}></i>
@@ -30,7 +30,7 @@ export default function Post(props) {
             data-bs-toggle="modal"
             data-bs-target={idModalDel}
             onClick={onDelete}
-            className={` mx-2 ${styles.button} ${styles.redButton}`}
+            className={` ${styles.button} ${styles.redButton}`}
           >
             <span>
               <i className={`bi bi-trash3 ${styles.icon}`}></i>
