@@ -76,20 +76,19 @@
       padding: 0.5rem;
       border-radius: 50%;
       background-color: transparent;
-      color: white;
-      border: 1px solid black;
+      border: 1px solid $blue-main;
       cursor: pointer;
       transition: background-color 0.3s ease;
 
       // Adicionando o ícone do Bootstrap Icons
       .bi {
         font-size: 1.5em; // Ajuste o tamanho do ícone conforme necessário
-        color: black;
+        color: $text-main;
       }
 
       // Efeito de hover
       &:hover {
-        background-color: $cor-hover;
+        background-color: $blue-lighter;
       }
     }
   }
