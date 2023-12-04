@@ -39,7 +39,8 @@
     }
 
     .button {
-      padding: 1rem;
+      padding: 10px;
+      border: 1px solid $blue-secondary;
       border-radius: 50%; // Adiciona uma borda redonda ao ícone
       transition: background-color 0.3s ease; // Adiciona uma transição suave para a cor de fundo
 
