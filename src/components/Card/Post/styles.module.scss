@@ -6,45 +6,45 @@
   display: flex;
   flex-direction: column;
   position: relative;
-}
 
-.imageContainer {
-  overflow: hidden;
-  flex-shrink: 0;
-  position: relative;
-}
+  .imageContainer {
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
 
-.card-img-top {
-  width: 100%;
-  height: auto;
-  max-height: 200px; // Defina a altura máxima desejada para a imagem
-}
+    .card-img-top {
+      width: 100%;
+      height: auto;
+      max-height: 200px; // Defina a altura máxima desejada para a imagem
+    }
+  }
 
-.card-body {
-  height: 100px; // Defina a altura desejada para o card-body
-  background: rgba(255, 255, 255, 0.8);
-  display: flex;
-  flex-direction: column; // Adicionado para garantir que o card-text fique abaixo dos botões
-  justify-content: space-around;
-  align-items: center;
-  padding: 1rem;
-}
+  .card-body {
+    height: 100px; // Defina a altura desejada para o card-body
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column; // Adicionado para garantir que o card-text fique abaixo dos botões
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
 
-.card-text-container {
-  flex-grow: 1; // Adicionado para ocupar o espaço disponível
-}
+    .card-text-container {
+      flex-grow: 1; // Adicionado para ocupar o espaço disponível
 
-.card-text {
-  margin: 0; // Adicionado para remover margens padrão
-}
+      .card-text {
+        margin: 0; // Adicionado para remover margens padrão
+      }
+    }
 
-.button {
-  padding: 0;
-  border: none;
-  background-color: transparent;
-}
+    .button {
+      padding: 0;
+      border: none;
+      background-color: transparent;
+    }
 
-.icon {
-  font-size: 1.2rem;
-  padding: 0 0.3rem;
+    .icon {
+      font-size: 1.2rem;
+      padding: 0 0.3rem;
+    }
+  }
 }
