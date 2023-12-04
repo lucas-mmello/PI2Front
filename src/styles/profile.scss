@@ -69,28 +69,27 @@
       transform: translateX(10px);
     }
 
-    .button {
+    .botao-circular {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       padding: 0.5rem;
-      background-color: $blue-lighter;
-      border: 1px solid $blue-main;
       border-radius: 50%;
+      background-color: transparent;
+      color: white;
+      border: 1px solid black;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      color: $text-main;
 
+      // Adicionando o ícone do Bootstrap Icons
+      .bi {
+        font-size: 1.5em; // Ajuste o tamanho do ícone conforme necessário
+        color: black;
+      }
+
+      // Efeito de hover
       &:hover {
-        background-color: $blue-secondary;
-      }
-
-      &.redButton {
-        &:hover {
-          background: #f91818;
-        }
-      }
-
-      .icon {
-        font-size: 18px;
-        color: $text-main;
+        background-color: $cor-hover;
       }
     }
   }

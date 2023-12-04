@@ -139,10 +139,8 @@ export default function ProfilePage() {
           >
             <i className="bi bi-plus-circle pe-2"></i>Criar Post
           </button> */}
-          <button className={`button}`}>
-            <span>
-              <i className={`bi bi-pencil pe-2 icon`}></i>Editar
-            </span>
+          <button className={`botao-circular`}>
+            <i className={`bi bi-pencil`}></i>
           </button>
         </div>
         {postsList &&
