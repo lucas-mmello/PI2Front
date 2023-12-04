@@ -46,6 +46,7 @@
       border-radius: 50%; // Agora o botão será redondo
       transition: 0.3s ease;
       background: none;
+      text-decoration: none;
 
       &:hover {
         background: $blue-main;
