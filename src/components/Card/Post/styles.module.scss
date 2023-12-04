@@ -19,6 +19,7 @@
       width: 100%;
       height: auto;
       max-height: 100%; // Garante que a imagem não ultrapasse a altura definida para .imageContainer
+      border-radius: 0.5rem 0.5rem 0 0; // Adiciona borda arredondada apenas na parte superior
     }
   }
 
@@ -49,13 +50,14 @@
       }
 
       &.red-button {
+        border: 1px solid red; // Altera a cor da borda para o botão vermelho
         &:hover {
           background: #f91818;
         }
       }
 
       .icon {
-        font-size: 12rem;
+        font-size: 1.2rem;
         border: none;
       }
     }
