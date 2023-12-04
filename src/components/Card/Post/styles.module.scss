@@ -11,16 +11,17 @@
     overflow: hidden;
     flex-shrink: 0;
     position: relative;
+    height: 70%; // Ajuste a altura da imagem conforme necessário
 
     .card-img-top {
       width: 100%;
       height: auto;
-      max-height: 200px; // Defina a altura máxima desejada para a imagem
+      max-height: 100%; // Garante que a imagem não ultrapasse a altura definida para .imageContainer
     }
   }
 
   .card-body {
-    height: 100px; // Defina a altura desejada para o card-body
+    height: 30%; // Ajuste a altura do card-body conforme necessário
     background: rgba(255, 255, 255, 0.8);
     display: flex;
     flex-direction: column; // Adicionado para garantir que o card-text fique abaixo dos botões
