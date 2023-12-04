@@ -13,29 +13,29 @@
     overflow: hidden;
     flex-shrink: 0;
     position: relative;
-    height: 70%; // Ajuste a altura da imagem conforme necessário
+    height: 70%;
 
     .card-img-top {
       width: 100%;
       height: auto;
-      max-height: 100%; // Garante que a imagem não ultrapasse a altura definida para .imageContainer
-      border-radius: 0.5rem 0.5rem 0 0; // Adiciona borda arredondada apenas na parte superior
+      max-height: 100%;
+      border-radius: 0.5rem 0.5rem 0 0;
     }
   }
 
   .card-body {
-    height: 30%; // Ajuste a altura do card-body conforme necessário
+    height: 30%;
     display: flex;
-    flex-direction: column; // Adicionado para garantir que o card-text fique abaixo dos botões
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
     padding: 1rem;
 
     .card-text-container {
-      flex-grow: 1; // Adicionado para ocupar o espaço disponível
+      flex-grow: 1;
 
       .card-text {
-        margin: 0; // Adicionado para remover margens padrão
+        margin: 0;
       }
     }
 
@@ -65,8 +65,21 @@
 
       .icon {
         font-size: 18px;
-        height: 18px;
         color: $text-main;
+      }
+
+      &.editButton {
+        .icon {
+          width: 18px;
+          height: 18px;
+        }
+      }
+
+      &.deleteButton {
+        .icon {
+          width: 18px;
+          height: 18px;
+        }
       }
     }
   }
