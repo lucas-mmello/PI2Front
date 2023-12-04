@@ -33,7 +33,7 @@ export default function Post(props) {
             className={`card-link ${styles.button}`}
           >
             <span>
-              <i className={`bi bi-trash3 ${styles.icon}`}></i>
+              <i id="icon-danger" className={`bi bi-trash3 ${styles.icon}`}></i>
             </span>
           </button>
         )}

@@ -45,7 +45,19 @@
 
       .icon {
         font-size: 1.2rem;
-        padding: 0 0.3rem;
+        padding: 0.3rem;
+        border-radius: 50%; // Adiciona uma borda redonda ao ícone
+        transition: background-color 0.3s ease; // Adiciona uma transição suave para a cor de fundo
+
+        &:hover {
+          background-color: $blue-main; // Adiciona uma cor de fundo no hover
+        }
+      }
+
+      #icon-danger {
+        &:hover {
+          background-color: #f91818;
+        }
       }
     }
   }
