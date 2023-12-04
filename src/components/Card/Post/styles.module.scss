@@ -39,14 +39,15 @@
     }
 
     .button {
-      padding: 0; // Removido o padding para o ícone não ter uma borda retangular
-      transition: background-color 0.3s ease;
+      padding: 0.3rem;
+      border-radius: 50%; // Adiciona uma borda redonda ao ícone
+      transition: background-color 0.3s ease; // Adiciona uma transição suave para a cor de fundo
 
       &:hover {
-        background-color: $blue-main;
+        background-color: $blue-main; // Adiciona uma cor de fundo no hover
       }
 
-      &.red-button {
+      &.danger {
         &:hover {
           background-color: #f91818;
         }
@@ -54,8 +55,6 @@
 
       .icon {
         font-size: 1.2rem;
-        padding: 0.3rem;
-        border-radius: 50%;
       }
     }
   }
