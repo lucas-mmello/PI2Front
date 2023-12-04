@@ -1,3 +1,5 @@
+@import "../../../styles/variables.scss";
+
 .cardPost {
   width: 100%;
   text-align: center;
@@ -22,7 +24,6 @@
 
   .card-body {
     height: 30%; // Ajuste a altura do card-body conforme necessário
-    background: rgba(255, 255, 255, 0.8);
     display: flex;
     flex-direction: column; // Adicionado para garantir que o card-text fique abaixo dos botões
     justify-content: space-around;
