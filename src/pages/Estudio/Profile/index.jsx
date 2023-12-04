@@ -139,12 +139,7 @@ export default function ProfilePage() {
           >
             <i className="bi bi-plus-circle pe-2"></i>Criar Post
           </button> */}
-          <button
-            data-bs-toggle="modal"
-            data-bs-target={idModalEd}
-            onClick={onEdit}
-            className={`${styles.btn} ${styles["btn-primary"]}`}
-          >
+          <button className={`${styles.btn} ${styles["btn-primary"]}`}>
             <span>
               <i className={`bi bi-pencil pe-2 ${styles.icon}`}></i>Editar
             </span>
