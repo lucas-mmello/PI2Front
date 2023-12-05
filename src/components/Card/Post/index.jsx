@@ -13,22 +13,24 @@ export default function Post(props) {
         <div className={styles["card-text-container"]}>
           <p className={`card-text ${styles["card-text"]}`}>{description}</p>
         </div>
-        {onEdit && (
-          <i
-            data-bs-toggle="modal"
-            data-bs-target={idModalEd}
-            onClick={onEdit}
-            className={`${styles.botaoCircular} bi bi-pencil`}
-          ></i>
-        )}
-        {onDelete && (
-          <i
-            data-bs-toggle="modal"
-            data-bs-target={idModalDel}
-            onClick={onDelete}
-            className={`${styles.botaoCircular} ${styles.vermelho} bi bi-trash3`}
-          ></i>
-        )}
+        <div className={styles.botaoContainer}>
+          {onEdit && (
+            <i
+              data-bs-toggle="modal"
+              data-bs-target={idModalEd}
+              onClick={onEdit}
+              className={`${styles.botaoCircular} bi bi-pencil`}
+            ></i>
+          )}
+          {onDelete && (
+            <i
+              data-bs-toggle="modal"
+              data-bs-target={idModalDel}
+              onClick={onDelete}
+              className={`${styles.botaoCircular} ${styles.vermelho} bi bi-trash3`}
+            ></i>
+          )}
+        </div>
       </div>
     </div>
   );
