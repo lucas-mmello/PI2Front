@@ -44,6 +44,8 @@
 .botaoContainer {
   display: flex;
   gap: 10px; // Ajuste o espaçamento conforme necessário
+  align-items: center;
+  justify-content: center;
 
   .botaoCircular {
     display: inline-flex;
