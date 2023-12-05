@@ -29,12 +29,6 @@ export default function Post(props) {
             className={`${styles.botaoCircular} ${styles.vermelho} bi bi-trash3`}
           ></i>
         )}
-        <i
-          data-bs-toggle="modal"
-          data-bs-target={idModalDel}
-          onClick={onDelete}
-          className={`${styles.botaoCircular} ${styles.vermelho} bi bi-trash3`}
-        ></i>
       </div>
     </div>
   );
