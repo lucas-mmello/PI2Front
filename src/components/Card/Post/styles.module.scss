@@ -65,6 +65,11 @@
     font-size: 1.5em; // Ajuste o tamanho do ícone conforme necessário
     color: $text-main;
 
+    @media (max-width: 410px) {
+      padding: 0.25rem;
+      font-size: 1.2rem;
+    }
+
     // Efeito de hover
     &:hover {
       background-color: $blue-lighter;
