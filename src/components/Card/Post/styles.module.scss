@@ -31,6 +31,10 @@
     align-items: center;
     padding: 1rem;
 
+    @media (max-width: 410px) {
+      padding: 0.5rem;
+    }
+
     .card-text-container {
       flex-grow: 1;
 
